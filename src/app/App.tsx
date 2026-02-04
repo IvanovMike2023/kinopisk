@@ -1,6 +1,6 @@
 import {Header} from '../common/component/Header/Header'
 import s from './App.module.css'
-import {MainPage} from "../common/component/Main page/MainPage";
+import {MainPage} from "../common/component/MainPage/MainPage";
 function App() {
   return (
         <div className={s.app}>
