@@ -1,12 +1,19 @@
 import s from './Header.module.css'
+import logoUrl from '../img/logo.svg'
 export const Header = () => {
     return (
-        <header className={s.header}>
-            <div className={s.logo}>МойЛоготип</div>
-            <nav className={s.nav}>
-                <a className={s.link} href="#home">Главная</a>
-                <a className={s.link} href="#about">О нас</a>
-                <a className={s.link} href="#contact">Контакты</a>
-            </nav>
-        </header>)
+        <div className={s.header}>
+            <div className={s.logo}><img src={logoUrl} alt="Логотип" width="150" /></div>
+            <div className={s.menu}>
+                <div className={s.menu_container}>
+                    <div className={s.menu_container_item}>Main |</div>
+                    <div className={s.menu_container_item}>Category Movies |</div>
+                    <div className={s.menu_container_item}>Filtered Movies |</div>
+                    <div className={s.menu_container_item}>Search |</div>
+                    <div className={s.menu_container_item}>Favorites |</div>
+                </div>
+
+                <div className={s.menu_container_theme}>😀</div>
+            </div>
+        </div>)
 }
