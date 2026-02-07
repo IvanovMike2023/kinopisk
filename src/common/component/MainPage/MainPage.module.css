@@ -22,3 +22,10 @@
     flex-direction: column;
     gap: 24px;
 }
+.form{
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    gap: 12px;
+    margin: 10px;
+}

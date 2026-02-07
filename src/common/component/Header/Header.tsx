@@ -7,7 +7,7 @@ export const Header = () => {
 const theme=getTheme()
     return (
         <ThemeProvider theme={theme}>
-        <AppBar position="static" sx={{mb: "30px"}} color="primary" >
+        <AppBar position="static" sx={{mb: "30px",marginBottom:0}} color="primary" >
             <Toolbar>
             <Container maxWidth={"lg"} sx={containerSx}>
            <img src={logoUrl} alt="Логотип" width="150" />

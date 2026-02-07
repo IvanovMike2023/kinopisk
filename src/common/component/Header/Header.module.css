@@ -5,6 +5,7 @@
     height: 50px;
     border: darkgray 1px solid;
     flex-direction: row;
+    margin-bottom: 0;
 
 }
 .logo{
