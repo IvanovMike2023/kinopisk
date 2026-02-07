@@ -1,0 +1,15 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-block: 32px;
+
+}
+.title{
+    color: white;
+}
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}

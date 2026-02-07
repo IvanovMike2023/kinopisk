@@ -1,8 +1,8 @@
-import s from './Header.module.css'
 import logoUrl from '../../../img/logo.svg'
-import {AppBar, Button, Container, createTheme, Switch, ThemeProvider, Toolbar} from "@mui/material";
+import {AppBar, Button, Container, Switch, ThemeProvider, Toolbar} from "@mui/material";
 import {getTheme} from "../../theme/theme";
 import {containerSx} from "../../styles/Container_styles";
+
 export const Header = () => {
 const theme=getTheme()
     return (
