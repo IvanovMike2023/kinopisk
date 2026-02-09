@@ -42,9 +42,6 @@ export const SearchInput = () => {
                 style={{marginBottom: 20, borderRadius: 40}}
             >
                 Search
-
-
-
             </Button>
         </form>
     )
