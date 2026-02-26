@@ -1,7 +1,7 @@
 import {baseApi} from "../../../../app/api/baseApi";
 import type {PopularType} from './MainPage.types';
 
-export const todolistApi = baseApi.injectEndpoints({
+export const mainPageApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getPopular: build.query<PopularType, void>({
             query: () => `/movie/popular?language=en-US&page=1`,
@@ -11,4 +11,4 @@ export const todolistApi = baseApi.injectEndpoints({
 })
 export const {
     useGetPopularQuery,
-} = todolistApi
+} = mainPageApi

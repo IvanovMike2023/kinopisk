@@ -1,8 +1,8 @@
 import {useNavigate} from "react-router-dom";
 import {SearchInput} from "../searchInput/searchInput";
-import s from "./SearchResult.module.css";
+import s from "./Search.module.css";
 
-export const SearchResult=()=>{
+export const Search=()=>{
 
     return    <div className={s.container}>
     <section className={s.page}>
