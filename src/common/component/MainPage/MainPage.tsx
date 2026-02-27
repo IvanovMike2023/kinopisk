@@ -1,7 +1,7 @@
 import {useGetPopularQuery} from "./api/mainPageApi";
 import s from "./MainPage.module.css";
 import {useEffect, useState} from "react";
-import {SearchInput} from "../searchInput/searchInput";
+import {SearchInput} from "../SearchInput/searchInput";
 
 export const MainPage = () => {
     const [backdrop_path, setBackdrop_path] = useState('');
@@ -17,7 +17,7 @@ export const MainPage = () => {
         <div className={s.content}>
             <h1 className={s.title}>Welcome</h1>
             <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
-            <SearchInput/>
+            <SearchInput />
         </div>
     </section>
 

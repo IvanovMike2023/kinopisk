@@ -1,0 +1,53 @@
+
+.card{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.posterFrame{
+    position: relative;
+    padding-top: 150%;
+    border-radius: 16px;
+    overflow: hidden;
+}
+.poster{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    inset: 0px;
+    transition: transform 0.2s;
+}
+.posterLink{
+    position: absolute;
+    display: block;
+    color: inherit;
+    inset: 0px;
+    text-decoration: none;
+    border-radius: inherit;
+}
+.button{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background-color: rgba(15, 23, 42, 0.6);
+    color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transform: translateY(-6px);
+    padding: 0px;
+    border-radius: 999px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+    transition: opacity 0.2s, transform 0.2s, background-color 0.2s, color 0.2s;
+}
+.cardTitle{
+    display: inline-block;
+    color: #ffffff;
+    text-decoration: none;
+}

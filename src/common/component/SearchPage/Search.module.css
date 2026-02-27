@@ -13,3 +13,11 @@
     margin: 0 auto;
     width: 100%;
 }
+._moviesGrid_1mspq_19 {
+    --movie-grid-columns: 5;
+}
+.movies{
+    display: grid;
+    grid-template-columns: repeat(var(--movie-grid-columns, 6), minmax(0, 1fr));
+    gap: 24px;
+}
