@@ -4,31 +4,35 @@ import s from "./Search.module.css";
 import {useSearchMonieQuery} from "./api/searchPageApi";
 import {useSelector} from "react-redux";
 import {baseApi} from "../../../app/api/baseApi";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {SearchResult} from "./SearchResult/SearchResult";
 
 export const Search = () => {
     const [inputValue, setinputValue] = useState('')
+    const [onChangeValue, setonChangeValue] = useState('')
 
-    const {data, isFetching} = useSearchMonieQuery({query: inputValue})
+    const {data,isLoading, isFetching,isSuccess,status} = useSearchMonieQuery({query: inputValue})
     const handleSearch = (value: string) => {
         setinputValue(value)
     }
-    if (!isFetching) {
-        console.log(data.results)
+    const handleChange=(value)=>{
+        setonChangeValue(value)
     }
-
     return <div className={s.container}>
+
         <section className={s.page}>
             <h2 className={s.title}>Search Results</h2>
-            <SearchInput handleSearch={handleSearch}/>
+            <SearchInput handleChange={handleChange} handleSearch={handleSearch}/>
+            {onChangeValue.trim() === ''  ? (
+                <h3>Enter a movie title to start searching.</h3>
+            ) : isSuccess ? (
+                <h2 className={s.titleResult}>Results for "{inputValue}"</h2>
+            ) : null}
             <div  className={s.movies}>
                 {data?.results.map((el)=>{
-                    return <SearchResult title={el.title} backdrop_path={el.backdrop_path} />
+                    return <SearchResult key={el.id} vote_average={el.vote_average} title={el.title} poster_path={el.poster_path} />
                 })}
             </div>
-
-
         </section>
 
     </div>

@@ -18,6 +18,9 @@
 }
 .movies{
     display: grid;
-    grid-template-columns: repeat(var(--movie-grid-columns, 6), minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 24px;
+}
+.titleResult{
+    color: white;
 }

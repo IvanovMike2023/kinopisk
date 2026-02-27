@@ -6,6 +6,7 @@ import {useSearchMonieQuery} from "../SearchPage/api/searchPageApi";
 
 type Props = {
     handleSearch?: (value: string) => void
+    handleChange?: (inputvalue: string) => void
 }
 export const SearchInput = (props): Props => {
     const [inputvalue, setinputvalue] = useState('');
@@ -14,7 +15,10 @@ export const SearchInput = (props): Props => {
         navigate('/search')
         props?.handleSearch(inputvalue)
     }
-
+const handleonChangeInput=(e)=>{
+    setinputvalue(e)
+    props.handleChange(e)
+}
     return (
         <form className={s.form}>
             <TextField
@@ -22,7 +26,7 @@ export const SearchInput = (props): Props => {
                 variant="outlined"
                 fullWidth
                 value={inputvalue}
-                onChange={(e) => setinputvalue(e.target.value)}
+                onChange={(e) => handleonChangeInput(e.target.value)}
                 sx={{
                     '& .MuiOutlinedInput-root': {
                         borderRadius: 20,

@@ -18,6 +18,9 @@
     inset: 0px;
     transition: transform 0.2s;
 }
+.poster:hover{
+    transform: scale(1.2);
+}
 .posterLink{
     position: absolute;
     display: block;
@@ -50,4 +53,19 @@
     display: inline-block;
     color: #ffffff;
     text-decoration: none;
+}
+.vote_average{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color:#facc15;
+    color:#ffffff;
+    bottom: 12px;
+    right: 12px;
+    border-radius: 70px;
 }
