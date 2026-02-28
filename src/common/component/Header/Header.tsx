@@ -10,11 +10,9 @@ const theme=getTheme()
 
     const handleMain = () => {
         navigate('/')
-        //console.log(inputvalue)
     }
     const handleSearch = () => {
         navigate('/search')
-        //console.log(inputvalue)
     }
     return (
         <ThemeProvider theme={theme}>

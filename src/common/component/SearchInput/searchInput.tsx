@@ -1,28 +1,29 @@
 import s from "../MainPage/MainPage.module.css";
-import {Button, TextField} from "@mui/material";
+import {Button, IconButton, InputAdornment, TextField} from "@mui/material";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useSearchMonieQuery} from "../SearchPage/api/searchPageApi";
+import CloseIcon from '@mui/icons-material/Close';
 
 type Props = {
-    handleSearch?: (value: string) => void
-    handleChange?: (inputvalue: string) => void
+    query?: string
+    handleInput?: (value: string) => void
 }
-export const SearchInput = (props): Props => {
-    const [inputvalue, setinputvalue] = useState('');
+export const SearchInput = ({query, handleInput}: Props) => {
+    const [inputvalue, setinputvalue] = useState(query || '');
     const navigate = useNavigate();
     const handleSearchForInput = () => {
-        navigate('/search')
-        props?.handleSearch(inputvalue)
+        navigate(`/search?query=${encodeURIComponent(inputvalue)}`);
     }
-const handleonChangeInput=(e)=>{
-    setinputvalue(e)
-    props.handleChange(e)
-}
+    const handleonChangeInput = (e) => {
+        setinputvalue(e)
+        if (handleInput)
+            handleInput(e)
+
+    }
     return (
         <form className={s.form}>
             <TextField
-                label={inputvalue ? "" : "Search for a movie"}
+                placeholder={inputvalue ? "" : "Search for a movie"}
                 variant="outlined"
                 fullWidth
                 value={inputvalue}
@@ -31,22 +32,44 @@ const handleonChangeInput=(e)=>{
                     '& .MuiOutlinedInput-root': {
                         borderRadius: 20,
                         backgroundColor: '#1f2b40',
-                        color: '#fff'
+                        color: '#fff',
                     },
                 }}
-                style={{marginBottom: 10}}
+                style={{ marginBottom: 10 }}
+                // Добавляем InputAdornment через свойство InputProps
+                InputProps={{
+                    endAdornment: inputvalue && (
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="clear"
+                                onClick={() => handleonChangeInput('')} // очищает поле
+                                edge="end"
+                            >
+                                <CloseIcon style={{ color: '#fff' ,fontSize: 16 }} /> {/* иконка крестика */}
+                            </IconButton>
+                        </InputAdornment>
+                    ),
+                }}
             />
             <Button
                 sx={{
                     '&:hover': {
-                        cursor: inputvalue === '' ? 'pointer' : 'pointer'
+                        cursor: inputvalue === '' ? 'not-allowed' : 'pointer'
+                    },
+                    '&.Mui-disabled': {
+                        backgroundColor: '#2563eb',
+                        color: '#f8fafc',
+                        cursor: 'not-allowed !important', // добавляем !important
+                        opacity: 0.6,
+                        pointerEvents: 'auto'
                     }
                 }}
                 variant="contained"
                 color="primary"
                 onClick={handleSearchForInput}
                 type="button"
-                style={{marginBottom: 20, borderRadius: 40}}
+                disabled={inputvalue === ''}
+                style={{ marginBottom: 20, borderRadius: 40 }}
             >
                 Search
             </Button>
