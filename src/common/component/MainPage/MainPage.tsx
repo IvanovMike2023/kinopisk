@@ -2,6 +2,7 @@ import {useGetPopularQuery} from "./api/mainPageApi";
 import s from "./MainPage.module.css";
 import {useEffect, useState} from "react";
 import {SearchInput} from "../SearchInput/searchInput";
+import {useTheme} from "@mui/material";
 
 export const MainPage = () => {
     const [backdrop_path, setBackdrop_path] = useState('');
