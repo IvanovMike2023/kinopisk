@@ -74,10 +74,15 @@ export const CategoryMovies = () => {
         <section className={s.section}>
             <div className={s.category}>
                 <div className={s.categoryButtons}>
-                    <Button onClick={()=>getPopularMovies('Popular')} variant={activeCategory==='Popular' ? 'contained' : 'outlined'}>Popular Movies</Button>
-                    <Button onClick={()=>getTopRated('TopRated')} variant={activeCategory==='TopRated' ? 'contained' : 'outlined'}>Top Rated Movies</Button>
-                    <Button onClick={()=>Upcoming('Upcoming')} variant={activeCategory==='Upcoming' ? 'contained' : 'outlined'}>Upcoming Movies</Button>
-                    <Button onClick={()=>NowPlaying('NowPlaying')} variant={activeCategory==='NowPlaying' ? 'contained' : 'outlined'}>Now Playing Movies</Button>
+                    <Button onClick={() => getPopularMovies('Popular')}
+                            variant={activeCategory === 'Popular' ? 'contained' : 'outlined'}>Popular Movies</Button>
+                    <Button onClick={() => getTopRated('TopRated')}
+                            variant={activeCategory === 'TopRated' ? 'contained' : 'outlined'}>Top Rated Movies</Button>
+                    <Button onClick={() => Upcoming('Upcoming')}
+                            variant={activeCategory === 'Upcoming' ? 'contained' : 'outlined'}>Upcoming Movies</Button>
+                    <Button onClick={() => NowPlaying('NowPlaying')}
+                            variant={activeCategory === 'NowPlaying' ? 'contained' : 'outlined'}>Now Playing
+                        Movies</Button>
                 </div>
             </div>
             <h2 style={{color: theme.palette.text.primary}} className={s.titleResult}>Popular Movies</h2>
