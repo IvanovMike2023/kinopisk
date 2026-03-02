@@ -5,15 +5,14 @@ type Props={
     vote_average:number
 }
 export const SearchResult=(props):Props=>{
-    return (
-            <article className={s.card}>
+    return          <article className={s.card}>
                 <div className={s.posterFrame} >
                     <a className={s.posterLink}  href="">
                         <img className={s.poster} src={'https://image.tmdb.org/t/p/w185'+props.poster_path} alt=""/>
-                        <span className={s.vote_average}>{props.vote_average}</span>
+                        <span className={props.vote_average>7 ? s.vote_average_top: s.vote_average}>{props.vote_average}</span>
                     </a>
                 </div>
                 <a href="#" className={s.cardTitle}>{props.title}</a>
             </article>
-    )
+
 }

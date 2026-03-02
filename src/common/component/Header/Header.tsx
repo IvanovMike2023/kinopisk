@@ -1,10 +1,7 @@
 import logoUrl from '../../../img/logo.svg'
-import {AppBar, Button, Container, Switch, ThemeProvider, Toolbar, useTheme} from "@mui/material";
-import {getTheme} from "../../theme/theme";
+import {AppBar, Button, Container, Switch, Toolbar, useTheme} from "@mui/material";
 import {containerSx} from "../../styles/Container_styles";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
-import {createTheme} from "@mui/material/styles";
 
 type Props= {
     darkMode: boolean,
