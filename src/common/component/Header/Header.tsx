@@ -2,7 +2,7 @@ import logoUrl from '../../../img/logo.svg'
 import {AppBar, Button, Container, Switch, Toolbar, useTheme} from "@mui/material";
 import {containerSx} from "../../styles/Container_styles";
 import {useNavigate} from "react-router-dom";
-
+import s from './Header.module.css'
 type Props= {
     darkMode: boolean,
     handleThemeChange: () => void
@@ -29,13 +29,17 @@ export const Header = ({darkMode, handleThemeChange}:Props) => {
             <AppBar position="static" sx={{mb: "30px", marginBottom: 0}} style={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary }}>
                 <Toolbar>
                     <Container maxWidth={"lg"} sx={containerSx}>
-                        <img src={logoUrl} alt="Логотип" width="150"/>
+                        <img className={s.logo} onClick={handleMain} src={logoUrl} alt="Логотип" width="150"/>
                         <Button color="inherit" onClick={handleMain}>Main |</Button>
                         <Button color="inherit" onClick={handleCategoryMovies} >Category Movies |</Button>
                         <Button color="inherit">Filtered Movies |</Button>
                         <Button color="inherit" onClick={handleSearch}>Search |</Button>
                         <Button color="inherit">Favorites |</Button>
-                        <Switch color={"default"} onChange={handleTheme } checked={darkMode}/>
+                        {darkMode?                         <button className={s.buttonTheme} aria-label="Переключить на светлую тему" title="Переключить на светлую тему" onClick={handleTheme} color="inherit">☀</button>
+                      :
+                            <button className={s.buttonTheme} aria-label="Переключить на светлую тему" title="Переключить на светлую тему" onClick={handleTheme} color="inherit">🌙</button>
+
+                        }
                     </Container>
                 </Toolbar>
             </AppBar>

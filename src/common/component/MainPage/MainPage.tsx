@@ -6,7 +6,7 @@ import {PopularMovies} from "../PopularMovies/PopularMovies";
 
 export const MainPage = () => {
     const [backdrop_path, setBackdrop_path] = useState('');
-    const {data} = useGetPopularQuery({page:10})
+    const {data} = useGetPopularQuery({page:1})
 
     useEffect(() => {
         const backdrop_path_number = Math.floor(Math.random() * data?.results.length)

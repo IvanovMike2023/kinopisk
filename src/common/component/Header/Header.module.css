@@ -11,11 +11,24 @@
 .logo{
     display: flex;
     justify-content: center;
-
+}
+.logo:hover{
+    cursor:pointer;
 }
 .menu{
 display: flex;
-
+}
+.buttonTheme{
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    padding: 0;
+    border-radius: 999px;
+    border: #324061 1px solid;
+    background-color: #1f2b40;
+    color: #facc15;
+    font-size: 25px;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s
 }
 .menu_container{
     display: flex;
