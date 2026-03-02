@@ -17,6 +17,9 @@ export const Header = ({darkMode, handleThemeChange}:Props) => {
     const handleSearch = () => {
         navigate('/search')
     }
+    const handleCategoryMovies = () => {
+        navigate('/movies/popular')
+    }
     const handleTheme=()=>{
         if(handleThemeChange){
             handleThemeChange()
@@ -28,7 +31,7 @@ export const Header = ({darkMode, handleThemeChange}:Props) => {
                     <Container maxWidth={"lg"} sx={containerSx}>
                         <img src={logoUrl} alt="Логотип" width="150"/>
                         <Button color="inherit" onClick={handleMain}>Main |</Button>
-                        <Button color="inherit">Category Movies |</Button>
+                        <Button color="inherit" onClick={handleCategoryMovies} >Category Movies |</Button>
                         <Button color="inherit">Filtered Movies |</Button>
                         <Button color="inherit" onClick={handleSearch}>Search |</Button>
                         <Button color="inherit">Favorites |</Button>

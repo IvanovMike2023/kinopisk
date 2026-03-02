@@ -5,6 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import {SearchPages} from "../common/component/SearchPage/SearchPages";
 import {useState} from "react";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
+import {CategoryMovies} from "../common/component/CategoryMoviesPage/CategoryMovies";
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<MainPage/>}/>
                 <Route path="/search" element={< SearchPages/>}/>
+                <Route path="/movies/popular" element={< CategoryMovies/>}/>
             </Routes>
 
         </div>

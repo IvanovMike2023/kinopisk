@@ -1,13 +1,21 @@
 import s from './Popular_movies.module.css'
 import {useGetPopularQuery} from "../MainPage/api/mainPageApi";
 import type {ResultsPopular} from '../MainPage/api/MainPage.types';
+import {useNavigate} from "react-router-dom";
+import {Button, useTheme} from "@mui/material";
 
 type Props={
     popular_movies:ResultsPopular[]
 }
 export const PopularMovies = ({ popular_movies}:Props) => {
+    const navigate=useNavigate()
+    const theme = useTheme();
+
+    const handleGoToCategoryMovies=()=>{
+    navigate('/movies/popular')
+}
     return <section class={s.section_popular}>
-        <div className={s.headerPopular}> <h2>Popular Movies</h2> <button>View more</button></div>
+        <div className={s.headerPopular}> <h2>Popular Movies</h2> <Button style={{border:'1px solid #d1d5db', color: theme.palette.text.primary }} color={'primary'} onClick={handleGoToCategoryMovies}>View more</Button></div>
         <div className={s.wrap_card}>
         {popular_movies.map((el)=>(
             <article key={el.id} className={s.card}>
@@ -19,7 +27,6 @@ export const PopularMovies = ({ popular_movies}:Props) => {
                 </div>
                 <a href="#" className={s.cardTitle}>{el.title}</a>
             </article>
-
         ))}
         </div>
     </section>

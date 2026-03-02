@@ -4,7 +4,7 @@ import type {PopularType} from './MainPage.types';
 export const mainPageApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getPopular: build.query<PopularType, void>({
-            query: () => `/movie/popular?language=en-US&page=1`,
+            query: ({page}) => ({url: `/movie/popular?language=en-US&page=${page}`}) ,
             providesTags: ['Popular']
         }),
     }),
