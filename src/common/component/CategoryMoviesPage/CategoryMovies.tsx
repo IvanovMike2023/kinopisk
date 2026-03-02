@@ -19,6 +19,7 @@ export const CategoryMovies = () => {
     const {data: UpcomingData, refetch: refetchUpcoming} = useGetUpcomingQuery({page});
     const {data: NowPlayingData, refetch: refetchNowPlaying} = useGetNowPlayingQuery({page});
     const [results, setResults] = useState(Popular);
+    const [activeCategory, setActiveCategory] = useState('Popular');
 
     const currentPage = results?.page
     const count = results?.total_pages
@@ -26,28 +27,32 @@ export const CategoryMovies = () => {
     const setCurrentPage = (newpage) => {
         setPage(newpage)
     }
-    const getPopularMovies = () => {
+    const getPopularMovies = (category) => {
+        setActiveCategory(category)
         refetchPopular().unwrap().then(() => {
             setResults(Popular || [])
             setDataitem('Popular')
             setPage(1)
         });
     }
-    const getTopRated = () => {
+    const getTopRated = (category) => {
+        setActiveCategory(category)
         refetchTopRated().unwrap().then(() => {
             setResults(topRatedData || [])
             setDataitem('TopRated')
             setPage(1)
         });
     }
-    const Upcoming = () => {
+    const Upcoming = (category) => {
+        setActiveCategory(category)
         refetchUpcoming().unwrap().then(() => {
             setResults(UpcomingData || [])
             setDataitem('Upcoming')
             setPage(1)
         });
     }
-    const NowPlaying = () => {
+    const NowPlaying = (category) => {
+        setActiveCategory(category)
         refetchNowPlaying().unwrap().then(() => {
             setResults(NowPlayingData || [])
             setDataitem('NowPlaying')
@@ -69,10 +74,10 @@ export const CategoryMovies = () => {
         <section className={s.section}>
             <div className={s.category}>
                 <div className={s.categoryButtons}>
-                    <Button onClick={getPopularMovies} variant="contained">Popular Movies</Button>
-                    <Button onClick={getTopRated} variant="contained">Top Rated Movies</Button>
-                    <Button onClick={Upcoming} variant="contained">Upcoming Movies</Button>
-                    <Button onClick={NowPlaying} variant="contained">Now Playing Movies</Button>
+                    <Button onClick={()=>getPopularMovies('Popular')} variant={activeCategory==='Popular' ? 'contained' : 'outlined'}>Popular Movies</Button>
+                    <Button onClick={()=>getTopRated('TopRated')} variant={activeCategory==='TopRated' ? 'contained' : 'outlined'}>Top Rated Movies</Button>
+                    <Button onClick={()=>Upcoming('Upcoming')} variant={activeCategory==='Upcoming' ? 'contained' : 'outlined'}>Upcoming Movies</Button>
+                    <Button onClick={()=>NowPlaying('NowPlaying')} variant={activeCategory==='NowPlaying' ? 'contained' : 'outlined'}>Now Playing Movies</Button>
                 </div>
             </div>
             <h2 style={{color: theme.palette.text.primary}} className={s.titleResult}>Popular Movies</h2>
