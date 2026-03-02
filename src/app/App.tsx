@@ -8,7 +8,6 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {CategoryMovies} from "../common/component/CategoryMoviesPage/CategoryMovies";
 
 function App() {
-
     const [darkMode, setDarkMode] = useState(true);
     const theme = createTheme({
         palette: {
