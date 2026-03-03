@@ -33,22 +33,27 @@ export const CategoryMovies = () => {
     const setCurrentPage = (newpage) => {
         setPage(newpage)
     }
-    const categoryMap={
-        'popular':{data:Popular,refetch:refetchPopular,label:"Popular Movies"},
-        'top_rated':{data:topRatedData,refetch:refetchTopRated,label:"Top Rated Movies"},
-        'upcoming':{data:UpcomingData,refetch:refetchUpcoming,label:"Upcoming Movies"},
-        'now_playing':{data:NowPlayingData,refetch:refetchNowPlaying,label:"Now Playing"}
+    const categoryMap = {
+        'popular': {data: Popular, refetch: refetchPopular, label: "Popular Movies"},
+        'top_rated': {data: topRatedData, refetch: refetchTopRated, label: "Top Rated Movies"},
+        'upcoming': {data: UpcomingData, refetch: refetchUpcoming, label: "Upcoming Movies"},
+        'now_playing': {data: NowPlayingData, refetch: refetchNowPlaying, label: "Now Playing"}
     }
+    const categories = [
+        {key: 'popular', label: 'Popular Movies'},
+        {key: 'top_rated', label: 'Top Rated Movies'},
+        {key: 'upcoming', label: 'Upcoming Movies'},
+        {key: 'now_playing', label: 'Now Playing'}
+    ];
     useEffect(() => {
         const categoryKey = location.pathname.split('/')[2];
-        console.log(categoryMap[categoryKey])
-        const category=categoryMap[categoryKey]
-        if(category){
+        const category = categoryMap[categoryKey]
+        if (category) {
             category.refetch({page}).unwrap().then((res) => {
                 setResults(res)
             })
             setActiveCategory(category.label);
-        }else setResults([])
+        } else setResults([])
     }, [location.pathname, page]);
     useEffect(() => {
         const categoryKey = location.pathname.split('/')[2];
@@ -61,20 +66,15 @@ export const CategoryMovies = () => {
         setActiveCategory(categoryLabels[categoryKey] || 'Popular Movies');
         setPage(1);
     }, [location.pathname]);
-    const categories = [
-        { key: 'popular', label: 'Popular Movies' },
-        { key: 'top_rated', label: 'Top Rated Movies' },
-        { key: 'upcoming', label: 'Upcoming Movies' },
-        { key: 'now_playing', label: 'Now Playing' }
-    ];
 
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.category}>
                 <div className={s.categoryButtons}>
-                    {categories.map((cat)=>(
+                    {categories.map((cat) => (
                         <Button key={cat.key}
-                                onClick={() => changeCategoryInUrl(cat.key)}  variant={activeCategory === cat.label ? 'contained' : 'outlined'}>
+                                onClick={() => changeCategoryInUrl(cat.key)}
+                                variant={activeCategory === cat.label ? 'contained' : 'outlined'}>
                             {cat.label}
                         </Button>
                     ))}
