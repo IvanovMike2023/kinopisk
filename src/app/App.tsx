@@ -6,6 +6,7 @@ import {SearchPages} from "../common/component/SearchPage/SearchPages";
 import {useState} from "react";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {CategoryMovies} from "../common/component/CategoryMoviesPage/CategoryMovies";
+import {Footer} from "../common/component/Footer/Footer";
 
 function App() {
     const [darkMode, setDarkMode] = useState(true);
@@ -47,15 +48,16 @@ function App() {
     };
     return (
         <ThemeProvider theme={theme}>
-        <div className={s.app} style={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary }}>
-            <Header  darkMode={darkMode } handleThemeChange={handleThemeChange} />
-            <Routes>
-                <Route path="/" element={<MainPage/>}/>
-                <Route path="/search" element={< SearchPages/>}/>
-                <Route path="/movies/popular" element={< CategoryMovies/>}/>
-            </Routes>
-
-        </div>
+            <div className={s.app}
+                 style={{backgroundColor: theme.palette.background.default, color: theme.palette.text.primary}}>
+                <Header darkMode={darkMode} handleThemeChange={handleThemeChange}/>
+                <Routes>
+                    <Route path="/" element={<MainPage/>}/>
+                    <Route path="/search" element={< SearchPages/>}/>
+                    <Route path="/movies/popular" element={< CategoryMovies/>}/>
+                </Routes>
+                <Footer/>
+            </div>
         </ThemeProvider>
     )
 }
