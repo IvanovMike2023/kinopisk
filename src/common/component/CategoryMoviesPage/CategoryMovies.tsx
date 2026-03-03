@@ -19,7 +19,7 @@ export const CategoryMovies = () => {
     const {data: UpcomingData, refetch: refetchUpcoming} = useGetUpcomingQuery({page});
     const {data: NowPlayingData, refetch: refetchNowPlaying} = useGetNowPlayingQuery({page});
     const [results, setResults] = useState(Popular);
-    const [activeCategory, setActiveCategory] = useState('Popular');
+    const [activeCategory, setActiveCategory] = useState('Popular Movies');
 
     const currentPage = results?.page
     const count = results?.total_pages
@@ -60,13 +60,13 @@ export const CategoryMovies = () => {
         });
     }
     useEffect(() => {
-        if (dataitem === 'Popular') {
+        if (dataitem === 'Popular Movies') {
             setResults(Popular || []);
-        } else if (dataitem === 'TopRated') {
+        } else if (dataitem === 'Top Rated Movies') {
             setResults(topRatedData || []);
-        } else if (dataitem === 'Upcoming') {
+        } else if (dataitem === 'Upcoming Movies') {
             setResults(UpcomingData || []);
-        } else if (dataitem === 'NowPlaying') {
+        } else if (dataitem === 'Now Playing') {
             setResults(NowPlayingData || []);
         }
     }, [Popular, topRatedData, UpcomingData, NowPlayingData, dataitem]);
@@ -74,18 +74,18 @@ export const CategoryMovies = () => {
         <section className={s.section}>
             <div className={s.category}>
                 <div className={s.categoryButtons}>
-                    <Button onClick={() => getPopularMovies('Popular')}
-                            variant={activeCategory === 'Popular' ? 'contained' : 'outlined'}>Popular Movies</Button>
-                    <Button onClick={() => getTopRated('TopRated')}
-                            variant={activeCategory === 'TopRated' ? 'contained' : 'outlined'}>Top Rated Movies</Button>
-                    <Button onClick={() => Upcoming('Upcoming')}
-                            variant={activeCategory === 'Upcoming' ? 'contained' : 'outlined'}>Upcoming Movies</Button>
-                    <Button onClick={() => NowPlaying('NowPlaying')}
-                            variant={activeCategory === 'NowPlaying' ? 'contained' : 'outlined'}>Now Playing
+                    <Button onClick={() => getPopularMovies('Popular Movies')}
+                            variant={activeCategory === 'Popular Movies' ? 'contained' : 'outlined'}>Popular Movies</Button>
+                    <Button onClick={() => getTopRated('Top Rated Movies')}
+                            variant={activeCategory === 'Top Rated Movies' ? 'contained' : 'outlined'}>Top Rated Movies</Button>
+                    <Button onClick={() => Upcoming('Upcoming Movies')}
+                            variant={activeCategory === 'Upcoming Movies' ? 'contained' : 'outlined'}>Upcoming Movies</Button>
+                    <Button onClick={() => NowPlaying('Now Playing')}
+                            variant={activeCategory === 'Now Playing' ? 'contained' : 'outlined'}>Now Playing
                         Movies</Button>
                 </div>
             </div>
-            <h2 style={{color: theme.palette.text.primary}} className={s.titleResult}>Popular Movies</h2>
+            <h2 style={{color: theme.palette.text.primary}} className={s.titleResult}>{activeCategory}</h2>
             <div className={s.movies}>
                 {results?.results.map((el) => (
                     <SearchResult
