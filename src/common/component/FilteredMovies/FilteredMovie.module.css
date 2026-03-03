@@ -3,29 +3,21 @@
     flex-direction: column;
     gap: 24px;
     padding-block: 32px;
-
 }
-
 .title {
     color: white;
 }
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
-
 ._moviesGrid_1mspq_19 {
     --movie-grid-columns: 5;
 }
-
-
-
 .titleResult {
     color: white;
 }
-
 .titleResultSpan {
     color: darkgray;
 }
