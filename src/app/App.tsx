@@ -7,6 +7,7 @@ import {useState} from "react";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {CategoryMovies} from "../common/component/CategoryMoviesPage/CategoryMovies";
 import {Footer} from "../common/component/Footer/Footer";
+import {FilteredMovies} from "../common/component/FilteredMovies/FilteredMovies";
 
 function App() {
     const [darkMode, setDarkMode] = useState(true);
@@ -55,6 +56,7 @@ function App() {
                     <Route path="/" element={<MainPage/>}/>
                     <Route path="/search" element={< SearchPages/>}/>
                     <Route path="/movies/:category" element={< CategoryMovies/>}/>
+                    <Route path="/movies/filtered-movies" element={< FilteredMovies/>}/>
                 </Routes>
                 <Footer/>
             </div>

@@ -1,4 +1,4 @@
-export type PopularType = {
+export type ResponseType = {
     page: number,
     results: ResultsPopular[],
     total_pages: number,

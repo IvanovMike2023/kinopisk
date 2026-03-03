@@ -20,6 +20,9 @@ export const Header = ({darkMode, handleThemeChange}:Props) => {
     const handleCategoryMovies = () => {
         navigate('/movies/popular')
     }
+    const handleFilteredMovies = () => {
+        navigate('/movies/filtered-movies')
+    }
     const handleTheme=()=>{
         if(handleThemeChange){
             handleThemeChange()
@@ -32,7 +35,7 @@ export const Header = ({darkMode, handleThemeChange}:Props) => {
                         <img className={s.logo} onClick={handleMain} src={logoUrl} alt="Логотип" width="150"/>
                         <Button color="inherit" onClick={handleMain}>Main |</Button>
                         <Button color="inherit" onClick={handleCategoryMovies} >Category Movies |</Button>
-                        <Button color="inherit">Filtered Movies |</Button>
+                        <Button color="inherit" onClick={handleFilteredMovies}>Filtered Movies |</Button>
                         <Button color="inherit" onClick={handleSearch}>Search |</Button>
                         <Button color="inherit">Favorites |</Button>
                         {darkMode?                         <button className={s.buttonTheme} aria-label="Переключить на светлую тему" title="Переключить на светлую тему" onClick={handleTheme} color="inherit">☀</button>

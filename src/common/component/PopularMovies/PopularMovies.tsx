@@ -14,7 +14,7 @@ export const PopularMovies = ({ popular_movies}:Props) => {
     const handleGoToCategoryMovies=()=>{
     navigate('/movies/popular')
 }
-    return <section class={s.section_popular}>
+    return <section className={s.section_popular}>
         <div className={s.headerPopular}> <h2>Popular Movies</h2> <Button style={{border:'1px solid #d1d5db', color: theme.palette.text.primary }} color={'primary'} onClick={handleGoToCategoryMovies}>View more</Button></div>
         <div className={s.wrap_card}>
         {popular_movies.map((el)=>(
