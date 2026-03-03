@@ -54,7 +54,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<MainPage/>}/>
                     <Route path="/search" element={< SearchPages/>}/>
-                    <Route path="/movies/popular" element={< CategoryMovies/>}/>
+                    <Route path="/movies/:category" element={< CategoryMovies/>}/>
                 </Routes>
                 <Footer/>
             </div>
