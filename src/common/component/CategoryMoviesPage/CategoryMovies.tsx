@@ -11,15 +11,15 @@ import {Button, useTheme} from "@mui/material";
 import s from "./CategoryMovies.module.css";
 import {useNavigate, useLocation} from 'react-router-dom';
 
-export const CategoryMovies = () => {
-    const [page, setPage] = useState(1);
-    const [dataitem, setDataitem] = useState('');
 
+export const CategoryMovies = () => {
+
+    const [page, setPage] = useState(1);
     const {data: Popular, refetch: refetchPopular} = useGetPopularQuery({page})
     const {data: topRatedData, refetch: refetchTopRated} = useGetTopRatedQuery({page});
     const {data: UpcomingData, refetch: refetchUpcoming} = useGetUpcomingQuery({page});
     const {data: NowPlayingData, refetch: refetchNowPlaying} = useGetNowPlayingQuery({page});
-    const [results, setResults] = useState(Popular);
+    const [results, setResults] = useState(undefined);
     const [activeCategory, setActiveCategory] = useState('Popular Movies');
 
     const currentPage = results?.page
@@ -33,70 +33,51 @@ export const CategoryMovies = () => {
     const setCurrentPage = (newpage) => {
         setPage(newpage)
     }
+    const categoryMap={
+        'popular':{data:Popular,refetch:refetchPopular,label:"Popular Movies"},
+        'top_rated':{data:topRatedData,refetch:refetchTopRated,label:"Top Rated Movies"},
+        'upcoming':{data:UpcomingData,refetch:refetchUpcoming,label:"Upcoming Movies"},
+        'now_playing':{data:NowPlayingData,refetch:refetchNowPlaying,label:"Now Playing"}
+    }
     useEffect(() => {
-        switch (location.pathname.split('/')[2]) {
-            case 'popular':
-                refetchPopular({page}).unwrap().then((res) => {
-                    setResults(res)
-                });
-                break;
-            case 'top_rated':
-                refetchTopRated({page}).unwrap().then((res) => {
-                    setResults(res)
-                })
-                break;
-            case 'upcoming':
-                refetchUpcoming({page}).unwrap().then((res) => {
-                    setResults(res)
-                })
-                break;
-            case 'now_playing':
-                refetchNowPlaying({page}).unwrap().then((res) => {
-                    setResults(res)
-                })
-                break;
-            default:
-                setResults([]);
-                break;
-        }
-    }, [location.pathname, refetchPopular, refetchTopRated, refetchUpcoming, refetchNowPlaying, page]);
+        const categoryKey = location.pathname.split('/')[2];
+        console.log(categoryMap[categoryKey])
+        const category=categoryMap[categoryKey]
+        if(category){
+            category.refetch({page}).unwrap().then((res) => {
+                setResults(res)
+            })
+            setActiveCategory(category.label);
+        }else setResults([])
+    }, [location.pathname, page]);
     useEffect(() => {
-        const pathParts = location.pathname.split('/');
-        const categoryPath = pathParts[2];
-        switch (categoryPath) {
-            case'popular':
-                setActiveCategory('Popular Movies')
-                break
-            case'top_rated':
-                setActiveCategory('Top Rated Movies')
-                break
-            case'upcoming':
-                setActiveCategory('Upcoming Movies')
-                break
-            case'now_playing':
-                setActiveCategory('Now Playing')
-                break
-            default:
-                setActiveCategory('Popular Movies')
-        }
-        setPage(1)
+        const categoryKey = location.pathname.split('/')[2];
+        const categoryLabels = {
+            'popular': 'Popular Movies',
+            'top_rated': 'Top Rated Movies',
+            'upcoming': 'Upcoming Movies',
+            'now_playing': 'Now Playing'
+        };
+        setActiveCategory(categoryLabels[categoryKey] || 'Popular Movies');
+        setPage(1);
     }, [location.pathname]);
+    const categories = [
+        { key: 'popular', label: 'Popular Movies' },
+        { key: 'top_rated', label: 'Top Rated Movies' },
+        { key: 'upcoming', label: 'Upcoming Movies' },
+        { key: 'now_playing', label: 'Now Playing' }
+    ];
+
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.category}>
                 <div className={s.categoryButtons}>
-                    <Button onClick={() => changeCategoryInUrl('popular')}
-                            variant={activeCategory === 'Popular Movies' ? 'contained' : 'outlined'}>Popular
-                        Movies</Button>
-                    <Button onClick={() => changeCategoryInUrl('top_rated')}
-                            variant={activeCategory === 'Top Rated Movies' ? 'contained' : 'outlined'}>Top Rated
-                        Movies</Button>
-                    <Button onClick={() => changeCategoryInUrl('upcoming')}
-                            variant={activeCategory === 'Upcoming Movies' ? 'contained' : 'outlined'}>Upcoming
-                        Movies</Button>
-                    <Button onClick={() => changeCategoryInUrl('now_playing')}
-                            variant={activeCategory === 'Now Playing' ? 'contained' : 'outlined'}>Now Playing
-                        Movies</Button>
+                    {categories.map((cat)=>(
+                        <Button key={cat.key}
+                                onClick={() => changeCategoryInUrl(cat.key)}  variant={activeCategory === cat.label ? 'contained' : 'outlined'}>
+                            {cat.label}
+                        </Button>
+                    ))}
                 </div>
             </div>
             <h2 style={{color: theme.palette.text.primary}} className={s.titleResult}>{activeCategory}</h2>

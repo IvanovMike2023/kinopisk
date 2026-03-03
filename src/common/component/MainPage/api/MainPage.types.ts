@@ -3,6 +3,10 @@ export type PopularType = {
     results: ResultsPopular[],
     total_pages: number,
     total_results: number
+    dates:{
+        maximum:string,
+        minimum:string
+    }
 }
 export type ResultsPopular = {
     adult: boolean,
