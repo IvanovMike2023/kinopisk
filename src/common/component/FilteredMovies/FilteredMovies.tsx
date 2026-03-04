@@ -1,14 +1,16 @@
 import s from "./FilteredMovie.module.css";
 import {useGetPopularQuery} from "../MainPage/api/mainPageApi";
 import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
+import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
 
 export const FilteredMovies=()=>{
     const {data} = useGetPopularQuery({page: 1})
-    console.log(data)
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.wrapper}>
-                <div className={s.menu}>xsss</div>
+                <div className={s.menu}>
+                    <Filters_Sort/>
+                </div>
                 <div className={s.movies}>
                     {data?.results.map((el)=>(
                         <SearchResult
