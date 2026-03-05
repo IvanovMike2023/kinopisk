@@ -1,15 +1,30 @@
 import s from "./FilteredMovie.module.css";
-import {useGetPopularQuery} from "../MainPage/api/mainPageApi";
+import {useGetDiscoverMovieQuery, useGetPopularQuery} from "../MainPage/api/mainPageApi";
 import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
+import {useState} from "react";
 
 export const FilteredMovies=()=>{
-    const {data} = useGetPopularQuery({page: 1})
+    const [params, setParams] = useState({ page: 20, sort_by: 'original_title.asc' });
+
+    const {data,refetch} =  useGetDiscoverMovieQuery({payload: params})
+    const selectFilter=(value)=>{
+        switch (value){
+            case 'popularity.asc' :
+                setParams({ page: 20, sort_by: 'popularity.asc' })
+                break
+            case 'popularity.desc':
+                setParams({ page: 20, sort_by: 'popularity.desc' })
+                break
+        }
+
+        refetch()
+    }
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.wrapper}>
                 <div className={s.menu}>
-                    <Filters_Sort/>
+                    <Filters_Sort selectFilter={selectFilter} />
                 </div>
                 <div className={s.movies}>
                     {data?.results.map((el)=>(
@@ -22,9 +37,6 @@ export const FilteredMovies=()=>{
                     ))}
                 </div>
             </div>
-
-
-
             </section>
                 </div>
 }

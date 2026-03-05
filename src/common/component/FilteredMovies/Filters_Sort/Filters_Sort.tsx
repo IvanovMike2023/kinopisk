@@ -1,9 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import {Button, Paper, Typography, useTheme} from "@mui/material";
-import {UI, RatingRangeSlider, SortingSelector} from "../../../UI/UI";
-
-export const Filters_Sort=()=>{
+import {UI, RatingRangeSlider, SortingSelector} from "../../../UI_Filter/UI";
+type Props={
+    selectFilter:(value:string)=>void
+}
+export const Filters_Sort=({selectFilter}):Props=>{
     const [age, setAge] = React.useState('Popularity ↓');
     const [range, setRange] = React.useState([2.0, 8.0])
     const theme = useTheme();
@@ -11,8 +13,8 @@ export const Filters_Sort=()=>{
         setRange(newValue);
     };
     const handleChange = (event: string) => {
-        console.log(event.target.value)
         setAge(event.target.value as string);
+        selectFilter(event.target.value)
     };
 
     return  <Box    sx={{

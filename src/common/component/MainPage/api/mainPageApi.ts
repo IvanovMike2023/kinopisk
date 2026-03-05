@@ -19,6 +19,12 @@ export const mainPageApi = baseApi.injectEndpoints({
             query: ({page}) => ({url:`movie/now_playing?page=${page}`}),
             providesTags: ['Popular']
         }),
+        getDiscoverMovie: build.query<ResponseType, { payload:{page:number,sort_by:string} }>({
+            query: ({payload}) => ({
+                url:`discover/movie`,
+                params: payload
+            }),
+        }),
     }),
 })
 export const {
@@ -26,4 +32,5 @@ export const {
     useGetTopRatedQuery,
     useGetUpcomingQuery,
     useGetNowPlayingQuery,
+    useGetDiscoverMovieQuery,
 } = mainPageApi

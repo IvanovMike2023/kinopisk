@@ -44,8 +44,8 @@ const theme = useTheme();
             height:35
         }}
         >
-            <MenuItem  value={'Popularity ↓'}>Popularity ↓</MenuItem>
-            <MenuItem value={'Popularity ↑'}>Popularity ↑</MenuItem>
+            <MenuItem  value={'popularity.desc'}>Popularity ↓</MenuItem>
+            <MenuItem value={'popularity.asc'}>Popularity ↑</MenuItem>
             <MenuItem value={'Rating ↓'}>Rating ↓</MenuItem>
             <MenuItem value={'Rating ↑'}>Rating ↑</MenuItem>
             <MenuItem value={'Release Date ↓'}>Release Date ↓</MenuItem>
