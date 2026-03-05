@@ -7,7 +7,7 @@ type Props = {
     selectFilter: (value: string) => void
 }
 export const Filters_Sort = ({selectFilter}): Props => {
-    const [age, setAge] = React.useState('Popularity ↓');
+    const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([2.0, 8.0])
     const theme = useTheme();
     const handleChangeSlider = (event, newValue) => {

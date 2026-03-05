@@ -15,6 +15,24 @@ export const FilteredMovies = () => {
             case 'popularity.desc':
                 setParams({page: 20, sort_by: 'popularity.desc'})
                 break
+            case 'vote_average.asc':
+                setParams({page: 20, sort_by: 'vote_average.asc'})
+                break
+            case 'vote_average.desc':
+                setParams({page: 20, sort_by: 'vote_average.desc'})
+                break
+            case 'primary_release_date.desc':
+                setParams({page: 20, sort_by: 'primary_release_date.desc'})
+                break
+            case 'primary_release_date.asc':
+                setParams({page: 20, sort_by: 'primary_release_date.asc'})
+                break
+            case 'original_title.asc':
+                setParams({page: 20, sort_by: 'original_title.asc'})
+                break
+            case 'original_title.desc':
+                setParams({page: 20, sort_by: 'original_title..desc'})
+                break
         }
 
         refetch()

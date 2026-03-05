@@ -33,7 +33,6 @@ export const SortingSelector = ({value, handleChange}): Sort => {
     const theme = useTheme();
     return <FormControl sx={{width: 200}}>
         <Select value={value}
-                defaultValue="someValue"
                 onChange={handleChange}
                 MenuProps={{
                     PaperProps: {
@@ -46,13 +45,12 @@ export const SortingSelector = ({value, handleChange}): Sort => {
         >
             <MenuItem value={'popularity.desc'}>Popularity ↓</MenuItem>
             <MenuItem value={'popularity.asc'}>Popularity ↑</MenuItem>
-            <MenuItem value={'Rating ↓'}>Rating ↓</MenuItem>
-            <MenuItem value={'Rating ↑'}>Rating ↑</MenuItem>
-            <MenuItem value={'Release Date ↓'}>Release Date ↓</MenuItem>
-            <MenuItem value={'Release Date ↑'}>Release Date ↑</MenuItem>
-            <MenuItem value={'Title A-Z'}>Title A-Z</MenuItem>
-            <MenuItem value={'Thirty'}>Thirty</MenuItem>
-            <MenuItem value={'Title Z-A'}>Title Z-A</MenuItem>
+            <MenuItem value={'vote_average.desc'}>Rating ↓</MenuItem>
+            <MenuItem value={'vote_average.asc'}>Rating ↑</MenuItem>
+            <MenuItem value={'primary_release_date.desc'}>Release Date ↓</MenuItem>
+            <MenuItem value={'primary_release_date.asc'}>Release Date ↑</MenuItem>
+            <MenuItem value={'original_title.asc'}>Title A-Z</MenuItem>
+            <MenuItem value={'original_title.desc'}>Title Z-A</MenuItem>
         </Select>
     </FormControl>
 }
