@@ -17,7 +17,6 @@ export const FilteredMovies=()=>{
                 setParams({ page: 20, sort_by: 'popularity.desc' })
                 break
         }
-
         refetch()
     }
     return <div className={s.container}>
