@@ -1,10 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select  from '@mui/material/Select';
-import {Paper, Slider, Typography, useTheme} from "@mui/material";
+import {Button, Paper, Typography, useTheme} from "@mui/material";
+import {UI, RatingRangeSlider, SortingSelector} from "../../../UI/UI";
 
 export const Filters_Sort=()=>{
     const [age, setAge] = React.useState('Popularity ↓');
@@ -25,76 +22,51 @@ export const Filters_Sort=()=>{
         '& > :not(style)': {
             m: 1,
             width: 290,
-            height: 628,
+            height: 608,
         },
     }}>
     <Paper sx={{backgroundColor: theme.palette.background.default,paddingTop:'20px'}} variant="elevation">
         <Typography align="center" variant="h5" component="h2">
             Filters / Sort
         </Typography>
-        <Box display="flex" alignItems="center" justifyContent="space-between" px={2}>
+        <Box display="flex" alignItems="center" justifyContent="space-between" px={2} paddingTop={5}>
             <Typography  variant="subtitle2" component="h2">
                 Filters / Sort
             </Typography>
-        <FormControl sx={{ width: 200}} >
-            <Select sx={{height:35,}}
-                value={age}
-                    defaultValue="someValue"
-                onChange={handleChange}
-                    MenuProps={{
-                        PaperProps: {
-                            style: { backgroundColor: theme.palette.background.default }, // цвет фона меню
-                        },
-                    }}
-            >
-                <MenuItem  value={'Popularity ↓'}>Popularity ↓</MenuItem>
-                <MenuItem value={'Popularity ↑'}>Popularity ↑</MenuItem>
-                <MenuItem value={'Rating ↓'}>Rating ↓</MenuItem>
-                <MenuItem value={'Rating ↑'}>Rating ↑</MenuItem>
-                <MenuItem value={'Release Date ↓'}>Release Date ↓</MenuItem>
-                <MenuItem value={'Release Date ↑'}>Release Date ↑</MenuItem>
-                <MenuItem value={'Title A-Z'}>Title A-Z</MenuItem>
-                <MenuItem value={'Thirty'}>Thirty</MenuItem>
-                <MenuItem value={'Title Z-A'}>Title Z-A</MenuItem>
-            </Select>
-        </FormControl>
+ <SortingSelector value={age} handleChange={handleChange} />
         </Box>
-        <Box sx={{ width: '100%', maxWidth: 250, padding: 2, borderRadius: 2 }}>
-            {/* Заголовок и диапазон */}
-            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                <Typography variant="subtitle1" fontWeight="bold">
-                    Rating Range
-                </Typography>
-                <Typography variant="subtitle1" sx={{ color: theme.palette.text.primary }}>
-                    {range[0].toFixed(1)} - {range[1].toFixed(1)}
-                </Typography>
-            </Box>
-            {/* Двойной слайдер */}
-            <Slider
-                value={range}
-                onChange={handleChangeSlider}
-                min={0.0}
-                max={10.0}
-                step={0.1}
-                valueLabelDisplay="off"
-                disableSwap // чтобы избежать пересечения ползунков (можно убрать, если хотите)
-                sx={{
-                    width: '100%',
-                    color: 'blue', // цвет слайдера
-                    '& .MuiSlider-thumb': {
-                        backgroundColor: 'blue',
-                        border: '2px solid blue',
-                    },
-                    '& .MuiSlider-track': {
-                        height: 4,
-                        backgroundColor: 'blue', // цвет полосы
-                    },
-                    '& .MuiSlider-rail': {
-                        height: 4,
-                        backgroundColor: '#ccc',
-                    },
-                }}
-            />
+            <RatingRangeSlider range={range} onChangeSlider={handleChangeSlider} />
+
+        <Box display={'flex'} flexWrap="wrap" gap={1} padding={2} >
+            <UI name={'Action'} />
+            <UI name={'Adventure'} />
+            <UI name={'Animation'}/>
+            <UI name={'Comedy'}/>
+            <UI name={'Crime'}/>
+            <UI name={'Drama'}/>
+            <UI name={'Documentary'}/>
+            <UI name={'Family'} />
+            <UI name={'Fantasy'}/>
+            <UI name={'History'}/>
+            <UI name={'Horror'}/>
+            <UI name={'Music'}/>
+            <UI name={'Mystery'}/>
+            <UI name={'Romance'}/>
+            <UI name={'Science Fiction'}/>
+            <UI name={'TV Movie'}/>
+            <UI name={'Thriller'}/>
+            <UI name={'War'}/>
+            <UI name={'Western'}/>
+        </Box>
+        <Box display={'flex'} justifyContent={'center'} paddingTop={3}>
+        <Button     sx={{
+            fontSize: 12,
+            backgroundColor: '#2563eb',
+            transition: 'background-color 0.2s ease',
+            '&:hover': {
+                backgroundColor: '#1e40af'
+            },
+        }}>Reset filters</Button>
         </Box>
     </Paper>
 </Box>
