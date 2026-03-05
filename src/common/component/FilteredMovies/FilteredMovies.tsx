@@ -4,16 +4,16 @@ import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
 import {useState} from "react";
 
-export const FilteredMovies=()=>{
-    const [params, setParams] = useState({ page: 20, sort_by: 'original_title.asc' });
-    const {data,refetch} =  useGetDiscoverMovieQuery({payload: params})
-    const selectFilter=(value)=>{
-        switch (value){
+export const FilteredMovies = () => {
+    const [params, setParams] = useState({page: 20, sort_by: 'original_title.asc'});
+    const {data, refetch} = useGetDiscoverMovieQuery({payload: params})
+    const selectFilter = (value) => {
+        switch (value) {
             case 'popularity.asc' :
-                setParams({ page: 20, sort_by: 'popularity.asc' })
+                setParams({page: 20, sort_by: 'popularity.asc'})
                 break
             case 'popularity.desc':
-                setParams({ page: 20, sort_by: 'popularity.desc' })
+                setParams({page: 20, sort_by: 'popularity.desc'})
                 break
         }
         refetch()
@@ -22,10 +22,10 @@ export const FilteredMovies=()=>{
         <section className={s.section}>
             <div className={s.wrapper}>
                 <div className={s.menu}>
-                    <Filters_Sort selectFilter={selectFilter} />
+                    <Filters_Sort selectFilter={selectFilter}/>
                 </div>
                 <div className={s.movies}>
-                    {data?.results.map((el)=>(
+                    {data?.results.map((el) => (
                         <SearchResult
                             key={el.id}
                             vote_average={el.vote_average}
@@ -35,6 +35,6 @@ export const FilteredMovies=()=>{
                     ))}
                 </div>
             </div>
-            </section>
-                </div>
+        </section>
+    </div>
 }
