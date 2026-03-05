@@ -18,6 +18,7 @@ export const FilteredMovies = () => {
         }
         refetch()
     }
+
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.wrapper}>
