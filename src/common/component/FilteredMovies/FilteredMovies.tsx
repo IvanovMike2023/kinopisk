@@ -6,7 +6,6 @@ import {useState} from "react";
 
 export const FilteredMovies=()=>{
     const [params, setParams] = useState({ page: 20, sort_by: 'original_title.asc' });
-
     const {data,refetch} =  useGetDiscoverMovieQuery({payload: params})
     const selectFilter=(value)=>{
         switch (value){
