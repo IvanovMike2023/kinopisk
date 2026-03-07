@@ -29,8 +29,6 @@ type Sort = {
     value: string,
     handleChange: () => void
 }
-
-
 export const SortingSelector = ({value, handleChange}): Sort => {
     const theme = useTheme();
     return <FormControl sx={{width: 200}}>
