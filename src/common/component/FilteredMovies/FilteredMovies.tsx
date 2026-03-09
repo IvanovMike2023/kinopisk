@@ -35,6 +35,9 @@ export const FilteredMovies = () => {
                 break
         }
 
+
+
+
         refetch()
     }
     return <div className={s.container}>
