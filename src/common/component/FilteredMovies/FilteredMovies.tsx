@@ -2,10 +2,10 @@ import s from "./FilteredMovie.module.css";
 import {useGetDiscoverMovieQuery, useGetPopularQuery} from "../MainPage/api/mainPageApi";
 import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export const FilteredMovies = () => {
-    const [params, setParams] = useState({page: 1, sort_by: 'original_title.asc'});
+    const [params, setParams] = useState({page: 1, sort_by: 'original_title.asc','vote_average.gte': 7,'vote_average.lte':8});
     const {data, refetch} = useGetDiscoverMovieQuery({payload: params})
     const selectFilter = (value) => {
         switch (value) {
@@ -34,17 +34,19 @@ export const FilteredMovies = () => {
                 setParams({page: 20, sort_by: 'original_title..desc'})
                 break
         }
-
-
-
-
-        refetch()
     }
+    const selectFilterSlider=(value)=>{
+        //vote_average vote_average.lte vote_average.gte
+        setParams(prev => ({ ...prev, 'vote_average.gte':value[0],'vote_average.lte':value[1]  }));
+    }
+    useEffect(() => {
+        refetch();
+    }, [params]);
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.wrapper}>
                 <div className={s.menu}>
-                    <Filters_Sort selectFilter={selectFilter}/>
+                    <Filters_Sort selectFilterSlider={selectFilterSlider} selectFilter={selectFilter}/>
                 </div>
                 <div className={s.movies}>
                     {data?.results.map((el) => (

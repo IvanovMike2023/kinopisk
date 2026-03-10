@@ -5,12 +5,14 @@ import {UI, RatingRangeSlider, SortingSelector} from "../../../UI_Filter/UI";
 
 type Props = {
     selectFilter: (value: string) => void
+    selectFilterSlider: (value: string) => void
 }
-export const Filters_Sort = ({selectFilter}): Props => {
+export const Filters_Sort = ({selectFilterSlider,selectFilter}): Props => {
     const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([2.0, 8.0])
     const theme = useTheme();
     const handleChangeSlider = (event, newValue) => {
+        selectFilterSlider(newValue)
         setRange(newValue);
     };
     const handleChange = (event: string) => {
