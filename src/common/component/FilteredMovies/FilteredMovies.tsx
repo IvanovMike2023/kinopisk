@@ -36,7 +36,6 @@ export const FilteredMovies = () => {
         }
     }
     const selectFilterSlider=(value)=>{
-        //vote_average vote_average.lte vote_average.gte
         setParams(prev => ({ ...prev, 'vote_average.gte':value[0],'vote_average.lte':value[1]  }));
     }
     useEffect(() => {
