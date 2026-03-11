@@ -2,7 +2,7 @@ import s from "./FilteredMovie.module.css";
 import {useGetDiscoverMovieQuery, useGetPopularQuery} from "../MainPage/api/mainPageApi";
 import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
 
 export const FilteredMovies = () => {
@@ -47,9 +47,27 @@ export const FilteredMovies = () => {
                 break
         }
     }
-    const selectFilterSlider = (value) => {
-        setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));
+    function debounce(func, delay) {
+        let timeoutId;
+        return function(...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func.apply(this, args), delay);
+        };
     }
+    const debouncedSetParams = useRef();
+
+    const createDebounce = useCallback(() => {
+        debouncedSetParams.current = debounce((value) => {
+            setParams(prev => ({ ...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1] }));
+        }, 200);
+    }, [setParams]);
+    useEffect(() => {
+        createDebounce();
+    }, [createDebounce]);
+    const selectFilterSlider = (value) => {
+        debouncedSetParams.current(value);
+    }
+
     useEffect(() => {
         refetch();
     }, [params]);
