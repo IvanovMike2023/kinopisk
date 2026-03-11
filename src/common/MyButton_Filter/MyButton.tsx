@@ -3,24 +3,40 @@ import * as React from "react";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
+import {useState} from "react";
 
 type Props = {
     name: string
+    id:number
+    handlerButtonClick:(id:number,isClick:boolean)=>void
 }
-export const UI = ({name}): Props => {
+export const MyButton = ({name,id,handlerButtonClick}): Props => {
     const theme = useTheme();
+    const [isClick,setisClick]=useState(true)
+    const handlerClick = (e) => {
+        if(!isClick){
+            setisClick(true)
+            handlerButtonClick(e.currentTarget.id,isClick)
+        }else{
+            handlerButtonClick(e.currentTarget.id,isClick)
+            setisClick(false)
 
-    return (<Button
+        }
+
+    }
+    return (<Button onClick={handlerClick} id={id}
         sx={{
             border: '1px solid #ccc',
             fontSize: 12,
             color: theme.palette.text.primary,
+            backgroundColor: theme.palette.background.default,
             lineHeight: 1.2,          // правильно писать camelCase
             borderRadius: 9999,       // тоже camelCase и без точки с запятой
             transition: 'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
             '&:hover': {
                 borderColor: 'blue',
             },
+            backgroundColor: !isClick  ? '#2563eb' : theme.palette.background.default,
         }}
     >{name}
     </Button>)

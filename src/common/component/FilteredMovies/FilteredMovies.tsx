@@ -11,7 +11,8 @@ export const FilteredMovies = () => {
         page: 1,
         sort_by: 'original_title.asc',
         'vote_average.gte': 7,
-        'vote_average.lte': 8
+        'vote_average.lte': 8,
+
     });
     const {data, refetch} = useGetDiscoverMovieQuery({payload: params})
     const currentPage = data?.page
@@ -71,12 +72,20 @@ export const FilteredMovies = () => {
     useEffect(() => {
         refetch();
     }, [params]);
+    const selectButtonFilter=(id,isClick)=>{
+        if(isClick){
+            setParams(prev => ({ ...prev,with_genres: id }))
+        }else {
+            const { with_genres, ...rest } = params;
+            setParams(rest)
+        }
+    }
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.wrapper}>
                 <div className={s.contentRow}>
                     <div className={s.menu}>
-                        <Filters_Sort selectFilterSlider={selectFilterSlider} selectFilter={selectFilter}/>
+                        <Filters_Sort selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider} selectFilter={selectFilter}/>
                     </div>
                     <section>
                         <div className={s.movies}>

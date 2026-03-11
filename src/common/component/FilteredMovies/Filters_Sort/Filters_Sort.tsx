@@ -1,13 +1,14 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import {Button, Paper, Typography, useTheme} from "@mui/material";
-import {UI, RatingRangeSlider, SortingSelector} from "../../../UI_Filter/UI";
+import {MyButton, RatingRangeSlider, SortingSelector} from "../../../MyButton_Filter/MyButton";
 
 type Props = {
     selectFilter: (value: string) => void
     selectFilterSlider: (value: string) => void
+    selectButtonFilter: (value: number,isClick:boolean) => void
 }
-export const Filters_Sort = ({selectFilterSlider,selectFilter}): Props => {
+export const Filters_Sort = ({selectButtonFilter,selectFilterSlider, selectFilter}): Props => {
     const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([2.0, 8.0])
     const theme = useTheme();
@@ -19,7 +20,9 @@ export const Filters_Sort = ({selectFilterSlider,selectFilter}): Props => {
         setAge(event.target.value as string);
         selectFilter(event.target.value)
     };
-
+    const handlerButtonClick = (id,isClick) => {
+        selectButtonFilter(id,isClick)
+    }
     return <Box sx={{
         display: 'flex',
         gap: '36px',
@@ -43,25 +46,25 @@ export const Filters_Sort = ({selectFilterSlider,selectFilter}): Props => {
             <RatingRangeSlider range={range} onChangeSlider={handleChangeSlider}/>
 
             <Box display={'flex'} flexWrap="wrap" gap={1} padding={2}>
-                <UI name={'Action'}/>
-                <UI name={'Adventure'}/>
-                <UI name={'Animation'}/>
-                <UI name={'Comedy'}/>
-                <UI name={'Crime'}/>
-                <UI name={'Drama'}/>
-                <UI name={'Documentary'}/>
-                <UI name={'Family'}/>
-                <UI name={'Fantasy'}/>
-                <UI name={'History'}/>
-                <UI name={'Horror'}/>
-                <UI name={'Music'}/>
-                <UI name={'Mystery'}/>
-                <UI name={'Romance'}/>
-                <UI name={'Science Fiction'}/>
-                <UI name={'TV Movie'}/>
-                <UI name={'Thriller'}/>
-                <UI name={'War'}/>
-                <UI name={'Western'}/>
+                <MyButton name={'Action'} id={28} handlerButtonClick={handlerButtonClick}  />
+                <MyButton name={'Adventure'} id={12} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Animation'}/>
+                <MyButton name={'Comedy'}/>
+                <MyButton name={'Crime'}/>
+                <MyButton name={'Drama'}/>
+                <MyButton name={'Documentary'}/>
+                <MyButton name={'Family'}/>
+                <MyButton name={'Fantasy'}/>
+                <MyButton name={'History'}/>
+                <MyButton name={'Horror'}/>
+                <MyButton name={'Music'}/>
+                <MyButton name={'Mystery'}/>
+                <MyButton name={'Romance'}/>
+                <MyButton name={'Science Fiction'}/>
+                <MyButton name={'TV Movie'}/>
+                <MyButton name={'Thriller'}/>
+                <MyButton name={'War'}/>
+                <MyButton name={'Western'}/>
             </Box>
             <Box display={'flex'} justifyContent={'center'} paddingTop={3}>
                 <Button sx={{
