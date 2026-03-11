@@ -42,12 +42,23 @@
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 24px;
-    flex-basis:70%
+    flex: 1; /* занимает оставшуюся ширину */
 }
 .wrapper{
     display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
-.menu{
+.menu {
+    flex-basis: 30%; /* или задайте фиксированную ширину, например, 300px */
+}
+.pagination_wrapper {
     display: flex;
-    flex-basis:30%
+    justify-content: center; /* выравниваем по центру */
+    margin-top: 16px;
+}
+.contentRow {
+    display: flex;
+    flex-direction: row; /* горизонтально */
+    align-items: flex-start; /* чтобы элементы были на одной линии сверху */
 }

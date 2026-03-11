@@ -3,10 +3,22 @@ import {useGetDiscoverMovieQuery, useGetPopularQuery} from "../MainPage/api/main
 import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
 import {useEffect, useState} from "react";
+import {Pagination} from "../../Pagination/Pagination";
 
 export const FilteredMovies = () => {
-    const [params, setParams] = useState({page: 1, sort_by: 'original_title.asc','vote_average.gte': 7,'vote_average.lte':8});
+
+    const [params, setParams] = useState({
+        page: 1,
+        sort_by: 'original_title.asc',
+        'vote_average.gte': 7,
+        'vote_average.lte': 8
+    });
     const {data, refetch} = useGetDiscoverMovieQuery({payload: params})
+    const currentPage = data?.page
+    const count = data?.total_pages
+    const setCurrentPage = (value) => {
+        setParams(prev => ({...prev, page: value}))
+    }
     const selectFilter = (value) => {
         switch (value) {
             case 'popularity.asc' :
@@ -28,15 +40,15 @@ export const FilteredMovies = () => {
                 setParams({page: 1, sort_by: 'primary_release_date.asc'})
                 break
             case 'original_title.asc':
-                setParams({page: 20, sort_by: 'original_title.asc'})
+                setParams({page: 1, sort_by: 'original_title.asc'})
                 break
             case 'original_title.desc':
-                setParams({page: 20, sort_by: 'original_title..desc'})
+                setParams({page: 1, sort_by: 'original_title..desc'})
                 break
         }
     }
-    const selectFilterSlider=(value)=>{
-        setParams(prev => ({ ...prev, 'vote_average.gte':value[0],'vote_average.lte':value[1]  }));
+    const selectFilterSlider = (value) => {
+        setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));
     }
     useEffect(() => {
         refetch();
@@ -44,19 +56,29 @@ export const FilteredMovies = () => {
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.wrapper}>
-                <div className={s.menu}>
-                    <Filters_Sort selectFilterSlider={selectFilterSlider} selectFilter={selectFilter}/>
+                <div className={s.contentRow}>
+                    <div className={s.menu}>
+                        <Filters_Sort selectFilterSlider={selectFilterSlider} selectFilter={selectFilter}/>
+                    </div>
+                    <section>
+                        <div className={s.movies}>
+                            {data?.results.map((el) => (
+                                <SearchResult
+                                    key={el.id}
+                                    vote_average={el.vote_average}
+                                    title={el.title}
+                                    poster_path={el.poster_path}
+                                />
+                            ))}
+
+                        </div>
+                        <div className={s.pagination_wrapper}>
+                            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}
+                                        count={count}/>
+                        </div>
+                    </section>
                 </div>
-                <div className={s.movies}>
-                    {data?.results.map((el) => (
-                        <SearchResult
-                            key={el.id}
-                            vote_average={el.vote_average}
-                            title={el.title}
-                            poster_path={el.poster_path}
-                        />
-                    ))}
-                </div>
+
             </div>
         </section>
     </div>
