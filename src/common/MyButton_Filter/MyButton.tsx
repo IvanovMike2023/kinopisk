@@ -14,15 +14,9 @@ export const MyButton = ({name,id,handlerButtonClick}): Props => {
     const theme = useTheme();
     const [isClick,setisClick]=useState(true)
     const handlerClick = (e) => {
-        if(!isClick){
-            setisClick(true)
+        const newIsClick = !isClick;
+            setisClick(newIsClick)
             handlerButtonClick(e.currentTarget.id,isClick)
-        }else{
-            handlerButtonClick(e.currentTarget.id,isClick)
-            setisClick(false)
-
-        }
-
     }
     return (<Button onClick={handlerClick} id={id}
         sx={{

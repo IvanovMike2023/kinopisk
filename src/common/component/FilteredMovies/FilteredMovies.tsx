@@ -10,8 +10,8 @@ export const FilteredMovies = () => {
     const [params, setParams] = useState({
         page: 1,
         sort_by: 'original_title.asc',
-        'vote_average.gte': 7,
-        'vote_average.lte': 8,
+        'vote_average.gte': 0,
+        'vote_average.lte': 10,
 
     });
     const [displayedData, setDisplayedData] = useState(null);
@@ -31,30 +31,30 @@ export const FilteredMovies = () => {
     }
     const selectFilter = (value) => {
         switch (value) {
-            case 'popularity.asc' :
-                setParams({page: 1, sort_by: 'popularity.asc'})
-                break
+            case 'popularity.asc':
+                setParams(prev => ({ ...prev, page: 1, sort_by: 'popularity.asc' }));
+                break;
             case 'popularity.desc':
-                setParams({page: 1, sort_by: 'popularity.desc'})
-                break
+                setParams(prev => ({ ...prev, page: 1, sort_by: 'popularity.desc' }));
+                break;
             case 'vote_average.asc':
-                setParams({page: 1, sort_by: 'vote_average.asc'})
-                break
+                setParams(prev => ({ ...prev, page: 1, sort_by: 'vote_average.asc' }));
+                break;
             case 'vote_average.desc':
-                setParams({page: 1, sort_by: 'vote_average.desc'})
-                break
+                setParams(prev => ({ ...prev, page: 1, sort_by: 'vote_average.desc' }));
+                break;
             case 'primary_release_date.desc':
-                setParams({page: 1, sort_by: 'primary_release_date.desc'})
-                break
+                setParams(prev => ({ ...prev, page: 1, sort_by: 'primary_release_date.desc' }));
+                break;
             case 'primary_release_date.asc':
-                setParams({page: 1, sort_by: 'primary_release_date.asc'})
-                break
+                setParams(prev => ({ ...prev, page: 1, sort_by: 'primary_release_date.asc' }));
+                break;
             case 'original_title.asc':
-                setParams({page: 1, sort_by: 'original_title.asc'})
-                break
+                setParams(prev => ({ ...prev, page: 1, sort_by: 'original_title.asc' }));
+                break;
             case 'original_title.desc':
-                setParams({page: 1, sort_by: 'original_title..desc'})
-                break
+                setParams(prev => ({ ...prev, page: 1, sort_by: 'original_title.desc' }));
+                break;
         }
     }
     function debounce(func, delay) {
@@ -95,16 +95,17 @@ export const FilteredMovies = () => {
             const { with_genres, ...rest } = params;
             if(with_genres.includes(id)){
                // console.log(with_genres)
+                if(with_genres===id){
+                   return setParams(rest)
+                   // handleParamsChange(rest, false);
+                }
                 const with_genres_id=with_genres.replace(/,/g, " ").split(' ').filter(fl=>fl != id).toString()
                 const newParams={...params,with_genres:with_genres_id}
                 setParams(newParams)
-                console.log(newParams)
-                //handleParamsChange(newParams, false);
-                // console.log(twith_genres)
+
             }
 
-            //setParams(rest)
-           // handleParamsChange(rest, false);
+
         }
     }
     return <div className={s.container}>

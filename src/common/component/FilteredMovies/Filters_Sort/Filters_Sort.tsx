@@ -10,7 +10,7 @@ type Props = {
 }
 export const Filters_Sort = ({selectButtonFilter,selectFilterSlider, selectFilter}): Props => {
     const [age, setAge] = React.useState('popularity.desc');
-    const [range, setRange] = React.useState([2.0, 8.0])
+    const [range, setRange] = React.useState([0.0, 10.0])
     const theme = useTheme();
     const handleChangeSlider = (event, newValue) => {
         selectFilterSlider(newValue)
