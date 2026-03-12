@@ -6,8 +6,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
 
 export const FilteredMovies = () => {
-    const cacheDefaultRef = useRef(); // кеш без фильтров
-    const cacheFilteredRef = useRef(); // кеш при фильтрах
+
     const [params, setParams] = useState({
         page: 1,
         sort_by: 'original_title.asc',
@@ -15,14 +14,16 @@ export const FilteredMovies = () => {
         'vote_average.lte': 8,
 
     });
-    const {data, refetch} = useGetDiscoverMovieQuery(
-        {payload: params},
-        {
-            selectFromResult: (result) => ({
-                data: result.data
-            })
-        },
-    )
+    const [displayedData, setDisplayedData] = useState(null);
+
+    const {data, refetch} = useGetDiscoverMovieQuery({payload: params},
+
+)
+    useEffect(() => {
+        if (data) {
+            setDisplayedData(data);
+        }
+    }, [data]);
     const currentPage = data?.page
     const count = data?.total_pages
     const setCurrentPage = (value) => {
@@ -56,20 +57,18 @@ export const FilteredMovies = () => {
                 break
         }
     }
-
     function debounce(func, delay) {
         let timeoutId;
-        return function (...args) {
+        return function(...args) {
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => func.apply(this, args), delay);
         };
     }
-
     const debouncedSetParams = useRef();
 
     const createDebounce = useCallback(() => {
         debouncedSetParams.current = debounce((value) => {
-            setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));
+            setParams(prev => ({ ...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1] }));
         }, 200);
     }, [setParams]);
     useEffect(() => {
@@ -79,56 +78,34 @@ export const FilteredMovies = () => {
         debouncedSetParams.current(value);
     }
 
-    const [showCached, setShowCached] = useState(false);
-
-    const selectButtonFilter = (id, isClick) => {
-        if (isClick) {
-            setParams(prev => ({...prev, with_genres: id}))
-            setShowCached(false)
-        } else {
-            setShowCached(true)
-        }
-    }
-    const displayedData = showCached
-        ? (params.with_genres ? cacheFilteredRef.current : cacheDefaultRef.current)
-        : data;
-    const isDataAvailable = displayedData && displayedData.results && displayedData.results.length > 0;
-
-    if (showCached && !isDataAvailable) {
-        console.log(displayedData)
-        // показываем сообщение или делаем повторный вызов
-    }
-    useEffect(() => {
-        if (data) {
-            if (!params.with_genres) {
-                // Обновляем кеш без фильтров
-                cacheDefaultRef.current = data;
-            } else {
-                // Обновляем кеш с фильтрами
-                cacheFilteredRef.current = data;
-            }
-        }
-    }, [data]);
-
-    useEffect(() => {
-        if (!showCached) {
+    // useEffect(() => {
+    //     refetch();
+    // }, [params]);
+    const handleParamsChange = (newParams, shouldRefetch = true) => {
+        setParams(newParams);
+        if (shouldRefetch) {
             refetch();
         }
-    }, [params, showCached]);
-    // console.log('КэшDefault:', cacheDefaultRef.current);
-    // console.log('КэшFiltered:', cacheFilteredRef.current);
-    // console.log('Отображаемое:', displayedData);
+    };
+    const selectButtonFilter=(id,isClick)=>{
+        if(isClick){
+            setParams(prev => ({ ...prev,with_genres: id }))
+        }else {
+            const { with_genres, ...rest } = params;
+            setParams(rest)
+            handleParamsChange(rest, false);
+        }
+    }
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.wrapper}>
                 <div className={s.contentRow}>
                     <div className={s.menu}>
-                        <Filters_Sort selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider}
-                                      selectFilter={selectFilter}/>
+                        <Filters_Sort selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider} selectFilter={selectFilter}/>
                     </div>
                     <section>
                         <div className={s.movies}>
-                            {displayedData?.results.map((el) => (
+                            {data?.results.map((el) => (
                                 <SearchResult
                                     key={el.id}
                                     vote_average={el.vote_average}
