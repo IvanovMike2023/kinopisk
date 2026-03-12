@@ -93,8 +93,18 @@ export const FilteredMovies = () => {
                 return { ...prev,with_genres: iswith_genres.join() }})
         }else {
             const { with_genres, ...rest } = params;
-            setParams(rest)
-            handleParamsChange(rest, false);
+            if(with_genres.includes(id)){
+               // console.log(with_genres)
+                const with_genres_id=with_genres.replace(/,/g, " ").split(' ').filter(fl=>fl != id).toString()
+                const newParams={...params,with_genres:with_genres_id}
+                setParams(newParams)
+                console.log(newParams)
+                //handleParamsChange(newParams, false);
+                // console.log(twith_genres)
+            }
+
+            //setParams(rest)
+           // handleParamsChange(rest, false);
         }
     }
     return <div className={s.container}>
