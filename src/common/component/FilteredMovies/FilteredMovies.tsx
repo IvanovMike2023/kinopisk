@@ -105,12 +105,17 @@ export const FilteredMovies = () => {
             }
         }
     }
+
+    const resetFilter=()=>{
+        setParams(params)
+
+    }
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.wrapper}>
                 <div className={s.contentRow}>
                     <div className={s.menu}>
-                        <Filters_Sort selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider}
+                        <Filters_Sort resetFilter={resetFilter} selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider}
                                       selectFilter={selectFilter}/>
                     </div>
                     <section>

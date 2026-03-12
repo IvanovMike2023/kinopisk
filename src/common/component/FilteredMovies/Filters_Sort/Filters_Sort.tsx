@@ -5,10 +5,11 @@ import {MyButton, RatingRangeSlider, SortingSelector} from "../../../MyButton_Fi
 
 type Props = {
     selectFilter: (value: string) => void
+    resetFilter: (value: string) => void
     selectFilterSlider: (value: string) => void
     selectButtonFilter: (value: number,isClick:boolean) => void
 }
-export const Filters_Sort = ({selectButtonFilter,selectFilterSlider, selectFilter}): Props => {
+export const Filters_Sort = ({resetFilter,selectButtonFilter,selectFilterSlider, selectFilter}): Props => {
     const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([0.0, 10.0])
     const theme = useTheme();
@@ -74,7 +75,7 @@ export const Filters_Sort = ({selectButtonFilter,selectFilterSlider, selectFilte
                     '&:hover': {
                         backgroundColor: '#1e40af'
                     },
-                }}>Reset filters</Button>
+                }} onClick={resetFilter}>Reset filters</Button>
             </Box>
         </Paper>
     </Box>
