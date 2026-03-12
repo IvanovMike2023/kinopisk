@@ -4,16 +4,16 @@ import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
+import {dialogActionsClasses} from "@mui/material";
 
 export const FilteredMovies = () => {
-
-    const [params, setParams] = useState({
+    const initialParams = {
         page: 1,
         sort_by: 'original_title.asc',
         'vote_average.gte': 0,
         'vote_average.lte': 10,
-
-    });
+    };
+    const [params, setParams] = useState(initialParams);
     const [displayedData, setDisplayedData] = useState(null);
     const [isresetFilter, setresetFilter] = useState(false);
 
@@ -109,8 +109,7 @@ export const FilteredMovies = () => {
 
     const resetFilter=()=>{
          setresetFilter(true)
-       // refetch();
-
+        setParams(initialParams);
     }
     return <div className={s.container}>
         <section className={s.section}>
