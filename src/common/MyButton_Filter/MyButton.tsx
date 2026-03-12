@@ -3,14 +3,15 @@ import * as React from "react";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 type Props = {
     name: string
     id:number
     handlerButtonClick:(id:number,isClick:boolean)=>void
+    isresetFilter:boolean
 }
-export const MyButton = ({name,id,handlerButtonClick}): Props => {
+export const MyButton = ({isresetFilter,name,id,handlerButtonClick}): Props => {
     const theme = useTheme();
     const [isClick,setisClick]=useState(true)
     const handlerClick = (e) => {
@@ -18,6 +19,11 @@ export const MyButton = ({name,id,handlerButtonClick}): Props => {
             setisClick(newIsClick)
             handlerButtonClick(e.currentTarget.id,isClick)
     }
+    useEffect(()=>{
+        if(isresetFilter){
+            setisClick (true)
+        }
+    },[isresetFilter])
     return (<Button onClick={handlerClick} id={id}
         sx={{
             border: '1px solid #ccc',

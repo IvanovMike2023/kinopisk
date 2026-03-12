@@ -15,6 +15,7 @@ export const FilteredMovies = () => {
 
     });
     const [displayedData, setDisplayedData] = useState(null);
+    const [isresetFilter, setresetFilter] = useState(false);
 
     const {data, refetch} = useGetDiscoverMovieQuery({payload: params},
     )
@@ -107,7 +108,8 @@ export const FilteredMovies = () => {
     }
 
     const resetFilter=()=>{
-        setParams(params)
+         setresetFilter(true)
+       // refetch();
 
     }
     return <div className={s.container}>
@@ -115,7 +117,7 @@ export const FilteredMovies = () => {
             <div className={s.wrapper}>
                 <div className={s.contentRow}>
                     <div className={s.menu}>
-                        <Filters_Sort resetFilter={resetFilter} selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider}
+                        <Filters_Sort isresetFilter={isresetFilter} resetFilter={resetFilter} selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider}
                                       selectFilter={selectFilter}/>
                     </div>
                     <section>
