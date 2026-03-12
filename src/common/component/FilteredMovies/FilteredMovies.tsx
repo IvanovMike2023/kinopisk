@@ -77,10 +77,6 @@ export const FilteredMovies = () => {
     const selectFilterSlider = (value) => {
         debouncedSetParams.current(value);
     }
-
-    // useEffect(() => {
-    //     refetch();
-    // }, [params]);
     const handleParamsChange = (newParams, shouldRefetch = true) => {
         setParams(newParams);
         if (shouldRefetch) {
@@ -89,7 +85,12 @@ export const FilteredMovies = () => {
     };
     const selectButtonFilter=(id,isClick)=>{
         if(isClick){
-            setParams(prev => ({ ...prev,with_genres: id }))
+            setParams(prev => {
+                const iswith_genres=prev.with_genres ? prev.with_genres.split(',') : []
+                if(!iswith_genres.includes(id)){
+                    iswith_genres.push(id)
+                }
+                return { ...prev,with_genres: iswith_genres.join() }})
         }else {
             const { with_genres, ...rest } = params;
             setParams(rest)

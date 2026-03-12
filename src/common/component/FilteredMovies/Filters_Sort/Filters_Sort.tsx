@@ -48,23 +48,23 @@ export const Filters_Sort = ({selectButtonFilter,selectFilterSlider, selectFilte
             <Box display={'flex'} flexWrap="wrap" gap={1} padding={2}>
                 <MyButton name={'Action'} id={28} handlerButtonClick={handlerButtonClick}  />
                 <MyButton name={'Adventure'} id={12} handlerButtonClick={handlerButtonClick }/>
-                <MyButton name={'Animation'}/>
-                <MyButton name={'Comedy'}/>
-                <MyButton name={'Crime'}/>
-                <MyButton name={'Drama'}/>
-                <MyButton name={'Documentary'}/>
-                <MyButton name={'Family'}/>
-                <MyButton name={'Fantasy'}/>
-                <MyButton name={'History'}/>
-                <MyButton name={'Horror'}/>
-                <MyButton name={'Music'}/>
-                <MyButton name={'Mystery'}/>
-                <MyButton name={'Romance'}/>
-                <MyButton name={'Science Fiction'}/>
-                <MyButton name={'TV Movie'}/>
-                <MyButton name={'Thriller'}/>
-                <MyButton name={'War'}/>
-                <MyButton name={'Western'}/>
+                <MyButton name={'Animation'} id={16} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Comedy'} id={35} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Crime'} id={80} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Drama'} id={18} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Documentary'} id={99} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Family'} id={10751} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Fantasy'} id={14} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'History'} id={36} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Horror'} id={27} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Music'} id={10402} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Mystery'} id={9648} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Romance'} id={10749} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Science Fiction'} id={878} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'TV Movie'} id={10770} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Thriller'} id={53} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'War'} id={10752} handlerButtonClick={handlerButtonClick }/>
+                <MyButton name={'Western'} id={37} handlerButtonClick={handlerButtonClick }/>
             </Box>
             <Box display={'flex'} justifyContent={'center'} paddingTop={3}>
                 <Button sx={{
