@@ -17,8 +17,7 @@ export const FilteredMovies = () => {
     const [displayedData, setDisplayedData] = useState(null);
 
     const {data, refetch} = useGetDiscoverMovieQuery({payload: params},
-
-)
+    )
     useEffect(() => {
         if (data) {
             setDisplayedData(data);
@@ -32,43 +31,45 @@ export const FilteredMovies = () => {
     const selectFilter = (value) => {
         switch (value) {
             case 'popularity.asc':
-                setParams(prev => ({ ...prev, page: 1, sort_by: 'popularity.asc' }));
+                setParams(prev => ({...prev, page: 1, sort_by: 'popularity.asc'}));
                 break;
             case 'popularity.desc':
-                setParams(prev => ({ ...prev, page: 1, sort_by: 'popularity.desc' }));
+                setParams(prev => ({...prev, page: 1, sort_by: 'popularity.desc'}));
                 break;
             case 'vote_average.asc':
-                setParams(prev => ({ ...prev, page: 1, sort_by: 'vote_average.asc' }));
+                setParams(prev => ({...prev, page: 1, sort_by: 'vote_average.asc'}));
                 break;
             case 'vote_average.desc':
-                setParams(prev => ({ ...prev, page: 1, sort_by: 'vote_average.desc' }));
+                setParams(prev => ({...prev, page: 1, sort_by: 'vote_average.desc'}));
                 break;
             case 'primary_release_date.desc':
-                setParams(prev => ({ ...prev, page: 1, sort_by: 'primary_release_date.desc' }));
+                setParams(prev => ({...prev, page: 1, sort_by: 'primary_release_date.desc'}));
                 break;
             case 'primary_release_date.asc':
-                setParams(prev => ({ ...prev, page: 1, sort_by: 'primary_release_date.asc' }));
+                setParams(prev => ({...prev, page: 1, sort_by: 'primary_release_date.asc'}));
                 break;
             case 'original_title.asc':
-                setParams(prev => ({ ...prev, page: 1, sort_by: 'original_title.asc' }));
+                setParams(prev => ({...prev, page: 1, sort_by: 'original_title.asc'}));
                 break;
             case 'original_title.desc':
-                setParams(prev => ({ ...prev, page: 1, sort_by: 'original_title.desc' }));
+                setParams(prev => ({...prev, page: 1, sort_by: 'original_title.desc'}));
                 break;
         }
     }
+
     function debounce(func, delay) {
         let timeoutId;
-        return function(...args) {
+        return function (...args) {
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => func.apply(this, args), delay);
         };
     }
+
     const debouncedSetParams = useRef();
 
     const createDebounce = useCallback(() => {
         debouncedSetParams.current = debounce((value) => {
-            setParams(prev => ({ ...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1] }));
+            setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));
         }, 200);
     }, [setParams]);
     useEffect(() => {
@@ -83,29 +84,25 @@ export const FilteredMovies = () => {
             refetch();
         }
     };
-    const selectButtonFilter=(id,isClick)=>{
-        if(isClick){
+    const selectButtonFilter = (id, isClick) => {
+        if (isClick) {
             setParams(prev => {
-                const iswith_genres=prev.with_genres ? prev.with_genres.split(',') : []
-                if(!iswith_genres.includes(id)){
+                const iswith_genres = prev.with_genres ? prev.with_genres.split(',') : []
+                if (!iswith_genres.includes(id)) {
                     iswith_genres.push(id)
                 }
-                return { ...prev,with_genres: iswith_genres.join() }})
-        }else {
-            const { with_genres, ...rest } = params;
-            if(with_genres.includes(id)){
-               // console.log(with_genres)
-                if(with_genres===id){
-                   return setParams(rest)
-                   // handleParamsChange(rest, false);
+                return {...prev, with_genres: iswith_genres.join()}
+            })
+        } else {
+            const {with_genres, ...rest} = params;
+            if (with_genres.includes(id)) {
+                if (with_genres === id) {
+                    return setParams(rest)
                 }
-                const with_genres_id=with_genres.replace(/,/g, " ").split(' ').filter(fl=>fl != id).toString()
-                const newParams={...params,with_genres:with_genres_id}
+                const with_genres_id = with_genres.replace(/,/g, " ").split(' ').filter(fl => fl != id).toString()
+                const newParams = {...params, with_genres: with_genres_id}
                 setParams(newParams)
-
             }
-
-
         }
     }
     return <div className={s.container}>
@@ -113,7 +110,8 @@ export const FilteredMovies = () => {
             <div className={s.wrapper}>
                 <div className={s.contentRow}>
                     <div className={s.menu}>
-                        <Filters_Sort selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider} selectFilter={selectFilter}/>
+                        <Filters_Sort selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider}
+                                      selectFilter={selectFilter}/>
                     </div>
                     <section>
                         <div className={s.movies}>
