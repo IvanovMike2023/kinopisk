@@ -3,9 +3,9 @@ import {SearchInput} from "../SearchInput/searchInput";
 import s from "./Search.module.css";
 import {useState} from "react";
 import {SearchResult} from "./SearchResult/SearchResult";
-import {useSearchMovieQuery} from "./api/searchPageApi";
 import {Pagination} from "../../Pagination/Pagination";
 import {useTheme} from "@mui/material";
+import {useSearchMovieQuery} from "../MainPage/api/mainPageApi";
 
 export const SearchPages = () => {
     const location = useLocation();

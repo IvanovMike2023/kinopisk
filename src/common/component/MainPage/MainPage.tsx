@@ -1,19 +1,26 @@
-import {useGetPopularQuery} from "./api/mainPageApi";
+import {useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery} from "./api/mainPageApi";
 import s from "./MainPage.module.css";
 import {useEffect, useState} from "react";
 import {SearchInput} from "../SearchInput/searchInput";
-import {PopularMovies} from "../PopularMovies/PopularMovies";
+import {ListMoviesForMainPage} from "./ListMoviesForMainPage/ListMoviesForMainPage";
 
 export const MainPage = () => {
     const [backdrop_path, setBackdrop_path] = useState('');
-    const {data} = useGetPopularQuery({page: 1})
-
+    const {data:Popular} = useGetPopularQuery({page: 1})
+    const {data: topRatedData} = useGetTopRatedQuery({page: 1});
+    const {data: UpcomingData} = useGetUpcomingQuery({page: 1});
+    const {data: NowPlayingData} = useGetNowPlayingQuery({page: 1});
     useEffect(() => {
-        const backdrop_path_number = Math.floor(Math.random() * data?.results.length)
-        const url = data?.results[backdrop_path_number].backdrop_path
+        const backdrop_path_number = Math.floor(Math.random() * Popular?.results.length)
+        const url = Popular?.results[backdrop_path_number].backdrop_path
         setBackdrop_path(url)
-    }, [data])
-    const popular_movies = data?.results ? data?.results.slice().sort((a, b) => b.vote_average - a.vote_average).slice(0, 6) : []
+    }, [Popular])
+
+    const topRated_movies =topRatedData?.results ? topRatedData?.results.slice(0, 6): []
+    const upcoming_movies =UpcomingData?.results ? UpcomingData?.results.slice(0, 6): []
+    const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6): []
+    const popular_movies =Popular?.results ? Popular?.results.slice(0, 6) : [] //.slice().sort((a, b) => b.vote_average - a.vote_average).slice(0, 6) : []
+
     return <div className={s.Container}>
         <section className={s.page}>
             <section style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop_path})`}}
@@ -26,8 +33,10 @@ export const MainPage = () => {
 
             </section>
             <div className={s.popularMovies}>
-                <PopularMovies popular_movies={popular_movies}/>
-
+                <ListMoviesForMainPage data={popular_movies} title={'Popular Movies'}  />
+                <ListMoviesForMainPage data={topRated_movies} title={'Top Rated Movies'} />
+                <ListMoviesForMainPage data={upcoming_movies} title={'Upcoming Movies'} />
+                <ListMoviesForMainPage data={now_playing_movies} title={'Now Playing'} />
             </div>
         </section>
     </div>

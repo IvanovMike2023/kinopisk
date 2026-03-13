@@ -28,6 +28,9 @@ export const mainPageApi = baseApi.injectEndpoints({
         getMovieList: build.query<ResponseType, void>({
             query: () => `genre/movie/list`,
         }),
+        searchMovie: build.query<any ,void>({
+            query: (params) => ({url: '/search/movie',params})
+        })
     }),
 })
 export const {
@@ -37,4 +40,5 @@ export const {
     useGetNowPlayingQuery,
     useGetDiscoverMovieQuery,
     useGetMovieListQuery,
+    useSearchMovieQuery
 } = mainPageApi
