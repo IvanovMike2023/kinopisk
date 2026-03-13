@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import {Button, Paper, Typography, useTheme} from "@mui/material";
+import {Button, dividerClasses, Paper, Typography, useTheme} from "@mui/material";
 import {MyButton, RatingRangeSlider, SortingSelector} from "../../../MyButton_Filter/MyButton";
 import {useEffect} from "react";
+import {useGetMovieListQuery} from "../../MainPage/api/mainPageApi";
 
 type Props = {
     selectFilter: (value: string) => void
@@ -12,6 +13,12 @@ type Props = {
     isresetFilter:boolean
 }
 export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selectFilterSlider, selectFilter}): Props => {
+    const {data}=useGetMovieListQuery()
+    let MovieList
+    if(data?.genres){
+        MovieList=data.genres
+    }
+
     const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([0.0, 10.0])
     const theme = useTheme();
@@ -55,25 +62,10 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
             <RatingRangeSlider range={range} onChangeSlider={handleChangeSlider}/>
 
             <Box display={'flex'} flexWrap="wrap" gap={1} padding={2}>
-                <MyButton isresetFilter={isresetFilter } name={'Action'} id={28} handlerButtonClick={handlerButtonClick}  />
-                <MyButton isresetFilter={isresetFilter } name={'Adventure'} id={12} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Animation'} id={16} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Comedy'} id={35} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Crime'} id={80} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Drama'} id={18} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter }  name={'Documentary'} id={99} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Family'} id={10751} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Fantasy'} id={14} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'History'} id={36} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Horror'} id={27} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Music'} id={10402} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Mystery'} id={9648} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Romance'} id={10749} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Science Fiction'} id={878} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'TV Movie'} id={10770} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Thriller'} id={53} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter }  name={'War'} id={10752} handlerButtonClick={handlerButtonClick }/>
-                <MyButton isresetFilter={isresetFilter } name={'Western'} id={37} handlerButtonClick={handlerButtonClick }/>
+                { MovieList ? MovieList.map((el)=>{
+                    return <MyButton key={el.id} isresetFilter={isresetFilter } name={el.name} id={el.id} handlerButtonClick={handlerButtonClick}   / >
+                }) : <></>
+                }
             </Box>
             <Box display={'flex'} justifyContent={'center'} paddingTop={3}>
                 <Button sx={{

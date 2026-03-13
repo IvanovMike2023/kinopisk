@@ -1,15 +1,14 @@
 import s from "./FilteredMovie.module.css";
-import {useGetDiscoverMovieQuery, useGetPopularQuery} from "../MainPage/api/mainPageApi";
+import {useGetDiscoverMovieQuery, useGetMovieListQuery} from "../MainPage/api/mainPageApi";
 import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
-import {dialogActionsClasses} from "@mui/material";
 
 export const FilteredMovies = () => {
     const initialParams = {
         page: 1,
-        sort_by: 'original_title.asc',
+        sort_by: 'popularity.desc',
         'vote_average.gte': 0,
         'vote_average.lte': 10,
     };
@@ -17,8 +16,7 @@ export const FilteredMovies = () => {
     const [displayedData, setDisplayedData] = useState(null);
     const [isresetFilter, setresetFilter] = useState(false);
 
-    const {data, refetch} = useGetDiscoverMovieQuery({payload: params},
-    )
+    const {data, refetch} = useGetDiscoverMovieQuery({payload: params})
     useEffect(() => {
         if (data) {
             setDisplayedData(data);
