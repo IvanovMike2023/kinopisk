@@ -85,7 +85,6 @@ export const RatingRangeSlider = ({range, onChangeSlider}): Rating => {
                 {range[0].toFixed(1)} - {range[1].toFixed(1)}
             </Typography>
         </Box>
-        {/* Двойной слайдер */}
         <Slider
             value={range}
             onChange={onChangeSlider}
