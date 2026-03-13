@@ -24,7 +24,9 @@ export const SearchInput = ({query, handleInput,handleSearch}: Props) => {
         setinputvalue(e)
         if (handleInput)
             handleInput(e)
-
+    }
+    const handleSearchF=()=>{
+        console.log('===')
     }
     return (
         <form className={s.form}>
