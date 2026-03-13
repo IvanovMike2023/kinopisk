@@ -44,7 +44,6 @@ export const SearchInput = ({query, handleInput,handleSearch}: Props) => {
                     },
                 }}
                 style={{ marginBottom: 10 }}
-                // Добавляем InputAdornment через свойство InputProps
                 InputProps={{
                     endAdornment: inputvalue && (
                         <InputAdornment position="end">
