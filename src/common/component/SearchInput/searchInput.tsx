@@ -43,8 +43,6 @@ export const SearchInput = ({query, handleInput,handleSearch}: Props) => {
                         color: theme.palette.text.primary,
                     },
                 }}
-
-
                 style={{ marginBottom: 10 }}
                 InputProps={{
                     endAdornment: inputvalue && (
