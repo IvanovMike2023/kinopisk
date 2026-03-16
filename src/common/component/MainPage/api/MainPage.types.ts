@@ -3,10 +3,6 @@ export type ResponseType = {
     results: ResultsPopular[],
     total_pages: number,
     total_results: number
-    dates:{
-        maximum:string,
-        minimum:string
-    }
 }
 export type ResultsPopular = {
     adult: boolean,
@@ -23,4 +19,8 @@ export type ResultsPopular = {
     video: boolean,
     vote_average: number,
     vote_count: number,
+}
+export type SearchParams = {
+    query: string
+    page?: number
 }

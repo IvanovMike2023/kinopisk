@@ -1,21 +1,21 @@
 import {baseApi} from "../../../../app/api/baseApi";
-import type {ResponseType} from './MainPage.types';
+import type {ResponseType, SearchParams} from './MainPage.types';
 
 export const mainPageApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getPopular: build.query<ResponseType, void>({
+        getPopular: build.query<ResponseType, {page:number}>({
             query: ({page}) => ({url: `/movie/popular?page=${page}`}) ,
             providesTags: ['Popular']
         }),
-        getTopRated: build.query<ResponseType, void>({
+        getTopRated: build.query<ResponseType, {page:number}>({
             query: ({page}) => ({url: `movie/top_rated?page=${page}`}),
             providesTags: ['Popular']
         }),
-        getUpcoming: build.query<ResponseType, void>({
+        getUpcoming: build.query<ResponseType, {page:number}>({
             query: ({page}) => ({url:`movie/upcoming?page=${page}`}),
             providesTags: ['Popular']
         }),
-        getNowPlaying: build.query<ResponseType, void>({
+        getNowPlaying: build.query<ResponseType, {page:number}>({
             query: ({page}) => ({url:`movie/now_playing?page=${page}`}),
             providesTags: ['Popular']
         }),
@@ -28,8 +28,11 @@ export const mainPageApi = baseApi.injectEndpoints({
         getMovieList: build.query<ResponseType, void>({
             query: () => `genre/movie/list`,
         }),
-        searchMovie: build.query<any ,void>({
-            query: (params) => ({url: '/search/movie',params})
+        searchMovie: build.query<ResponseType,SearchParams>({
+            query: (params) => ({
+                url: '/search/movie',
+                params
+            })
         })
     }),
 })
