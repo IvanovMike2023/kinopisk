@@ -9,21 +9,19 @@ type Props = {
     handleSearch?: (value: string) => void
     handleInput?: (value: string) => void
 }
-export const SearchInput = ({query, handleInput,handleSearch}: Props) => {
+export const SearchInput = ({query, handleInput, handleSearch}: Props) => {
     const [inputvalue, setinputvalue] = useState(query || '');
-
     const theme = useTheme();
     const navigate = useNavigate();
     const handleSearchForInput = (e) => {
         if (e.key === 'Enter') {
             setinputvalue(e.target.defaultValue)
             console.log(encodeURIComponent(inputvalue))
-           return  navigate(`/search?query=${inputvalue}`);
+            return navigate(`/search?query=${inputvalue}`);
+        } else {
+            return
         }
-        else {
-return
-        }
-        if(handleSearch){
+        if (handleSearch) {
             handleSearch(encodeURIComponent(inputvalue))
         }
 
@@ -51,7 +49,7 @@ return
                         color: theme.palette.text.primary,
                     },
                 }}
-                style={{ marginBottom: 10 }}
+                style={{marginBottom: 10}}
                 InputProps={{
                     endAdornment: inputvalue && (
                         <InputAdornment position="end">
@@ -60,7 +58,7 @@ return
                                 onClick={() => handleonChangeInput('')} // очищает поле
                                 edge="end"
                             >
-                                <CloseIcon style={{ color: '#fff' ,fontSize: 16 }} /> {/* иконка крестика */}
+                                <CloseIcon style={{color: '#fff', fontSize: 16}}/> {/* иконка крестика */}
                             </IconButton>
                         </InputAdornment>
                     ),
@@ -84,7 +82,7 @@ return
                 onClick={handleSearchForInput}
                 type="button"
                 disabled={inputvalue === ''}
-                style={{ marginBottom: 20, borderRadius: 40 }}
+                style={{marginBottom: 20, borderRadius: 40}}
             >
                 Search
             </Button>
