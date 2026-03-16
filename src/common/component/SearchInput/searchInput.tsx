@@ -1,6 +1,6 @@
 import s from "../MainPage/MainPage.module.css";
 import {Button, IconButton, InputAdornment, TextField, useTheme} from "@mui/material";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -10,39 +10,40 @@ type Props = {
     handleInput?: (value: string) => void
 }
 export const SearchInput = ({query, handleInput, handleSearch}: Props) => {
-    const [inputvalue, setinputvalue] = useState(query || '');
+    const [inputValue, setinputValue] = useState(query ?? '');
     const theme = useTheme();
     const navigate = useNavigate();
-    const handleSearchForInput = (e) => {
-        if (e.key === 'Enter') {
-            setinputvalue(e.target.defaultValue)
-
-            console.log(encodeURIComponent(inputvalue))
-            return navigate(`/search?query=${inputvalue}`);
-        } else {
-            return
-        }
-        if (handleSearch) {
-            handleSearch(encodeURIComponent(inputvalue))
-        }
-
-        navigate(`/search?query=${encodeURIComponent(inputvalue)}`);
+    const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const value=inputValue.trim()
+        console.log(value)
+        if(!value) return
+        handleSearch?.(value)
+        navigate(`/search?query=${encodeURIComponent(inputValue)}`);
     }
-    const handleonChangeInput = (e) => {
-        setinputvalue(e)
-        if (handleInput)
-            handleInput(e)
+    const handleChange = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setinputValue(value)
+        handleInput?.(value)
+    },[handleInput]
+    )
+    const clearInput=()=>{
+        setinputValue('')
+        handleInput?.('')
     }
-
+    useEffect(() => {
+        if(query!==undefined){
+            setinputValue(query)
+        }
+    }, [query])
     return (
-        <form className={s.form}>
+        <form className={s.form} onSubmit={handleSubmit} >
             <TextField
-                placeholder={inputvalue ? "" : "Search for a movie"}
+                placeholder= "Search for a movie"
                 variant="outlined"
                 fullWidth
-                onKeyDown={handleSearchForInput}
-                value={inputvalue}
-                onChange={(e) => handleonChangeInput(e.target.value)}
+                value={inputValue}
+                onChange={handleChange}
                 sx={{
                     '& .MuiOutlinedInput-root': {
                         borderRadius: 20,
@@ -50,13 +51,13 @@ export const SearchInput = ({query, handleInput, handleSearch}: Props) => {
                         color: theme.palette.text.primary,
                     },
                 }}
-                style={{marginBottom: 10}}
+                style={{mb: 10}}
                 InputProps={{
-                    endAdornment: inputvalue && (
+                    endAdornment: inputValue && (
                         <InputAdornment position="end">
                             <IconButton
                                 aria-label="clear"
-                                onClick={() => handleonChangeInput('')} // очищает поле
+                                onClick={clearInput} // очищает поле
                                 edge="end"
                             >
                                 <CloseIcon style={{color: '#fff', fontSize: 16}}/> {/* иконка крестика */}
@@ -68,7 +69,7 @@ export const SearchInput = ({query, handleInput, handleSearch}: Props) => {
             <Button
                 sx={{
                     '&:hover': {
-                        cursor: inputvalue === '' ? 'not-allowed' : 'pointer'
+                        cursor: inputValue === '' ? 'not-allowed' : 'pointer'
                     },
                     '&.Mui-disabled': {
                         backgroundColor: '#2563eb',
@@ -80,9 +81,8 @@ export const SearchInput = ({query, handleInput, handleSearch}: Props) => {
                 }}
                 variant="contained"
                 color="primary"
-                onClick={handleSearchForInput}
-                type="button"
-                disabled={inputvalue === ''}
+                type="submit"
+                disabled={!inputValue.trim()}
                 style={{marginBottom: 20, borderRadius: 40}}
             >
                 Search
