@@ -1,6 +1,6 @@
 import s from "../MainPage/MainPage.module.css";
 import {Button, IconButton, InputAdornment, TextField, useTheme} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -11,12 +11,14 @@ type Props = {
 }
 export const SearchInput = ({query, handleInput,handleSearch}: Props) => {
     const [inputvalue, setinputvalue] = useState(query || '');
-    console.log(inputvalue)
+
     const theme = useTheme();
     const navigate = useNavigate();
     const handleSearchForInput = (e) => {
         if (e.key === 'Enter') {
             setinputvalue(e.target.defaultValue)
+            console.log(encodeURIComponent(inputvalue))
+           return  navigate(`/search?query=${inputvalue}`);
         }
         else {
 return
@@ -32,9 +34,7 @@ return
         if (handleInput)
             handleInput(e)
     }
-    const handleSearchF=()=>{
-        console.log('===')
-    }
+
     return (
         <form className={s.form}>
             <TextField
