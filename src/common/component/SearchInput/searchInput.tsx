@@ -16,6 +16,7 @@ export const SearchInput = ({query, handleInput, handleSearch}: Props) => {
     const handleSearchForInput = (e) => {
         if (e.key === 'Enter') {
             setinputvalue(e.target.defaultValue)
+
             console.log(encodeURIComponent(inputvalue))
             return navigate(`/search?query=${inputvalue}`);
         } else {
