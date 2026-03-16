@@ -11,9 +11,16 @@ type Props = {
 }
 export const SearchInput = ({query, handleInput,handleSearch}: Props) => {
     const [inputvalue, setinputvalue] = useState(query || '');
+    console.log(inputvalue)
     const theme = useTheme();
     const navigate = useNavigate();
-    const handleSearchForInput = () => {
+    const handleSearchForInput = (e) => {
+        if (e.key === 'Enter') {
+            setinputvalue(e.target.defaultValue)
+        }
+        else {
+return
+        }
         if(handleSearch){
             handleSearch(encodeURIComponent(inputvalue))
         }
@@ -34,6 +41,7 @@ export const SearchInput = ({query, handleInput,handleSearch}: Props) => {
                 placeholder={inputvalue ? "" : "Search for a movie"}
                 variant="outlined"
                 fullWidth
+                onKeyDown={handleSearchForInput}
                 value={inputvalue}
                 onChange={(e) => handleonChangeInput(e.target.value)}
                 sx={{
