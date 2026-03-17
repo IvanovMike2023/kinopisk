@@ -10,6 +10,8 @@ import {useEffect, useState} from "react";
 import {Button, useTheme} from "@mui/material";
 import s from "./CategoryMovies.module.css";
 import {useNavigate, useLocation} from 'react-router-dom';
+import {MovieCard} from "../MovieCard/MovieCard";
+import {useFavorites} from "../../helper/useFavorites";
 
 
 export const CategoryMovies = () => {
@@ -66,7 +68,13 @@ export const CategoryMovies = () => {
         setActiveCategory(categoryLabels[categoryKey] || 'Popular Movies');
         setPage(1);
     }, [location.pathname]);
+const handleLike=()=>{
 
+}
+    const { likedIds, toggleFavorite } = useFavorites()
+
+    const stored = localStorage.getItem('films')
+    const films = stored ? JSON.parse(stored) : []
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.category}>
@@ -83,12 +91,14 @@ export const CategoryMovies = () => {
             <h2 style={{color: theme.palette.text.primary}} className={s.titleResult}>{activeCategory}</h2>
             <div className={s.movies}>
                 {results?.results?.map((el) => (
-                    <SearchResult
-                        key={el.id}
-                        vote_average={el.vote_average}
-                        title={el.title}
-                        poster_path={el.poster_path}
-                    />
+                    <MovieCard key={el.id}
+                               data={el} id={el.id}
+                               onLike={()=>toggleFavorite({ id: el.id,
+                        title: el.title,
+                        backdrop_path: el.backdrop_path,
+                        vote_average: el.vote_average})}
+                               isLiked={likedIds.includes(el.id)} />
+
                 ))}
             </div>
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}
