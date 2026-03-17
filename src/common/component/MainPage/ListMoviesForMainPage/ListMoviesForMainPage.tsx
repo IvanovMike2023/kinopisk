@@ -1,5 +1,4 @@
 import s from './Popular_movies.module.css'
-import {useGetPopularQuery} from "../api/mainPageApi";
 import type {ResultsPopular} from '../api/MainPage.types';
 import {useNavigate} from "react-router-dom";
 import {Button, useTheme} from "@mui/material";
