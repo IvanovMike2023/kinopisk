@@ -119,14 +119,19 @@
     border-image: initial;
     transition: opacity 0.2s, transform 0.2s, background-color 0.2s, color 0.2s;
 }
+
 .favoriteIcon {
     width: 20px;
     height: 20px;
     fill: #ffffff;
 }
+.active {
+    width: 20px;
+    height: 20px;
+    fill: #f5d005;
+}
 .like:hover{
     background-color: rgba(25, 87, 236, 0.6);
-
 }
 .posterLink:hover .like{
     opacity: 1;

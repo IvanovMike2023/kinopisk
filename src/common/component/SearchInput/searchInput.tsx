@@ -16,7 +16,6 @@ export const SearchInput = ({query, handleInput, handleSearch}: Props) => {
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const value=inputValue.trim()
-        console.log(value)
         if(!value) return
         handleSearch?.(value)
         navigate(`/search?query=${encodeURIComponent(inputValue)}`);

@@ -3,6 +3,7 @@ import {AppBar, Button, Container, Switch, Toolbar, useTheme} from "@mui/materia
 import {containerSx} from "../../styles/Container_styles";
 import {useNavigate} from "react-router-dom";
 import s from './Header.module.css'
+import {FavoritesPage} from "../FavoritesPage/FavoritesPage";
 type Props= {
     darkMode: boolean,
     handleThemeChange: () => void
@@ -23,6 +24,9 @@ export const Header = ({darkMode, handleThemeChange}:Props) => {
     const handleFilteredMovies = () => {
         navigate('/movies/filtered-movies')
     }
+    const handleFavoritesdMovies = () => {
+        navigate('/favorites')
+    }
     const handleTheme=()=>{
         if(handleThemeChange){
             handleThemeChange()
@@ -37,7 +41,7 @@ export const Header = ({darkMode, handleThemeChange}:Props) => {
                         <Button color="inherit" onClick={handleCategoryMovies} >Category Movies |</Button>
                         <Button color="inherit" onClick={handleFilteredMovies}>Filtered Movies |</Button>
                         <Button color="inherit" onClick={handleSearch}>Search |</Button>
-                        <Button color="inherit">Favorites |</Button>
+                        <Button color="inherit" onClick={handleFavoritesdMovies} >Favorites |</Button>
                         {darkMode?                         <button className={s.buttonTheme} aria-label="Переключить на светлую тему" title="Переключить на светлую тему" onClick={handleTheme} color="inherit">☀</button>
                       :
                             <button className={s.buttonTheme} aria-label="Переключить на светлую тему" title="Переключить на светлую тему" onClick={handleTheme} color="inherit">🌙</button>
