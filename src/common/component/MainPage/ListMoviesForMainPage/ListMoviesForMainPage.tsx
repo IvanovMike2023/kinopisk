@@ -3,7 +3,6 @@ import {useGetPopularQuery} from "../api/mainPageApi";
 import type {ResultsPopular} from '../api/MainPage.types';
 import {useNavigate} from "react-router-dom";
 import {Button, useTheme} from "@mui/material";
-import {addFilmsToStorage} from '../../../helper/addFilmsToStorage'
 import {useState} from "react";
 import {MovieCard} from "../../MovieCard/MovieCard";
 import {useFavorites} from "../../../helper/useFavorites";
