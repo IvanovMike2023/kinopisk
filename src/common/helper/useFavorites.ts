@@ -9,39 +9,43 @@ type Film = {
 
 export const useFavorites = () => {
     const [likedIds, setLikedIds] = useState<number[]>([])
-
-    // загрузка из localStorage
     useEffect(() => {
         const stored = localStorage.getItem('films')
-        const films = stored ? JSON.parse(stored) : []
-        setLikedIds(films.map((f: Film) => f.id))
+        let films: Film[] = []
+
+        try {
+            const parsed = stored ? JSON.parse(stored) : []
+            films = Array.isArray(parsed) ? parsed : [] // <-- защита от объектов
+        } catch {
+            films = []
+        }
+        setLikedIds(films.map((el)=>el.id))
     }, [])
 
-    const toggleFavorite = (film: Film) => {
-
+    const togleFilm = (film: Film) => {
         setLikedIds((prev) => {
-            if (prev.includes(film.id)) {
-                // удалить
-                const updated = prev.filter(id => id !== film.id)
-                const stored = localStorage.getItem('films')
-                const films = stored ? JSON.parse(stored) : []
-                const newFilms = films.filter((f: Film) => f.id !== film.id)
-                localStorage.setItem('films', JSON.stringify(newFilms))
-                return updated
-            } else {
-                // добавить
-                const stored = localStorage.getItem('films')
-                const films = stored ? JSON.parse(stored) : []
+            const stored = localStorage.getItem('films')
+            let films: Film[] = []
 
+            try {
+                const parsed = stored ? JSON.parse(stored) : []
+                films = Array.isArray(parsed) ? parsed : []
+            } catch {
+                films = []
+            }
+            if(prev.includes(film.id)){
+                const update = prev.filter((f) => f !== film.id)
+                const newfilms = films.filter((f) => f.id != film.id)
+                localStorage.setItem('films', JSON.stringify(newfilms))
+                return update
+            }
+            else {
                 localStorage.setItem('films', JSON.stringify([...films, film]))
-
                 return [...prev, film.id]
             }
-        })
-    }
 
-    return {
-        likedIds,
-        toggleFavorite
+        })
+
     }
+    return {likedIds, togleFilm}
 }
