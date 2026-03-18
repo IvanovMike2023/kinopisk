@@ -35,7 +35,6 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
     }
     useEffect(() => {
             setRange([0.0, 10.0]);
-            console.log('++++')
             setAge('popularity.desc')
 
     }, [isresetFilter]);

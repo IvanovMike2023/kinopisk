@@ -127,7 +127,7 @@ export const FilteredMovies = () => {
                                            onLike={() => toggleFavorite({
                                                id: el.id,
                                                title: el.title,
-                                               backdrop_path: el.backdrop_path,
+                                               poster_path: el.poster_path,
                                                vote_average: el.vote_average
                                            })}
                                            isLiked={likedIds.includes(el.id)}/>

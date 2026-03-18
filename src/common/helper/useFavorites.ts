@@ -9,6 +9,7 @@ type Film = {
 
 export const useFavorites = () => {
     const [likedIds, setLikedIds] = useState<number[]>([])
+    const [, setFilms] = useState([])
     useEffect(() => {
         const stored = localStorage.getItem('films')
         let films: Film[] = []
@@ -35,6 +36,7 @@ export const useFavorites = () => {
                 const update = prev.filter((f) => f !== film.id)
                 const newfilms = films.filter((f) => f.id != film.id)
                 localStorage.setItem('films', JSON.stringify(newfilms))
+                setFilms(newfilms)
                 return update
             }
             else {

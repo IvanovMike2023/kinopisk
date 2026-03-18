@@ -15,7 +15,6 @@ export const MainPage = () => {
         const url = Popular?.results[backdrop_path_number].backdrop_path
         setBackdrop_path(url)
     }, [Popular])
-
     const topRated_movies =topRatedData?.results ? topRatedData?.results.slice(0, 6): []
     const upcoming_movies =UpcomingData?.results ? UpcomingData?.results.slice(0, 6): []
     const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6): []
