@@ -1,10 +1,12 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useGetCreditsQuery, useGetDetailsMovieQuery, useGetSimilarQuery} from "../MainPage/api/mainPageApi";
 import s from "./MoviePage.module.css"
 import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 export const MoviePage=()=>{
     const { id } = useParams();
+    const navigate = useNavigate();
+
     const movie_id=Number(id)
     const {likedIds, toggleFavorite} = useFavorites()
 
@@ -13,6 +15,9 @@ export const MoviePage=()=>{
     const {data:Similar}=useGetSimilarQuery({movie_id:movie_id})
    const actor= Credits?.cast?.slice(0,6)
    const similar= Similar?.results?.slice(0,6)
+    const goBack=()=>{
+        navigate(-1)
+    }
     return  <div className={s.wrapper}>
         <div className={s.container}>
             {/* LEFT POSTER */}
@@ -28,7 +33,7 @@ export const MoviePage=()=>{
             <div className={s.info}>
                 <div className={s.header}>
                     <h1 className={s.title}>{movie?.title}</h1>
-                    <button className={s.back}>Back</button>
+                    <button onClick={goBack} className={s.back}>Back</button>
                 </div>
 
                 <div className={s.meta}>
