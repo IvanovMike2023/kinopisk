@@ -20,22 +20,33 @@ export const mainPageApi = baseApi.injectEndpoints({
             providesTags: ['Popular']
         }),
         getDiscoverMovie: build.query<ResponseType, { payload:{page:number,sort_by:string, 'vote_average.gte': number,'vote_average.lte': number} }>({
-            query: ({payload}) =>
-            {
-                return {
+            query: ({payload}) =>({
                 url: `discover/movie`,
                 params: payload
-            }
-            },
+            }),
         }),
         getMovieList: build.query<ResponseType, void>({
             query: () => `genre/movie/list`,
         }),
-        searchMovie: build.query<ResponseType,SearchParams>({
+        getSearchMovie: build.query<ResponseType,SearchParams>({
             query: (params) => ({
                 url: '/search/movie',
                 params
             })
+        }),
+        getDetailsMovie: build.query<any,{movie_id:number}>({
+            query: ({movie_id}) => {
+                return {
+                    url: `/movie/${movie_id}`
+                }
+            }
+        }),
+        getCredits: build.query<any,{movie_id:number}>({
+            query: ({movie_id}) => {
+                return {
+                    url: `/movie/${movie_id}/credits`
+                }
+            }
         })
     }),
 })
@@ -46,5 +57,7 @@ export const {
     useGetNowPlayingQuery,
     useGetDiscoverMovieQuery,
     useGetMovieListQuery,
-    useSearchMovieQuery
+    useGetSearchMovieQuery,
+    useGetDetailsMovieQuery,
+    useGetCreditsQuery
 } = mainPageApi

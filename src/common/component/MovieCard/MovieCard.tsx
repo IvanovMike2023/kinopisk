@@ -1,16 +1,18 @@
 import s from "../MainPage/ListMoviesForMainPage/Popular_movies.module.css";
-
+import { Link } from "react-router-dom";
 type Props = {
     onLike: (id: number, e: React.MouseEvent<HTMLButtonElement>) => void
     isLiked:boolean
     data:any
 }
 export const MovieCard = ({data, isLiked, onLike}): Props => {
+
     return (
         <article className={s.card}>
             <div className={s.posterFrame}>
-                <a className={s.posterLink}
-                   href="src/common/component/MainPage/ListMoviesForMainPage/ListMoviesForMainPage">
+                <Link className={s.posterLink}
+                      to={`/movie/${data.id}`}
+                   >
                     <img className={s.poster} src={'https://image.tmdb.org/t/p/w185' + data.poster_path} alt=""/>
                     <button id={data.id} onClick={(e) => onLike(data.id, e.preventDefault())} className={s.like}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
@@ -21,7 +23,7 @@ export const MovieCard = ({data, isLiked, onLike}): Props => {
                     </button>
                     <span
                         className={data.vote_average > 7 ? s.vote_average_top : s.vote_average}>{data.vote_average}</span>
-                </a>
+                </Link>
             </div>
             <a href="src/common/component/MainPage/ListMoviesForMainPage/ListMoviesForMainPage#"
                className={s.cardTitle}>{data.title}</a>

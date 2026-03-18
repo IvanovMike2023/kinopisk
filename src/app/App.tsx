@@ -9,6 +9,7 @@ import {CategoryMovies} from "../common/component/CategoryMoviesPage/CategoryMov
 import {Footer} from "../common/component/Footer/Footer";
 import {FilteredMovies} from "../common/component/FilteredMovies/FilteredMovies";
 import {FavoritesPage} from "../common/component/FavoritesPage/FavoritesPage";
+import {MoviePage} from "../common/component/MoviePage/MoviePage";
 
 function App() {
     const [darkMode, setDarkMode] = useState(true);
@@ -59,7 +60,7 @@ function App() {
                     <Route path="/movies/filtered-movies" element={< FilteredMovies/>}/>
                     <Route path="/search" element={< SearchPages/>}/>
                     <Route path="/favorites" element={< FavoritesPage/>}/>
-
+                    <Route path="/movie/:id" element={<MoviePage />} />
                 </Routes>
                 <Footer/>
             </div>

@@ -4,9 +4,9 @@ import s from "./Search.module.css";
 import {useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
 import {useTheme} from "@mui/material";
-import {useSearchMovieQuery} from "../MainPage/api/mainPageApi";
 import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
+import {useGetSearchMovieQuery} from "../MainPage/api/mainPageApi";
 
 export const SearchPages = () => {
     const location = useLocation();
@@ -20,7 +20,7 @@ export const SearchPages = () => {
 
     const [inputValue, setinputValue] = useState(query)
 
-    const {data,refetch } = useSearchMovieQuery({query: query, page: page })
+    const {data,refetch } = useGetSearchMovieQuery({query: query, page: page })
     const handleInput = (value) => {
         setinputValue(value)
         if (value === '') {
