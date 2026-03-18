@@ -21,12 +21,10 @@ export const useFavorites = () => {
         }
         setLikedIds(films.map((el)=>el.id))
     }, [])
-
     const togleFilm = (film: Film) => {
         setLikedIds((prev) => {
             const stored = localStorage.getItem('films')
             let films: Film[] = []
-
             try {
                 const parsed = stored ? JSON.parse(stored) : []
                 films = Array.isArray(parsed) ? parsed : []
@@ -43,9 +41,7 @@ export const useFavorites = () => {
                 localStorage.setItem('films', JSON.stringify([...films, film]))
                 return [...prev, film.id]
             }
-
         })
-
     }
     return {likedIds, togleFilm}
 }

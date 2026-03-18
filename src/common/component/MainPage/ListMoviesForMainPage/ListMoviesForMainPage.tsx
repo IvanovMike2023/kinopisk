@@ -13,7 +13,7 @@ type Props = {
 export const ListMoviesForMainPage = ({data, title}: Props) => {
     const navigate = useNavigate()
     const theme = useTheme();
-    const [likedId, setLikedId] = useState<number[]>([])
+    const {likedIds,togleFilm}=useFavorites()
 
     const handleGoToCategoryMovies = () => {
         switch (title) {
@@ -38,7 +38,6 @@ export const ListMoviesForMainPage = ({data, title}: Props) => {
     const films = stored ? JSON.parse(stored) : []
 
 
-    const {likedIds,togleFilm}=useFavorites()
     // const handleLike = (idLike,e) => {
     //     setLikedId((prev) => {
     //         if (prev.includes(idLike)) {
@@ -64,7 +63,8 @@ export const ListMoviesForMainPage = ({data, title}: Props) => {
     //         }
     //     })
     // }
-   //localStorage.removeItem('films');
+
+  // localStorage.removeItem('films');
     return <section className={s.section_popular}>
         <div className={s.headerPopular}>
             <h2>{title}</h2>
