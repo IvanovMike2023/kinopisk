@@ -1,9 +1,10 @@
 import s from "./FilteredMovie.module.css";
 import {useGetDiscoverMovieQuery, useGetMovieListQuery} from "../MainPage/api/mainPageApi";
-import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
+import {MovieCard} from "../MovieCard/MovieCard";
+import {useFavorites} from "../../helper/useFavorites";
 
 export const FilteredMovies = () => {
     const initialParams = {
@@ -15,8 +16,10 @@ export const FilteredMovies = () => {
     const [params, setParams] = useState(initialParams);
     const [displayedData, setDisplayedData] = useState(null);
     const [isresetFilter, setresetFilter] = useState(false);
+    const {likedIds, toggleFavorite} = useFavorites()
 
     const {data, refetch} = useGetDiscoverMovieQuery({payload: params})
+
     useEffect(() => {
         if (data) {
             setDisplayedData(data);
@@ -65,7 +68,6 @@ export const FilteredMovies = () => {
     }
 
     const debouncedSetParams = useRef();
-
     const createDebounce = useCallback(() => {
         debouncedSetParams.current = debounce((value) => {
             setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));
@@ -106,7 +108,7 @@ export const FilteredMovies = () => {
     }
 
     const resetFilter=()=>{
-         setresetFilter(true)
+         setresetFilter(!isresetFilter)
         setParams(initialParams);
     }
     return <div className={s.container}>
@@ -120,12 +122,15 @@ export const FilteredMovies = () => {
                     <section>
                         <div className={s.movies}>
                             {data?.results.map((el) => (
-                                <SearchResult
-                                    key={el.id}
-                                    vote_average={el.vote_average}
-                                    title={el.title}
-                                    poster_path={el.poster_path}
-                                />
+                                <MovieCard key={el.id}
+                                           data={el} id={el.id}
+                                           onLike={() => toggleFavorite({
+                                               id: el.id,
+                                               title: el.title,
+                                               backdrop_path: el.backdrop_path,
+                                               vote_average: el.vote_average
+                                           })}
+                                           isLiked={likedIds.includes(el.id)}/>
                             ))}
 
                         </div>

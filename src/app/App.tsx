@@ -55,9 +55,11 @@ function App() {
                 <Header darkMode={darkMode} handleThemeChange={handleThemeChange}/>
                 <Routes>
                     <Route path="/" element={<MainPage/>}/>
-                    <Route path="/search" element={< SearchPages/>}/>
                     <Route path="/movies/:category" element={< CategoryMovies/>}/>
+                    <Route path="/movies/filtered-movies" element={< FilteredMovies/>}/>
+                    <Route path="/search" element={< SearchPages/>}/>
                     <Route path="/favorites" element={< FavoritesPage/>}/>
+
                 </Routes>
                 <Footer/>
             </div>

@@ -4,7 +4,6 @@ import {
     useGetTopRatedQuery,
     useGetUpcomingQuery
 } from "../MainPage/api/mainPageApi";
-import {SearchResult} from "../SearchPage/SearchResult/SearchResult";
 import {Pagination} from "../../Pagination/Pagination";
 import {useEffect, useState} from "react";
 import {Button, useTheme} from "@mui/material";
@@ -23,6 +22,7 @@ export const CategoryMovies = () => {
     const {data: NowPlayingData, refetch: refetchNowPlaying} = useGetNowPlayingQuery({page});
     const [results, setResults] = useState(undefined);
     const [activeCategory, setActiveCategory] = useState('Popular Movies');
+    const {likedIds, toggleFavorite} = useFavorites()
 
     const currentPage = results?.page
     const count = results?.total_pages
@@ -68,13 +68,6 @@ export const CategoryMovies = () => {
         setActiveCategory(categoryLabels[categoryKey] || 'Popular Movies');
         setPage(1);
     }, [location.pathname]);
-const handleLike=()=>{
-
-}
-    const { likedIds, toggleFavorite } = useFavorites()
-
-    const stored = localStorage.getItem('films')
-    const films = stored ? JSON.parse(stored) : []
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.category}>
@@ -93,11 +86,13 @@ const handleLike=()=>{
                 {results?.results?.map((el) => (
                     <MovieCard key={el.id}
                                data={el} id={el.id}
-                               onLike={()=>toggleFavorite({ id: el.id,
-                        title: el.title,
-                        backdrop_path: el.backdrop_path,
-                        vote_average: el.vote_average})}
-                               isLiked={likedIds.includes(el.id)} />
+                               onLike={() => toggleFavorite({
+                                   id: el.id,
+                                   title: el.title,
+                                   backdrop_path: el.backdrop_path,
+                                   vote_average: el.vote_average
+                               })}
+                               isLiked={likedIds.includes(el.id)}/>
 
                 ))}
             </div>

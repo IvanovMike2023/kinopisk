@@ -2,10 +2,11 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {SearchInput} from "../SearchInput/searchInput";
 import s from "./Search.module.css";
 import {useState} from "react";
-import {SearchResult} from "./SearchResult/SearchResult";
 import {Pagination} from "../../Pagination/Pagination";
 import {useTheme} from "@mui/material";
 import {useSearchMovieQuery} from "../MainPage/api/mainPageApi";
+import {MovieCard} from "../MovieCard/MovieCard";
+import {useFavorites} from "../../helper/useFavorites";
 
 export const SearchPages = () => {
     const location = useLocation();
@@ -15,6 +16,7 @@ export const SearchPages = () => {
     const [query, setQuery] = useState(queryFromURL);
     const [page, setPage] = useState(1);
     const theme = useTheme();
+    const {likedIds, toggleFavorite} = useFavorites()
 
     const [inputValue, setinputValue] = useState(query)
 
@@ -58,12 +60,15 @@ export const SearchPages = () => {
                                     <h2 style={{ color: theme.palette.text.primary }} className={s.titleResult}>Results for "{query}"</h2>
                                     <div className={s.movies}>
                                         {data?.results.map((el) => (
-                                            <SearchResult
-                                                key={el.id}
-                                                vote_average={el.vote_average}
-                                                title={el.title}
-                                                poster_path={el.poster_path}
-                                            />
+                                            <MovieCard key={el.id}
+                                                       data={el} id={el.id}
+                                                       onLike={() => toggleFavorite({
+                                                           id: el.id,
+                                                           title: el.title,
+                                                           backdrop_path: el.backdrop_path,
+                                                           vote_average: el.vote_average
+                                                       })}
+                                                       isLiked={likedIds.includes(el.id)}/>
                                         ))}
                                     </div>
                                     <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}

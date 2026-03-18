@@ -21,7 +21,7 @@ export const useFavorites = () => {
         }
         setLikedIds(films.map((el)=>el.id))
     }, [])
-    const togleFilm = (film: Film) => {
+    const toggleFavorite = (film: Film) => {
         setLikedIds((prev) => {
             const stored = localStorage.getItem('films')
             let films: Film[] = []
@@ -43,5 +43,5 @@ export const useFavorites = () => {
             }
         })
     }
-    return {likedIds, togleFilm}
+    return {likedIds, toggleFavorite}
 }

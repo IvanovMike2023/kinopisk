@@ -2,7 +2,6 @@ import s from './Popular_movies.module.css'
 import type {ResultsPopular} from '../api/MainPage.types';
 import {useNavigate} from "react-router-dom";
 import {Button, useTheme} from "@mui/material";
-import {useState} from "react";
 import {MovieCard} from "../../MovieCard/MovieCard";
 import {useFavorites} from "../../../helper/useFavorites";
 
@@ -13,7 +12,7 @@ type Props = {
 export const ListMoviesForMainPage = ({data, title}: Props) => {
     const navigate = useNavigate()
     const theme = useTheme();
-    const {likedIds,togleFilm}=useFavorites()
+    const {likedIds, toggleFavorite} = useFavorites()
 
     const handleGoToCategoryMovies = () => {
         switch (title) {
@@ -34,37 +33,6 @@ export const ListMoviesForMainPage = ({data, title}: Props) => {
         }
 
     }
-    const stored = localStorage.getItem('films')
-    const films = stored ? JSON.parse(stored) : []
-
-
-    // const handleLike = (idLike,e) => {
-    //     setLikedId((prev) => {
-    //         if (prev.includes(idLike)) {
-    //             const update = prev.filter((f) => f !== idLike)
-    //             const stored = localStorage.getItem('films')
-    //             const films = stored ? JSON.parse(stored) : []
-    //             const newfilms = films.filter((f) => f.id != idLike)
-    //             localStorage.setItem('films', JSON.stringify(newfilms))
-    //             return update
-    //         } else {
-    //             const result = data.find((el) => el.id === idLike)
-    //             if (result) {
-    //                 const newFilm = {
-    //                     id: result.id,
-    //                     title: result.title,
-    //                     backdrop_path: result.backdrop_path,
-    //                     vote_average: result.vote_average
-    //                 };
-    //                 addFilmsToStorage(newFilm)
-    //                 console.log(newFilm)
-    //             }
-    //             return [...prev, idLike]
-    //         }
-    //     })
-    // }
-
-  // localStorage.removeItem('films');
     return <section className={s.section_popular}>
         <div className={s.headerPopular}>
             <h2>{title}</h2>
@@ -72,13 +40,13 @@ export const ListMoviesForMainPage = ({data, title}: Props) => {
                     onClick={handleGoToCategoryMovies}>View more</Button></div>
         <div className={s.wrap_card}>
             {data.map((el) => (
-      <MovieCard key={el.id}  data={el} id={el.id} onLike={()=>togleFilm({
-          id: el.id,
-          title: el.title,
-          backdrop_path: el.backdrop_path,
-          vote_average: el.vote_average
-      })}
-                 isLiked={likedIds.includes(el.id)} />
+                <MovieCard key={el.id} data={el} id={el.id} onLike={() => toggleFavorite({
+                    id: el.id,
+                    title: el.title,
+                    backdrop_path: el.backdrop_path,
+                    vote_average: el.vote_average
+                })}
+                           isLiked={likedIds.includes(el.id)}/>
             ))}
         </div>
     </section>

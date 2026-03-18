@@ -34,11 +34,12 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
         selectButtonFilter(id,isClick)
     }
     useEffect(() => {
-        if (isresetFilter) {
             setRange([0.0, 10.0]);
+            console.log('++++')
             setAge('popularity.desc')
-        }
+
     }, [isresetFilter]);
+
     return <Box sx={{
         display: 'flex',
         gap: '36px',

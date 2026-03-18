@@ -20,10 +20,13 @@ export const mainPageApi = baseApi.injectEndpoints({
             providesTags: ['Popular']
         }),
         getDiscoverMovie: build.query<ResponseType, { payload:{page:number,sort_by:string, 'vote_average.gte': number,'vote_average.lte': number} }>({
-            query: ({payload}) =>  ({
-                    url: `discover/movie`,
-                    params: payload
-            }),
+            query: ({payload}) =>
+            {
+                return {
+                url: `discover/movie`,
+                params: payload
+            }
+            },
         }),
         getMovieList: build.query<ResponseType, void>({
             query: () => `genre/movie/list`,
