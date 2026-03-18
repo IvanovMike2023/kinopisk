@@ -1,13 +1,18 @@
 import {useParams} from "react-router-dom";
-import {useGetCreditsQuery, useGetDetailsMovieQuery} from "../MainPage/api/mainPageApi";
+import {useGetCreditsQuery, useGetDetailsMovieQuery, useGetSimilarQuery} from "../MainPage/api/mainPageApi";
 import s from "./MoviePage.module.css"
+import {MovieCard} from "../MovieCard/MovieCard";
+import {useFavorites} from "../../helper/useFavorites";
 export const MoviePage=()=>{
     const { id } = useParams();
     const movie_id=Number(id)
+    const {likedIds, toggleFavorite} = useFavorites()
+
     const {data:movie}=useGetDetailsMovieQuery({movie_id:movie_id})
     const {data:Credits}=useGetCreditsQuery({movie_id:movie_id})
+    const {data:Similar}=useGetSimilarQuery({movie_id:movie_id})
    const actor= Credits?.cast?.slice(0,6)
-    console.log(actor)
+   const similar= Similar?.results?.slice(0,6)
     return  <div className={s.wrapper}>
         <div className={s.container}>
             {/* LEFT POSTER */}
@@ -55,18 +60,47 @@ export const MoviePage=()=>{
         <div className={s.inner}>
         <div className={s.castBlock}>
             <h2>Cast</h2>
-
             <div className={s.castList}>
                 {actor?.map((actor: any) => (
                     <div key={actor.id} className={s.actor}>
-                        <img
-                            src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
-                            className={s.actorImg}
-                            alt={actor.name}
-                        />
-                        <span className={s.actorName}>{actor.name}</span>
-                        <span className={s.actorRole}>{actor.character}</span>
+                        <div className={s.actorAvatar}>
+                        {actor.profile_path ?    (<img
+                        src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
+                        className={s.actorImg}
+                        alt={actor.name}
+                    />)
+                      :
+                        (
+                        <div className={s.noPoster}>
+                            No poster
+                        </div>
+                        ) }
+
                     </div>
+                        <div className={s.actorInfo}>
+                            <span className={s.actorName}>{actor.name}</span>
+                            <span className={s.actorRole}>{actor.character}</span>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+        </div>
+        {/* Similar Movies */}
+        <div className={s.inner}>
+        <div className={s.similarBlock}>
+            <h2>Similar Movies</h2>
+            <div className={s.similarList}>
+                {similar?.map((sim: any) => (
+                <MovieCard key={sim.id}
+                           data={sim} id={sim.id}
+                           onLike={() => toggleFavorite({
+                               id: sim.id,
+                               title: sim.title,
+                               poster_path: sim.poster_path,
+                               vote_average: sim.vote_average
+                           })}
+                           isLiked={likedIds.includes(sim.id)} />
                 ))}
             </div>
         </div>

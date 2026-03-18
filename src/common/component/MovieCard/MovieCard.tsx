@@ -6,7 +6,6 @@ type Props = {
     data:any
 }
 export const MovieCard = ({data, isLiked, onLike}): Props => {
-
     return (
         <article className={s.card}>
             <div className={s.posterFrame}>
