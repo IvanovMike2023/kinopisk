@@ -1,7 +1,7 @@
 import logoUrl from '../../../img/logo.svg'
 import {AppBar, Button, Container, Switch, Toolbar, useTheme} from "@mui/material";
 import {containerSx} from "../../styles/Container_styles";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import s from './Header.module.css'
 import {useState} from "react";
 type Props= {
@@ -11,6 +11,16 @@ type Props= {
 export const Header = ({darkMode, handleThemeChange}:Props) => {
     const navigate = useNavigate();
     const theme = useTheme();
+    const location = useLocation();
+
+    const navItems = [
+        { label: 'Main', path: '/' },
+        { label: 'Category Movies', path: '/movies/popular' },
+        { label: 'Filtered Movies', path: '/movies/filtered-movies' },
+        { label: 'Search', path: '/search' },
+        { label: 'Favorites', path: '/favorites' },
+    ];
+
 const [isActive,setIsActive]=useState(1)
     const handleMain = (e) => {
         navigate('/')
