@@ -8,7 +8,7 @@ export const getTheme =(darkMode)=> {
                     main: '#ffffff',  // основной цвет
                 },
                 secondary: {
-                    main: '#141c2c',  // дополнительный цвет
+                    main: darkMode ? '#141c2c': '#c4bdbd',  // дополнительный цвет
                 },
                 background: {
                     default: darkMode ? '#0b1120' : '#ffffff', // фон

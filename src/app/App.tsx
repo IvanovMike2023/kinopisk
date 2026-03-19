@@ -11,12 +11,11 @@ import {FilteredMovies} from "../common/component/FilteredMovies/FilteredMovies"
 import {FavoritesPage} from "../common/component/FavoritesPage/FavoritesPage";
 import {MoviePage} from "../common/component/MoviePage/MoviePage";
 import {getTheme} from "../common/utils/theme/theme";
-import {useThemeMode} from "../common/helper/UseThemeMode";
+import {useThemeMode} from "../common/helper/useThemeMode";
 
 function App() {
     const [darkMode,toggleTheme]=useThemeMode()
-    const theme = getTheme(darkMode)
-
+const theme=getTheme(darkMode)
     return (
         <ThemeProvider theme={theme}>
             <div className={s.app}
@@ -28,7 +27,7 @@ function App() {
                     <Route path="/movies/filtered-movies" element={< FilteredMovies/>}/>
                     <Route path="/search" element={< SearchPages/>}/>
                     <Route path="/favorites" element={< FavoritesPage/>}/>
-                    <Route path="/movie/:id" element={<MoviePage/>}/>
+                    <Route path="/movie/:id" element={<MoviePage />} />
                 </Routes>
                 <Footer/>
             </div>

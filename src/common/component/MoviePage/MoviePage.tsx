@@ -52,9 +52,9 @@ export const MoviePage=()=>{
 
                 <div  className={s.genres}>
                     <h3>Genres</h3>
-                    <div style={{backgroundColor: theme.palette.background.default}} className={s.genreList} >
+                    <div  className={s.genreList} >
                         {movie?.genres?.map((g: any) => (
-                            <span  key={g.id} className={s.genre}>
+                            <span style={{backgroundColor: theme.palette.secondary.main,color: theme.palette.text.primary}} key={g.id} className={s.genre}>
                   {g.name}
                 </span>
                         ))}
