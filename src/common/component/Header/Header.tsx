@@ -36,7 +36,7 @@ const [isActive,setIsActive]=useState(1)
             <AppBar elevation={4} position="static" sx={{mb: "3px"}} style={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary }}>
                 <Toolbar>
                     <Container maxWidth={"lg"} sx={containerSx}>
-                        <img className={s.logo} onClick={handleMain} src={logoUrl} alt="Логотип" width="150"/>
+                        <img className={s.logo} id='1' onClick={handleMain} src={logoUrl} alt="Логотип" width="150"/>
                         <Button id='1' sx={{backgroundColor:isActive==1 ? '#5d6167' : 'none' }} color="inherit" onClick={handleMain}>Main |</Button>
                         <Button id='2' sx={{backgroundColor:isActive==2 ? '#5d6167' : 'none' }} color="inherit" onClick={handleCategoryMovies} >Category Movies |</Button>
                         <Button id='3' sx={{backgroundColor:isActive==3 ? '#5d6167' : 'none' }} color="inherit" onClick={handleFilteredMovies}>Filtered Movies |</Button>
