@@ -11,38 +11,37 @@ type Props= {
 export const Header = ({darkMode, handleThemeChange}:Props) => {
     const navigate = useNavigate();
     const theme = useTheme();
-const [isActive,setIsActive]=useState(false)
-    const handleMain = () => {
+const [isActive,setIsActive]=useState(1)
+    const handleMain = (e) => {
         navigate('/')
-        setIsActive(true)
+        setIsActive(e.currentTarget.id)
     }
-    const handleSearch = () => {
+    const handleSearch = (e) => {
         navigate('/search')
-        setIsActive(true)
+        setIsActive(e.currentTarget.id)
     }
-    const handleCategoryMovies = () => {
+    const handleCategoryMovies = (e) => {
         navigate('/movies/popular')
-        setIsActive(true)
+        setIsActive(e.currentTarget.id)
     }
-    const handleFilteredMovies = () => {
+    const handleFilteredMovies = (e) => {
         navigate('/movies/filtered-movies')
-        setIsActive(true)
+        setIsActive(e.currentTarget.id)
     }
-    const handleFavoritesdMovies = () => {
+    const handleFavoritesdMovies = (e) => {
         navigate('/favorites')
-        setIsActive(true)
+        setIsActive(e.currentTarget.id)
     }
-
     return (
             <AppBar elevation={4} position="static" sx={{mb: "3px"}} style={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary }}>
                 <Toolbar>
                     <Container maxWidth={"lg"} sx={containerSx}>
                         <img className={s.logo} onClick={handleMain} src={logoUrl} alt="Логотип" width="150"/>
-                        <Button sx={{backgroundColor:isActive ? '#5d6167' : 'none' }} color="inherit" onClick={handleMain}>Main |</Button>
-                        <Button sx={{backgroundColor:isActive ? '#5d6167' : 'none' }} color="inherit" onClick={handleCategoryMovies} >Category Movies |</Button>
-                        <Button sx={{backgroundColor:isActive ? '#5d6167' : 'none' }} color="inherit" onClick={handleFilteredMovies}>Filtered Movies |</Button>
-                        <Button sx={{backgroundColor:isActive ? '#5d6167' : 'none' }} color="inherit" onClick={handleSearch}>Search |</Button>
-                        <Button sx={{backgroundColor:isActive ? '#5d6167' : 'none' }} color="inherit" onClick={handleFavoritesdMovies} >Favorites |</Button>
+                        <Button id='1' sx={{backgroundColor:isActive==1 ? '#5d6167' : 'none' }} color="inherit" onClick={handleMain}>Main |</Button>
+                        <Button id='2' sx={{backgroundColor:isActive==2 ? '#5d6167' : 'none' }} color="inherit" onClick={handleCategoryMovies} >Category Movies |</Button>
+                        <Button id='3' sx={{backgroundColor:isActive==3 ? '#5d6167' : 'none' }} color="inherit" onClick={handleFilteredMovies}>Filtered Movies |</Button>
+                        <Button id='4' sx={{backgroundColor:isActive==4 ? '#5d6167' : 'none' }} color="inherit" onClick={handleSearch}>Search |</Button>
+                        <Button id='5' sx={{backgroundColor:isActive==5 ? '#5d6167' : 'none' }} color="inherit" onClick={handleFavoritesdMovies} >Favorites |</Button>
                         {darkMode?                         <button className={s.buttonTheme} aria-label="Переключить на светлую тему" title="Переключить на светлую тему" onClick={handleThemeChange} color="inherit">☀</button>
                       :
                             <button className={s.buttonTheme} aria-label="Переключить на светлую тему" title="Переключить на светлую тему" onClick={handleThemeChange} color="inherit">🌙</button>
