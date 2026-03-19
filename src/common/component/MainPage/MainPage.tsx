@@ -18,7 +18,7 @@ export const MainPage = () => {
     const topRated_movies =topRatedData?.results ? topRatedData?.results.slice(0, 6): []
     const upcoming_movies =UpcomingData?.results ? UpcomingData?.results.slice(0, 6): []
     const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6): []
-    const popular_movies =Popular?.results ? Popular?.results.slice(0, 6) : [] //.slice().sort((a, b) => b.vote_average - a.vote_average).slice(0, 6) : []
+    const popular_movies =Popular?.results ? Popular?.results.slice(0, 6) : []
 
     return <div className={s.Container}>
         <section className={s.page}>

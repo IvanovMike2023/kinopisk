@@ -30,8 +30,8 @@ export const MyButton = ({isresetFilter,name,id,handlerButtonClick}): Props => {
             fontSize: 12,
             color: theme.palette.text.primary,
             backgroundColor: theme.palette.background.default,
-            lineHeight: 1.2,          // правильно писать camelCase
-            borderRadius: 9999,       // тоже camelCase и без точки с запятой
+            lineHeight: 1.2,
+            borderRadius: 9999,
             transition: 'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
             '&:hover': {
                 borderColor: 'blue',

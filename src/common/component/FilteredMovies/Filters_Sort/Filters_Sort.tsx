@@ -1,8 +1,8 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import Box from '@mui/material/Box';
-import {Button, dividerClasses, Paper, Typography, useTheme} from "@mui/material";
+import {Button, Paper, Typography, useTheme} from "@mui/material";
 import {MyButton, RatingRangeSlider, SortingSelector} from "../../../MyButton_Filter/MyButton";
-import {useEffect} from "react";
 import {useGetMovieListQuery} from "../../MainPage/api/mainPageApi";
 
 type Props = {
@@ -14,10 +14,8 @@ type Props = {
 }
 export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selectFilterSlider, selectFilter}): Props => {
     const {data}=useGetMovieListQuery()
-    let MovieList
-    if(data?.genres){
-        MovieList=data.genres
-    }
+        const MovieList=data?.genres || []
+
 
     const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([0.0, 10.0])
@@ -26,16 +24,17 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
         selectFilterSlider(newValue)
         setRange(newValue);
     };
-    const handleChange = (event: string) => {
+    const handleChange = (event:  React.ChangeEvent<{ value: unknown }>) => {
         setAge(event.target.value as string);
         selectFilter(event.target.value)
     };
-    const handlerButtonClick = (id,isClick) => {
-        selectButtonFilter(id,isClick)
-    }
+
     useEffect(() => {
+        if (isresetFilter) {
+
             setRange([0.0, 10.0]);
             setAge('popularity.desc')
+        }
 
     }, [isresetFilter]);
 
@@ -49,7 +48,7 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
             height: 608,
         },
     }}>
-        <Paper sx={{backgroundColor: theme.palette.background.default, paddingTop: '20px'}} variant="elevation">
+        <Paper sx={{ bgcolor: 'background.default', pt: 2 }} variant="elevation">
             <Typography align="center" variant="h5" component="h2">
                 Filters / Sort
             </Typography>
@@ -62,15 +61,18 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
             <RatingRangeSlider range={range} onChangeSlider={handleChangeSlider}/>
 
             <Box display={'flex'} flexWrap="wrap" gap={1} padding={2}>
-                { MovieList ? MovieList.map((el)=>{
-                    return <MyButton key={el.id} isresetFilter={isresetFilter } name={el.name} id={el.id} handlerButtonClick={handlerButtonClick}   / >
-                }) : <></>
+                {  MovieList.map((el)=>(
+                   <MyButton key={el.id} isresetFilter={isresetFilter } name={el.name} id={el.id} handlerButtonClick={selectButtonFilter}   / >
+                ))
                 }
             </Box>
             <Box display={'flex'} justifyContent={'center'} paddingTop={3}>
                 <Button sx={{
                     fontSize: 12,
-                    backgroundColor: '#2563eb',
+                    bgcolor: 'primary.main',
+                    '&:hover': {
+                        bgcolor: 'primary.dark'
+                    },
                     transition: 'background-color 0.2s ease',
                     '&:hover': {
                         backgroundColor: '#1e40af'
