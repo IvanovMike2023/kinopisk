@@ -3,64 +3,32 @@ import s from './App.module.css'
 import {MainPage} from "../common/component/MainPage/MainPage";
 import {Route, Routes} from "react-router-dom";
 import {SearchPages} from "../common/component/SearchPage/SearchPages";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {CategoryMovies} from "../common/component/CategoryMoviesPage/CategoryMovies";
 import {Footer} from "../common/component/Footer/Footer";
 import {FilteredMovies} from "../common/component/FilteredMovies/FilteredMovies";
 import {FavoritesPage} from "../common/component/FavoritesPage/FavoritesPage";
 import {MoviePage} from "../common/component/MoviePage/MoviePage";
+import {getTheme} from "../common/utils/theme/theme";
+import {useThemeMode} from "../common/helper/UseThemeMode";
 
 function App() {
-    const [darkMode, setDarkMode] = useState(true);
-    const theme = createTheme({
-        palette: {
-            mode: darkMode ? 'dark' : 'light', // автоматическое переключение
-            primary: {
-                main: '#ffffff',  // основной цвет
-            },
-            secondary: {
-                main: '#141c2c',  // дополнительный цвет
-            },
-            background: {
-                default: darkMode ? '#0b1120' : '#ffffff', // фон
-            },
-            text: {
-                primary: darkMode ? '#ffffff' : '#000000', // текст
-            },
-        },
-        typography: {
-            fontFamily: `'Roboto', 'Helvetica', 'Arial', sans-serif`,
-            fontSize: 14,
-        },
-        shape: {
-            borderRadius: 8,
-        },
-        components: {
-            MuiButton: {
-                styleOverrides: {
-                    root: {
-                        borderRadius: 20,
-                    },
-                },
-            },
-        },
-    });
-    const handleThemeChange = () => {
-        setDarkMode(!darkMode);
-    };
+    const [darkMode,toggleTheme]=useThemeMode()
+    const theme = getTheme(darkMode)
+
     return (
         <ThemeProvider theme={theme}>
             <div className={s.app}
                  style={{backgroundColor: theme.palette.background.default, color: theme.palette.text.primary}}>
-                <Header darkMode={darkMode} handleThemeChange={handleThemeChange}/>
+                <Header darkMode={darkMode} handleThemeChange={toggleTheme}/>
                 <Routes>
                     <Route path="/" element={<MainPage/>}/>
                     <Route path="/movies/:category" element={< CategoryMovies/>}/>
                     <Route path="/movies/filtered-movies" element={< FilteredMovies/>}/>
                     <Route path="/search" element={< SearchPages/>}/>
                     <Route path="/favorites" element={< FavoritesPage/>}/>
-                    <Route path="/movie/:id" element={<MoviePage />} />
+                    <Route path="/movie/:id" element={<MoviePage/>}/>
                 </Routes>
                 <Footer/>
             </div>

@@ -33,7 +33,7 @@ export const Header = ({darkMode, handleThemeChange}:Props) => {
         }
     }
     return (
-            <AppBar position="static" sx={{mb: "30px", marginBottom: 0}} style={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary }}>
+            <AppBar elevation={4} position="static" sx={{mb: "3px"}} style={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary }}>
                 <Toolbar>
                     <Container maxWidth={"lg"} sx={containerSx}>
                         <img className={s.logo} onClick={handleMain} src={logoUrl} alt="Логотип" width="150"/>

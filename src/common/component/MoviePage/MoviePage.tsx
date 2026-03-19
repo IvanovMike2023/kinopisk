@@ -3,9 +3,11 @@ import {useGetCreditsQuery, useGetDetailsMovieQuery, useGetSimilarQuery} from ".
 import s from "./MoviePage.module.css"
 import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
+import {useTheme} from "@mui/material";
 export const MoviePage=()=>{
     const { id } = useParams();
     const navigate = useNavigate();
+    const theme = useTheme();
 
     const movie_id=Number(id)
     const {likedIds, toggleFavorite} = useFavorites()
@@ -18,8 +20,8 @@ export const MoviePage=()=>{
     const goBack=()=>{
         navigate(-1)
     }
-    return  <div className={s.wrapper}>
-        <div className={s.container}>
+    return  <div style={{backgroundColor: theme.palette.background.default, color: theme.palette.text.primary}} className={s.wrapper}>
+        <div  className={s.container}>
             {/* LEFT POSTER */}
             <div className={s.posterBlock}>
                 <img
@@ -33,7 +35,7 @@ export const MoviePage=()=>{
             <div className={s.info}>
                 <div className={s.header}>
                     <h1 className={s.title}>{movie?.title}</h1>
-                    <button onClick={goBack} className={s.back}>Back</button>
+                    <button style={{color: theme.palette.text.primary}} onClick={goBack} className={s.back}>Back</button>
                 </div>
 
                 <div className={s.meta}>
@@ -48,11 +50,11 @@ export const MoviePage=()=>{
 
                 <p className={s.overview}>{movie?.overview}</p>
 
-                <div className={s.genres}>
+                <div  className={s.genres}>
                     <h3>Genres</h3>
-                    <div className={s.genreList}>
+                    <div style={{backgroundColor: theme.palette.background.default}} className={s.genreList} >
                         {movie?.genres?.map((g: any) => (
-                            <span key={g.id} className={s.genre}>
+                            <span  key={g.id} className={s.genre}>
                   {g.name}
                 </span>
                         ))}
