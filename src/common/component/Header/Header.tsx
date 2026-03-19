@@ -12,7 +12,6 @@ export const Header = ({darkMode, handleThemeChange}:Props) => {
     const navigate = useNavigate();
     const theme = useTheme();
     const location = useLocation();
-
     const navItems = [
         { label: 'Main', path: '/' },
         { label: 'Category Movies', path: '/movies/popular' },
