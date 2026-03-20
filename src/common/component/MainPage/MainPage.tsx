@@ -7,17 +7,30 @@ import {MySnackbar} from "../MySnackbar/MySnackbar";
 
 export const MainPage = () => {
     const [backdrop_path, setBackdrop_path] = useState('');
-    const {data: Popular,error} = useGetPopularQuery({pag: 1})
+    const {data: Popular,error} = useGetPopularQuery({page: 1})
     const {data: topRatedData} = useGetTopRatedQuery({page: 1});
     const {data: UpcomingData} = useGetUpcomingQuery({page: 1});
     const {data: NowPlayingData} = useGetNowPlayingQuery({page: 1});
     const [isError, setIsError] = useState(false);
-const [errormessage ,setErrorMessage]=useState('')
+const [errormessage ,setErrorMessage]=useState(null)
+    const getErrorMessage = (error) => {
+        if (!error) return '';
+        if ('status' in error) {
+            // ошибки от API
+            return (
+                error?.data?.status_message ||
+                error?.data?.message ||
+                error?.error ||
+                `Error ${error.status}`
+            );
+        }
+        // JS ошибки
+        return error.message || 'Unknown error';
+    };
     useEffect(() => {
-        if (error) {
-            setErrorMessage(error.data.status_message)
-            console.log(errormessage)
-            setIsError(true);
+        if (error!=undefined){
+            setErrorMessage(prev=>getErrorMessage(error))
+            setIsError(prev=>true)
         }
     }, [error]);
     useEffect(() => {
@@ -29,7 +42,6 @@ const [errormessage ,setErrorMessage]=useState('')
     const upcoming_movies = UpcomingData?.results ? UpcomingData?.results.slice(0, 6) : []
     const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6) : []
     const popular_movies = Popular?.results ? Popular?.results.slice(0, 6) : []
-
     return <div className={s.Container}>
 
         <section className={s.page}>
@@ -49,6 +61,6 @@ const [errormessage ,setErrorMessage]=useState('')
                 <ListMoviesForMainPage data={now_playing_movies} title={'Now Playing'}/>
             </div>
         </section>
-        <MySnackbar  message={errormessage} open={isError} onClose={() => setIsError(false)} />
+        <MySnackbar message={errormessage } open={isError} />
     </div>
 }
