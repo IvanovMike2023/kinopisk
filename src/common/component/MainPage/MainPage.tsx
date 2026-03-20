@@ -4,6 +4,8 @@ import {useEffect, useRef, useState} from "react";
 import {SearchInput} from "../SearchInput/searchInput";
 import {ListMoviesForMainPage} from "./ListMoviesForMainPage/ListMoviesForMainPage";
 import {MySnackbar} from "../MySnackbar/MySnackbar";
+import {useDispatch, useSelector} from "react-redux";
+import {hideError, showError} from "../../../app/SnackSlice";
 
 export const MainPage = () => {
     const [backdrop_path, setBackdrop_path] = useState('');
@@ -11,28 +13,14 @@ export const MainPage = () => {
     const {data: topRatedData} = useGetTopRatedQuery({page: 1});
     const {data: UpcomingData} = useGetUpcomingQuery({page: 1});
     const {data: NowPlayingData} = useGetNowPlayingQuery({page: 1});
-    const [isError, setIsError] = useState(false);
-const [errormessage ,setErrorMessage]=useState(null)
-    const getErrorMessage = (error) => {
-        if (!error) return '';
-        if ('status' in error) {
-            // ошибки от API
-            return (
-                error?.data?.status_message ||
-                error?.data?.message ||
-                error?.error ||
-                `Error ${error.status}`
-            );
-        }
-        // JS ошибки
-        return error.message || 'Unknown error';
-    };
+
+const dispatch=useDispatch()
     useEffect(() => {
-        if (error!=undefined){
-            setErrorMessage(prev=>getErrorMessage(error))
-            setIsError(prev=>true)
+        if (error?.message) {
+            dispatch(showError(error.message));
         }
-    }, [error]);
+    }, [error, dispatch]);
+
     useEffect(() => {
         const backdrop_path_number = Math.floor(Math.random() * Popular?.results.length)
         const url = Popular?.results[backdrop_path_number].backdrop_path
@@ -61,6 +49,5 @@ const [errormessage ,setErrorMessage]=useState(null)
                 <ListMoviesForMainPage data={now_playing_movies} title={'Now Playing'}/>
             </div>
         </section>
-        <MySnackbar message={errormessage } open={isError} />
     </div>
 }

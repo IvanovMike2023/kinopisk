@@ -12,6 +12,7 @@ import {FavoritesPage} from "../common/component/FavoritesPage/FavoritesPage";
 import {MoviePage} from "../common/component/MoviePage/MoviePage";
 import {getTheme} from "../common/utils/theme/theme";
 import {useThemeMode} from "../common/helper/useThemeMode";
+import {GlobalSnackbar} from "../common/component/GlobalSnackbar/GlobalSnackbar";
 
 function App() {
     const [darkMode,toggleTheme]=useThemeMode()
@@ -21,6 +22,7 @@ const theme=getTheme(darkMode)
             <div className={s.app}
                  style={{backgroundColor: theme.palette.background.default, color: theme.palette.text.primary}}>
                 <Header darkMode={darkMode} handleThemeChange={toggleTheme}/>
+                <GlobalSnackbar />
                 <Routes>
                     <Route path="/" element={<MainPage/>}/>
                     <Route path="/movies/:category" element={< CategoryMovies/>}/>
