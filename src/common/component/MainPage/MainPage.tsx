@@ -21,7 +21,6 @@ const dispatch=useDispatch()
         }
     }, [error, dispatch]);
 
-
     useEffect(() => {
         const backdrop_path_number = Math.floor(Math.random() * Popular?.results.length)
         const url = Popular?.results[backdrop_path_number].backdrop_path
