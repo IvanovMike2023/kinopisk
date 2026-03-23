@@ -3,8 +3,7 @@ import s from './App.module.css'
 import {MainPage} from "../common/component/MainPage/MainPage";
 import {Route, Routes} from "react-router-dom";
 import {SearchPages} from "../common/component/SearchPage/SearchPages";
-import {useEffect, useState} from "react";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
+import {ThemeProvider} from "@mui/material/styles";
 import {CategoryMovies} from "../common/component/CategoryMoviesPage/CategoryMovies";
 import {Footer} from "../common/component/Footer/Footer";
 import {FilteredMovies} from "../common/component/FilteredMovies/FilteredMovies";
@@ -13,8 +12,6 @@ import {MoviePage} from "../common/component/MoviePage/MoviePage";
 import {getTheme} from "../common/utils/theme/theme";
 import {useThemeMode} from "../common/helper/useThemeMode";
 import {GlobalSnackbar} from "../common/component/GlobalSnackbar/GlobalSnackbar";
-import {useGetPopularQuery} from "../common/component/MainPage/api/mainPageApi";
-import {LinearProgress} from "@mui/material";
 
 function App() {
     const [darkMode,toggleTheme]=useThemeMode()
