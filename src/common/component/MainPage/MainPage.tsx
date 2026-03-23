@@ -1,25 +1,24 @@
 import {useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery} from "./api/mainPageApi";
 import s from "./MainPage.module.css";
-import {useEffect, useRef, useState} from "react";
+import {useEffect} from "react";
 import {SearchInput} from "../SearchInput/searchInput";
 import {ListMoviesForMainPage} from "./ListMoviesForMainPage/ListMoviesForMainPage";
-import {MySnackbar} from "../MySnackbar/MySnackbar";
-import {useDispatch, useSelector} from "react-redux";
-import {hideError, showError} from "../../../app/SnackSlice";
+import {useDispatch} from "react-redux";
+import {showError} from "../../../app/SnackSlice";
 
 export const MainPage = () => {
-    const {data: Popular,error} = useGetPopularQuery({page: 1})
+    const {data: Popular, error} = useGetPopularQuery({page: 1})
     const {data: topRatedData} = useGetTopRatedQuery({page: 1});
     const {data: UpcomingData} = useGetUpcomingQuery({page: 1});
     const {data: NowPlayingData} = useGetNowPlayingQuery({page: 1});
-const dispatch=useDispatch()
+    const dispatch = useDispatch()
     useEffect(() => {
         if (error?.message) {
             console.log(error)
             dispatch(showError(error.message));
         }
     }, [error, dispatch]);
-const backdrop=Popular?.results[Math.floor(Math.random() * Popular?.results.length)].backdrop_path
+    const backdrop = Popular?.results[Math.floor(Math.random() * Popular?.results.length)].backdrop_path
     const topRated_movies = topRatedData?.results ? topRatedData?.results.slice(0, 6) : []
     const upcoming_movies = UpcomingData?.results ? UpcomingData?.results.slice(0, 6) : []
     const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6) : []

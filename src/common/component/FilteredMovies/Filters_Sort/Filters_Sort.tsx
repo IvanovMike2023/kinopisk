@@ -62,17 +62,15 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
 
             <Box display={'flex'} flexWrap="wrap" gap={1} padding={2}>
                 {  MovieList.map((el)=>(
-                   <MyButton key={el.id} isresetFilter={isresetFilter } name={el.name} id={el.id} handlerButtonClick={selectButtonFilter}   / >
+                   <MyButton key={el.id} isresetFilter={isresetFilter } name={el.name} id={el.id} handlerButtonClick={selectButtonFilter}/>
                 ))
                 }
             </Box>
             <Box display={'flex'} justifyContent={'center'} paddingTop={3}>
                 <Button sx={{
                     fontSize: 12,
-                    bgcolor: 'primary.main',
-                    '&:hover': {
-                        bgcolor: 'primary.dark'
-                    },
+                    bgcolor: theme.palette.secondary.main,
+                    border: '1px solid #ffff',
                     transition: 'background-color 0.2s ease',
                     '&:hover': {
                         backgroundColor: '#1e40af'

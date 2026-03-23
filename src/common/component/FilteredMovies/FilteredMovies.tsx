@@ -5,6 +5,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
 import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
+import {LinearProgress} from "@mui/material";
 
 export const FilteredMovies = () => {
     const initialParams = {
@@ -18,7 +19,11 @@ export const FilteredMovies = () => {
     const [isresetFilter, setresetFilter] = useState(false);
     const {likedIds, toggleFavorite} = useFavorites()
 
-    const {data, refetch} = useGetDiscoverMovieQuery({params})
+    const {data, refetch,isFetching} = useGetDiscoverMovieQuery({params})
+    console.log(isFetching)
+
+
+
     useEffect(() => {
         if (data) {
             setDisplayedData(data);
@@ -111,6 +116,7 @@ export const FilteredMovies = () => {
         setParams(initialParams);
     }
     return <div className={s.container}>
+
         <section className={s.section}>
             <div className={s.wrapper}>
                 <div className={s.contentRow}>
@@ -142,5 +148,6 @@ export const FilteredMovies = () => {
 
             </div>
         </section>
+
     </div>
 }

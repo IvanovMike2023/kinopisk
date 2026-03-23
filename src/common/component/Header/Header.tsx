@@ -1,15 +1,19 @@
 import logoUrl from '../../../img/logo.svg'
-import {AppBar, Button, Container, Switch, Toolbar, useTheme} from "@mui/material";
+import {AppBar, Button, Container, LinearProgress, Switch, Toolbar, useTheme} from "@mui/material";
 import {containerSx} from "../../styles/Container_styles";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import s from './Header.module.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import {selectIsFetching} from "../../../app/app-slice";
 
 type Props = {
     darkMode: boolean,
     handleThemeChange: () => void
 }
 export const Header = ({darkMode, handleThemeChange}: Props) => {
+    const status = useSelector(selectIsFetching )
+    console.log(status)
     const navigate = useNavigate();
     const theme = useTheme();
     const location = useLocation();
@@ -20,6 +24,7 @@ export const Header = ({darkMode, handleThemeChange}: Props) => {
         {label: 'Search', path: '/search'},
         {label: 'Favorites', path: '/favorites'},
     ];
+
     return (
         <AppBar elevation={4} position="static" sx={{mb: "3px"}}
                 style={{backgroundColor: theme.palette.background.default, color: theme.palette.text.primary}}>
@@ -54,6 +59,7 @@ export const Header = ({darkMode, handleThemeChange}: Props) => {
                     }
                 </Container>
             </Toolbar>
+            {status  && <LinearProgress  />}
         </AppBar>
     )
 }

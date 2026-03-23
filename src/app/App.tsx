@@ -13,10 +13,13 @@ import {MoviePage} from "../common/component/MoviePage/MoviePage";
 import {getTheme} from "../common/utils/theme/theme";
 import {useThemeMode} from "../common/helper/useThemeMode";
 import {GlobalSnackbar} from "../common/component/GlobalSnackbar/GlobalSnackbar";
+import {useGetPopularQuery} from "../common/component/MainPage/api/mainPageApi";
+import {LinearProgress} from "@mui/material";
 
 function App() {
     const [darkMode,toggleTheme]=useThemeMode()
-const theme=getTheme(darkMode)
+
+    const theme=getTheme(darkMode)
     return (
         <ThemeProvider theme={theme}>
             <div className={s.app}
