@@ -82,7 +82,7 @@ export const SearchInput = ({query, handleInput, handleSearch}: Props) => {
                 color="primary"
                 type="submit"
                 disabled={!inputValue.trim()}
-                style={{marginBottom: 20, borderRadius: 40}}
+                style={{ borderRadius: 40,height:50}}
             >
                 Search
             </Button>

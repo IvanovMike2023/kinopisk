@@ -36,7 +36,8 @@
     max-width: 560px;
     display: flex;
     gap: 12px;
-    margin: 10px;
+    height: 40px;
+    align-items: center;
 }
 .title{
     margin: 0;

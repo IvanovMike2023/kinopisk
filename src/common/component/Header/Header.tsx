@@ -5,7 +5,7 @@ import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import s from './Header.module.css'
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {selectIsFetching} from "../../../app/app-slice";
+import {selectIsFetching} from "../../../app/selectIsFetching";
 
 type Props = {
     darkMode: boolean,
@@ -13,7 +13,6 @@ type Props = {
 }
 export const Header = ({darkMode, handleThemeChange}: Props) => {
     const status = useSelector(selectIsFetching )
-    console.log(status)
     const navigate = useNavigate();
     const theme = useTheme();
     const location = useLocation();
