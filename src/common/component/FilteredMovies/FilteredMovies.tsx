@@ -19,7 +19,6 @@ export const FilteredMovies = () => {
     const {likedIds, toggleFavorite} = useFavorites()
 
     const {data, refetch} = useGetDiscoverMovieQuery({payload: params})
-
     useEffect(() => {
         if (data) {
             setDisplayedData(data);

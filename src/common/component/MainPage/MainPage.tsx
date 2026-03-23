@@ -8,24 +8,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {hideError, showError} from "../../../app/SnackSlice";
 
 export const MainPage = () => {
-    const [backdrop_path, setBackdrop_path] = useState('');
     const {data: Popular,error} = useGetPopularQuery({page: 1})
     const {data: topRatedData} = useGetTopRatedQuery({page: 1});
     const {data: UpcomingData} = useGetUpcomingQuery({page: 1});
     const {data: NowPlayingData} = useGetNowPlayingQuery({page: 1});
-
 const dispatch=useDispatch()
     useEffect(() => {
         if (error?.message) {
+            console.log(error)
             dispatch(showError(error.message));
         }
     }, [error, dispatch]);
-
-    useEffect(() => {
-        const backdrop_path_number = Math.floor(Math.random() * Popular?.results.length)
-        const url = Popular?.results[backdrop_path_number].backdrop_path
-        setBackdrop_path(url)
-    }, [Popular])
+const backdrop=Popular?.results[Math.floor(Math.random() * Popular?.results.length)].backdrop_path
     const topRated_movies = topRatedData?.results ? topRatedData?.results.slice(0, 6) : []
     const upcoming_movies = UpcomingData?.results ? UpcomingData?.results.slice(0, 6) : []
     const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6) : []
@@ -33,7 +27,7 @@ const dispatch=useDispatch()
     return <div className={s.Container}>
 
         <section className={s.page}>
-            <section style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop_path})`}}
+            <section style={{backgroundImage: backdrop}}
                      className={s.section}>
                 <div className={s.content}>
                     <h1 className={s.title}>Welcome</h1>

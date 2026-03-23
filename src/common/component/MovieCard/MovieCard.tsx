@@ -14,7 +14,7 @@ export const MovieCard = ({data, isLiked, onLike}): Props => {
                       to={`/movie/${data.id}`}
                 >
                     {data.poster_path ?
-                        <img className={s.poster} src={'https://image.tmdb.org/t/p/w185' + data.poster_path} alt=""/>
+                        <img className={s.poster} src={data.poster_path} alt=""/>
                         :
                         <div className={s.noPoster}>
                             No poster

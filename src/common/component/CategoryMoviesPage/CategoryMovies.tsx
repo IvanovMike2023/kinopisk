@@ -23,7 +23,6 @@ export const CategoryMovies = () => {
     const [results, setResults] = useState(undefined);
     const [activeCategory, setActiveCategory] = useState('Popular Movies');
     const {likedIds, toggleFavorite} = useFavorites()
-
     const currentPage = results?.page
     const count = results?.total_pages
     const theme = useTheme();
