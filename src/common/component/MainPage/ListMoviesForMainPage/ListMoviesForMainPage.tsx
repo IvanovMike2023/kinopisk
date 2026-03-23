@@ -1,12 +1,13 @@
 import s from './Popular_movies.module.css'
-import type {ResultsPopular} from '../api/MainPage.types';
 import {useNavigate} from "react-router-dom";
-import {Button, useTheme} from "@mui/material";
+import {Button, Skeleton, useTheme} from "@mui/material";
 import {MovieCard} from "../../MovieCard/MovieCard";
 import {useFavorites} from "../../../helper/useFavorites";
+import {MovieSchema} from "../api/MainPage.types";
+import {ListMovieSkeleton} from "./ListMovieSkeleton/ListMovieSkeleton";
 
 type Props = {
-    data: ResultsPopular[]
+    data: MovieSchema[]
     title: string
 }
 export const ListMoviesForMainPage = ({data, title}: Props) => {
@@ -39,15 +40,17 @@ export const ListMoviesForMainPage = ({data, title}: Props) => {
             <Button style={{border: '1px solid #d1d5db', color: theme.palette.text.primary}} color={'primary'}
                     onClick={handleGoToCategoryMovies}>View more</Button></div>
         <div className={s.wrap_card}>
-            {data.map((el) => (
-                <MovieCard key={el.id} data={el} id={el.id} onLike={() => toggleFavorite({
-                    id: el.id,
-                    title: el.title,
-                    poster_path: el.poster_path,
-                    vote_average: el.vote_average
-                })}
-                           isLiked={likedIds.includes(el.id)}/>
-            ))}
+            {data ? data.map((el) => (
+                    <MovieCard key={el.id} data={el} id={el.id} onLike={() => toggleFavorite({
+                        id: el.id,
+                        title: el.title,
+                        poster_path: el.poster_path,
+                        vote_average: el.vote_average
+                    })}
+                               isLiked={likedIds.includes(el.id)}/>
+                ))
+                : <ListMovieSkeleton/>
+            }
         </div>
     </section>
 
