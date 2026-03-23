@@ -15,7 +15,6 @@ import {GlobalSnackbar} from "../common/component/GlobalSnackbar/GlobalSnackbar"
 
 function App() {
     const [darkMode,toggleTheme]=useThemeMode()
-
     const theme=getTheme(darkMode)
     return (
         <ThemeProvider theme={theme}>
