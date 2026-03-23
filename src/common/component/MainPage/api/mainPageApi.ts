@@ -9,70 +9,61 @@ import {
     ResponseSchema
 } from "./MainPage.types";
 
-
+export type DiscoverParams = {
+    page?: number;
+    sort_by?: string;
+    'vote_average.gte'?: number;
+    'vote_average.lte'?: number;
+};
 export type ResponseType = z.infer<typeof ResponseSchema>;
 export type DiscoverTypeType = z.infer<typeof ResponseDetailsSchema>;
 export type CreditType = z.infer<typeof CreditsSchema>;
 export type ResponseTypeDetailsMovie = z.infer<typeof MovieDetailsSchema>;
 export type ResponseGenreListSchema = z.infer<typeof GenreListSchema >;
 
-
+const parseResponse = <T>(schema: z.ZodType<T>) => (response: unknown) => schema.parse(response);
 
 export const mainPageApi = baseApi.injectEndpoints({
     endpoints: (build) => {
         return ({
             getPopular: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `/movie/popular?page=${page}`}),
-                transformResponse: (response: unknown) => {
-                    return ResponseSchema.parse(response)
-                },
+                transformResponse:parseResponse(ResponseSchema),
                 providesTags: ['Popular']
             }),
             getTopRated: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `movie/top_rated?page=${page}`}),
-                transformResponse: (response: unknown) => {
-                    return ResponseSchema.parse(response)
-                },
-                providesTags: ['Popular']
+                    transformResponse:parseResponse(ResponseSchema),
+                providesTags: ['TopRated']
             }),
             getUpcoming: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `movie/upcoming?page=${page}`}),
-                transformResponse: (response: unknown) => {
-                    return ResponseSchema.parse(response)
-                },
-                providesTags: ['Popular']
+                transformResponse:parseResponse(ResponseSchema),
+                providesTags: ['Upcoming']
             }),
             getNowPlaying: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `movie/now_playing?page=${page}`}),
-                transformResponse: (response: unknown) => {
-                    return ResponseSchema.parse(response)
-                },
-                providesTags: ['Popular']
+                transformResponse:parseResponse(ResponseSchema),
+                providesTags: ['NowPlaying']
             }),
-            getDiscoverMovie: build.query<DiscoverTypeType, { payload: { page: number, sort_by: string, 'vote_average.gte': number, 'vote_average.lte': number } }>({
-                query: ({payload}) => ({
+            getDiscoverMovie: build.query<DiscoverTypeType,DiscoverParams >({
+                query: ({params}) => ({
                     url: `discover/movie`,
-                    params: payload
+                    params
                 }),
-                transformResponse: (response: unknown) => {
-                    return ResponseDetailsSchema.parse(response)
-                },
+                transformResponse:parseResponse(ResponseDetailsSchema),
+
             }),
             getMovieList: build.query<ResponseGenreListSchema, void>({
                 query: () => `genre/movie/list`,
-                transformResponse: (response: unknown) => {
-                    return GenreListSchema.parse(response)
-                },
-
+                transformResponse:parseResponse(GenreListSchema),
             }),
             getSearchMovie: build.query<ResponseType, SearchParams>({
                 query: (params) => ({
                     url: '/search/movie',
                     params
                 }),
-                transformResponse: (response: unknown) => {
-                    return ResponseSchema.parse(response)
-                },
+                transformResponse:parseResponse(ResponseSchema),
             }),
             getDetailsMovie: build.query<ResponseTypeDetailsMovie, { movie_id: number }>({
                 query: ({movie_id}) => ({
