@@ -24,9 +24,6 @@ export const ListMovieSkeleton= () => (
                     </div>
                     <Skeleton width={20} height={40} />
                 </Box>
-
-
-
             ))}
         <Box sx={containerSx}>
             {Array(3)
