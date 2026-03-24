@@ -1,17 +1,19 @@
 import {useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery} from "./api/mainPageApi";
 import s from "./MainPage.module.css";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {SearchInput} from "../SearchInput/searchInput";
 import {ListMoviesForMainPage} from "./ListMoviesForMainPage/ListMoviesForMainPage";
 import {useDispatch} from "react-redux";
 import {showError} from "../../../app/SnackSlice";
 
-export const MainPage = () => {
-    const {data: Popular, error} = useGetPopularQuery({page: 1})
+ const MainPage = () => {
+    const {data: Popular, error,loading} = useGetPopularQuery({page: 1})
     const {data: topRatedData} = useGetTopRatedQuery({page: 1});
     const {data: UpcomingData} = useGetUpcomingQuery({page: 1});
     const {data: NowPlayingData} = useGetNowPlayingQuery({page: 1});
     const dispatch = useDispatch()
+    const [isLoad,setIsLoad]=useState(false)
+    console.log(loading)
     useEffect(() => {
         if (error?.message) {
             console.log(error)
@@ -23,6 +25,7 @@ export const MainPage = () => {
     const upcoming_movies = UpcomingData?.results ? UpcomingData?.results.slice(0, 6) : []
     const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6) : []
     const popular_movies = Popular?.results ? Popular?.results.slice(0, 6) : []
+
     return <div className={s.Container}>
 
         <section className={s.page}>
@@ -36,11 +39,12 @@ export const MainPage = () => {
 
             </section>
             <div className={s.popularMovies}>
-                <ListMoviesForMainPage data={popular_movies} title={'Popular Movies'}/>
-                <ListMoviesForMainPage data={topRated_movies} title={'Top Rated Movies'}/>
-                <ListMoviesForMainPage data={upcoming_movies} title={'Upcoming Movies'}/>
-                <ListMoviesForMainPage data={now_playing_movies} title={'Now Playing'}/>
+                <ListMoviesForMainPage isLoad data={popular_movies} title={'Popular Movies'}/>
+                <ListMoviesForMainPage isLoad data={topRated_movies} title={'Top Rated Movies'}/>
+                <ListMoviesForMainPage isLoad data={upcoming_movies} title={'Upcoming Movies'}/>
+                <ListMoviesForMainPage isLoad data={now_playing_movies} title={'Now Playing'}/>
             </div>
         </section>
     </div>
 }
+export default MainPage

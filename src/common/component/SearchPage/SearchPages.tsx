@@ -7,8 +7,9 @@ import {useTheme} from "@mui/material";
 import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 import {useGetSearchMovieQuery} from "../MainPage/api/mainPageApi";
+import FilteredMovies from "../FilteredMovies/FilteredMovies";
 
-export const SearchPages = () => {
+ const SearchPages = () => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const navigate = useNavigate()
@@ -82,3 +83,4 @@ export const SearchPages = () => {
 
     </div>
 }
+export default SearchPages

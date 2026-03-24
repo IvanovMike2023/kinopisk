@@ -9,12 +9,12 @@ import {ListMovieSkeleton} from "./ListMovieSkeleton/ListMovieSkeleton";
 type Props = {
     data: MovieSchema[]
     title: string
+    isLoad?:boolean
 }
-export const ListMoviesForMainPage = ({data, title}: Props) => {
+export const ListMoviesForMainPage = ({isLoad,data, title}: Props) => {
     const navigate = useNavigate()
     const theme = useTheme();
     const {likedIds, toggleFavorite} = useFavorites()
-
     const handleGoToCategoryMovies = () => {
         switch (title) {
             case 'Popular Movies':
@@ -40,7 +40,8 @@ export const ListMoviesForMainPage = ({data, title}: Props) => {
             <Button style={{border: '1px solid #d1d5db', color: theme.palette.text.primary}} color={'primary'}
                     onClick={handleGoToCategoryMovies}>View more</Button></div>
         <div className={s.wrap_card}>
-            {!data ? data.map((el) => (
+            {
+                data.map((el) => (
                     <MovieCard key={el.id} data={el} id={el.id} onLike={() => toggleFavorite({
                         id: el.id,
                         title: el.title,
@@ -49,8 +50,8 @@ export const ListMoviesForMainPage = ({data, title}: Props) => {
                     })}
                                isLiked={likedIds.includes(el.id)}/>
                 ))
-                : <ListMovieSkeleton/>
             }
+
         </div>
     </section>
 

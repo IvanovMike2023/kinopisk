@@ -13,7 +13,7 @@ import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 
 
-export const CategoryMovies = () => {
+const CategoryMovies = () => {
 
     const [page, setPage] = useState(1);
     const {data: Popular, refetch: refetchPopular} = useGetPopularQuery({page})
@@ -101,3 +101,4 @@ export const CategoryMovies = () => {
         </section>
     </div>
 }
+export default CategoryMovies
