@@ -15,7 +15,6 @@ export const MainPageSkeleton = () => {
                         <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
                         <SearchInput/>
                     </div>
-
                 </section>
                 <div className={s.wrappperItemMovies}>
                     {Array(4).fill(null).map((_, id) => (
