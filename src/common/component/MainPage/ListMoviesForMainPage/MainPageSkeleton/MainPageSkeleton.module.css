@@ -81,6 +81,12 @@
 }
 .itemMovies{
     display: flex;
+    flex-direction: column;
+    gap: 56px;
+    margin-bottom: 40px;
+}
+.item{
+    display: flex;
     flex-direction: row;
     gap: 56px;
     margin-bottom: 40px;
