@@ -4,14 +4,16 @@
 }
 
 .container {
-    width: 305px;
-    padding: 10px 20px;
+    display: flex;
+    flex-direction:column;
 }
 
 .title {
     display: flex;
-    gap: 15px;
-    align-items: center;
+    width: 180px;
+    height: 10px;
+    padding: 10px 0px ;
+    margin-top: 10px;
 }
 
 .createItemForm {

@@ -40,7 +40,7 @@ export const ListMoviesForMainPage = ({data, title}: Props) => {
             <Button style={{border: '1px solid #d1d5db', color: theme.palette.text.primary}} color={'primary'}
                     onClick={handleGoToCategoryMovies}>View more</Button></div>
         <div className={s.wrap_card}>
-            {data ? data.map((el) => (
+            {!data ? data.map((el) => (
                     <MovieCard key={el.id} data={el} id={el.id} onLike={() => toggleFavorite({
                         id: el.id,
                         title: el.title,
