@@ -2,7 +2,6 @@ import Skeleton from "@mui/material/Skeleton"
 import {SearchInput} from "../../../SearchInput/searchInput";
 import s from "../MainPageSkeleton/MainPageSkeleton.module.css";
 
-
 export const MainPageSkeleton = () => {
     const title = ['Popular Movies', 'Top Rated Movies', 'Upcoming Movies', 'Now Playing']
     return (
@@ -34,10 +33,8 @@ export const MainPageSkeleton = () => {
                         </div>
                     ))}
                 </div>
-
             </section>
         </div>
-
     )
 }
 
