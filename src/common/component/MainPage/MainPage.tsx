@@ -35,7 +35,6 @@ export const MainPage = () => {
                     <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
                     <SearchInput/>
                 </div>
-
             </section>
             <div className={s.popularMovies}>
                 <ListMoviesForMainPage  data={popular_movies} title={'Popular Movies'}/>
