@@ -5,9 +5,8 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
 import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
-import {LinearProgress} from "@mui/material";
-import CategoryMovies from "../CategoryMoviesPage/CategoryMovies";
-const FilteredMovies = () => {
+
+export const FilteredMovies = () => {
     const initialParams = {
         page: 1,
         sort_by: 'popularity.desc',
@@ -151,4 +150,3 @@ const FilteredMovies = () => {
 
     </div>
 }
-export default FilteredMovies

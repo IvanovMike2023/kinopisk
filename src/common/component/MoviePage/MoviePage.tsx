@@ -4,7 +4,7 @@ import s from "./MoviePage.module.css"
 import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 import {useTheme} from "@mui/material";
- const MoviePage=()=>{
+export const MoviePage=()=>{
     const { id } = useParams();
     const navigate = useNavigate();
     const theme = useTheme();
@@ -114,4 +114,3 @@ import {useTheme} from "@mui/material";
         </div>
     </div>
 }
-export default MoviePage

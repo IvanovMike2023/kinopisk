@@ -3,7 +3,7 @@ import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 import s from "../SearchPage/Search.module.css";
 
- const FavoritesPage=()=>{
+export const FavoritesPage=()=>{
     const stored = localStorage.getItem('films')
     const films = stored ? JSON.parse(stored) : []
     const {likedIds, toggleFavorite} = useFavorites()
@@ -32,4 +32,3 @@ import s from "../SearchPage/Search.module.css";
 
     </div>
 }
-export default FavoritesPage

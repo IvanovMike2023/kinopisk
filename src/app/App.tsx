@@ -1,30 +1,27 @@
 import {Header} from '../common/component/Header/Header'
 import s from './App.module.css'
+import {MainPage} from "../common/component/MainPage/MainPage";
 import {Route, Routes} from "react-router-dom";
+import {SearchPages} from "../common/component/SearchPage/SearchPages";
 import {ThemeProvider} from "@mui/material/styles";
+import {CategoryMovies} from "../common/component/CategoryMoviesPage/CategoryMovies";
 import {Footer} from "../common/component/Footer/Footer";
+import {FilteredMovies} from "../common/component/FilteredMovies/FilteredMovies";
+import {FavoritesPage} from "../common/component/FavoritesPage/FavoritesPage";
+import {MoviePage} from "../common/component/MoviePage/MoviePage";
 import {getTheme} from "../common/utils/theme/theme";
 import {useThemeMode} from "../common/helper/useThemeMode";
 import {GlobalSnackbar} from "../common/component/GlobalSnackbar/GlobalSnackbar";
-import {Skeleton} from "@mui/material";
-import { Suspense, lazy } from "react";
-const MainPage = lazy(() => import("../common/component/MainPage/MainPage"));
-const CategoryMovies = lazy(() => import("../common/component/CategoryMoviesPage/CategoryMovies"));
-const FilteredMovies = lazy(() => import("../common/component/FilteredMovies/FilteredMovies"));
-const SearchPages = lazy(() => import("../common/component/SearchPage/SearchPages"));
-const FavoritesPage = lazy(() => import("../common/component/FavoritesPage/FavoritesPage"));
-const MoviePage = lazy(() => import("../common/component/MoviePage/MoviePage"));
+
 function App() {
     const [darkMode,toggleTheme]=useThemeMode()
     const theme=getTheme(darkMode)
-
     return (
         <ThemeProvider theme={theme}>
             <div className={s.app}
                  style={{backgroundColor: theme.palette.background.default, color: theme.palette.text.primary}}>
                 <Header darkMode={darkMode} handleThemeChange={toggleTheme}/>
                 <GlobalSnackbar />
-                <Suspense fallback={<Skeleton variant="rectangular" height={300}/>}>
                 <Routes>
                     <Route path="/" element={<MainPage/>}/>
                     <Route path="/movies/:category" element={< CategoryMovies/>}/>
@@ -33,7 +30,6 @@ function App() {
                     <Route path="/favorites" element={< FavoritesPage/>}/>
                     <Route path="/movie/:id" element={<MoviePage />} />
                 </Routes>
-                </Suspense>
                 <Footer/>
             </div>
         </ThemeProvider>
