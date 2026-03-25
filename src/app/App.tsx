@@ -15,9 +15,6 @@ import {GlobalSnackbar} from "../shared/utils/GlobalSnackbar/GlobalSnackbar";
 import {NotFoundPage} from "../shared/404Page/404Page";
 
 function App() {
-
-
-
     const [darkMode,toggleTheme]=useThemeMode()
     const theme=getTheme(darkMode)
     return (
