@@ -1,18 +1,18 @@
-import {Header} from '../common/component/Header/Header'
+import {Header} from '../widgets/Header/Header'
 import s from './App.module.css'
-import {MainPage} from "../common/component/MainPage/MainPage";
+import {MainPage} from "../pages/MainPage/MainPage";
 import {Route, Routes} from "react-router-dom";
-import {SearchPages} from "../common/component/SearchPage/SearchPages";
+import {SearchPages} from "../pages/SearchPage/SearchPages";
 import {ThemeProvider} from "@mui/material/styles";
-import {CategoryMovies} from "../common/component/CategoryMoviesPage/CategoryMovies";
-import {Footer} from "../common/component/Footer/Footer";
-import {FilteredMovies} from "../common/component/FilteredMovies/FilteredMovies";
-import {FavoritesPage} from "../common/component/FavoritesPage/FavoritesPage";
-import {MoviePage} from "../common/component/MoviePage/MoviePage";
-import {getTheme} from "../common/utils/theme/theme";
-import {useThemeMode} from "../common/helper/useThemeMode";
-import {GlobalSnackbar} from "../common/utils/GlobalSnackbar/GlobalSnackbar";
-import {NotFoundPage} from "../common/component/404Page/404Page";
+import {CategoryMovies} from "../pages/CategoryMoviesPage/CategoryMovies";
+import {Footer} from "../widgets/Footer/Footer";
+import {FilteredMovies} from "../pages/FilteredMovies/FilteredMovies";
+import {FavoritesPage} from "../pages/FavoritesPage/FavoritesPage";
+import {MoviePage} from "../pages/MoviePage/MoviePage";
+import {getTheme} from "../shared/utils/theme/theme";
+import {useThemeMode} from "../shared/helper/useThemeMode";
+import {GlobalSnackbar} from "../shared/utils/GlobalSnackbar/GlobalSnackbar";
+import {NotFoundPage} from "../shared/404Page/404Page";
 
 function App() {
     const [darkMode,toggleTheme]=useThemeMode()

@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit"
-import { mainPageApi } from "../common/component/MainPage/api/mainPageApi"
+import { mainPageApi } from "../pages/MainPage/api/mainPageApi"
 
 export const selectIsFetching = createSelector(
     (state) => state[mainPageApi.reducerPath].queries,
