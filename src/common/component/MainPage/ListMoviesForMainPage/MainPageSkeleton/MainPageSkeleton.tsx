@@ -10,9 +10,12 @@ export const MainPageSkeleton = () => {
                 <section
                     className={s.section}>
                     <div className={s.content}>
-                        <h1 className={s.title}>Welcome</h1>
-                        <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
-                        <SearchInput/>
+                        <Skeleton variant="rectangular" width={220} height={70} margin={10}
+                                  sx={{borderRadius: 1}}/>
+                        <Skeleton variant="rectangular" width={380} height={50} margin={10}
+                                  sx={{borderRadius: 1}}/><Skeleton variant="rectangular" width={580} height={50}
+                                                                    margin={10}
+                                                                    sx={{borderRadius: 1}}/>
                     </div>
                 </section>
                 <div className={s.wrappperItemMovies}>
