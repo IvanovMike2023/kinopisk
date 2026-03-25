@@ -1,7 +1,7 @@
 import s from './Popular_movies.module.css'
 import {useNavigate} from "react-router-dom";
 import {Button, Skeleton, useTheme} from "@mui/material";
-import {MovieCard} from "../../MovieCard/MovieCard";
+import {MovieCard} from "../../../utils/MovieCard/MovieCard";
 import {useFavorites} from "../../../helper/useFavorites";
 import {MovieSchema} from "../api/MainPage.types";
 

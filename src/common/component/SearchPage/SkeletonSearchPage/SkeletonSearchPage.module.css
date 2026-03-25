@@ -1,0 +1,95 @@
+.Container{
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* страница */
+.page{
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding-bottom: 64px;
+}
+
+/* hero секция */
+.section{
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    height: 300px;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* контейнер контента */
+.content{
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* форма поиска */
+.form{
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* skeleton заголовка */
+.titleSkeleton{
+    width: 340px;
+    height: 50px !important;
+    border-radius: 6px;
+}
+
+/* skeleton input */
+.inputSkeleton{
+    width: 560px;
+    height: 50px !important;
+    border-radius: 6px;
+}
+
+/* skeleton кнопки */
+.buttonSkeleton{
+    width: 140px;
+    height: 56px !important;
+    border-radius: 30px;
+}
+
+/* skeleton подписи */
+.subtitleSkeleton{
+    width: 260px;
+    height: 28px !important;
+    border-radius: 4px;
+}
+
+/* дополнительные блоки (если будут фильмы) */
+.itemMovies{
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    margin-bottom: 40px;
+}
+
+.item{
+    display: flex;
+    flex-direction: row;
+    gap: 56px;
+    margin-bottom: 40px;
+}
+
+.wrappperItemMovies{
+    display: flex;
+    flex-direction: column;
+}

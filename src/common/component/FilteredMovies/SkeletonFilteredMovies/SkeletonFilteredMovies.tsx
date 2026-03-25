@@ -2,7 +2,7 @@ import {Skeleton} from "@mui/material";
 import s from "../SkeletonFilteredMovies/MainPageSkeleton.module.css"
     ;
 import {Filters_Sort} from "../Filters_Sort/Filters_Sort";
-import {MovieCard} from "../../MovieCard/MovieCard";
+import {MovieCard} from "../../../utils/MovieCard/MovieCard";
 import {Pagination} from "../../../Pagination/Pagination";
 
 export const SkeletonFilteredMovies = () => {

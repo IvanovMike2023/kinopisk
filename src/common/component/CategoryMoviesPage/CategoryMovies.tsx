@@ -9,7 +9,7 @@ import {useEffect, useState} from "react";
 import {Button, useTheme} from "@mui/material";
 import s from "./CategoryMovies.module.css";
 import {useNavigate, useLocation} from 'react-router-dom';
-import {MovieCard} from "../MovieCard/MovieCard";
+import {MovieCard} from "../../utils/MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 import {SkeletonCategoryMoviesPage} from "./SkeletonCategoryMoviesPage/SkeletonCategoryMoviesPage";
 

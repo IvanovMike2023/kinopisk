@@ -1,4 +1,4 @@
-import s from "../../MainPage/ListMoviesForMainPage/MainPageSkeleton/MainPageSkeleton.module.css";
+import s from "../SkeletonCategoryMoviesPage/SkeletonCategoryMoviesPage.module.css";
 import {Skeleton} from "@mui/material";
 
 export const SkeletonCategoryMoviesPage = ({activeCategory}) => {

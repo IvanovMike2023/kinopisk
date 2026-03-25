@@ -1,7 +1,7 @@
 import {useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery} from "./api/mainPageApi";
 import s from "./MainPage.module.css";
 import {useEffect, useState} from "react";
-import {SearchInput} from "../SearchInput/searchInput";
+import {SearchInput} from "../../utils/SearchInput/searchInput";
 import {ListMoviesForMainPage} from "./ListMoviesForMainPage/ListMoviesForMainPage";
 import {useDispatch} from "react-redux";
 import {showError} from "../../../app/SnackSlice";

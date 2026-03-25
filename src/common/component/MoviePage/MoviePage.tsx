@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useGetCreditsQuery, useGetDetailsMovieQuery, useGetSimilarQuery} from "../MainPage/api/mainPageApi";
 import s from "./MoviePage.module.css"
-import {MovieCard} from "../MovieCard/MovieCard";
+import {MovieCard} from "../../utils/MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 import {useTheme} from "@mui/material";
 export const MoviePage=()=>{

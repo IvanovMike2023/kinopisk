@@ -11,7 +11,8 @@ import {FavoritesPage} from "../common/component/FavoritesPage/FavoritesPage";
 import {MoviePage} from "../common/component/MoviePage/MoviePage";
 import {getTheme} from "../common/utils/theme/theme";
 import {useThemeMode} from "../common/helper/useThemeMode";
-import {GlobalSnackbar} from "../common/component/GlobalSnackbar/GlobalSnackbar";
+import {GlobalSnackbar} from "../common/utils/GlobalSnackbar/GlobalSnackbar";
+import {NotFoundPage} from "../common/component/404Page/404Page";
 
 function App() {
     const [darkMode,toggleTheme]=useThemeMode()
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/search" element={< SearchPages/>}/>
                     <Route path="/favorites" element={< FavoritesPage/>}/>
                     <Route path="/movie/:id" element={<MoviePage />} />
+                    <Route path="/*" element={<NotFoundPage/>} />
                 </Routes>
                 <Footer/>
             </div>

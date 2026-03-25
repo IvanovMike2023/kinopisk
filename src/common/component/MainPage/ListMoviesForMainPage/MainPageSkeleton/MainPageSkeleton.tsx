@@ -1,5 +1,5 @@
 import Skeleton from "@mui/material/Skeleton"
-import {SearchInput} from "../../../SearchInput/searchInput";
+import {SearchInput} from "../../../../utils/SearchInput/searchInput";
 import s from "../MainPageSkeleton/MainPageSkeleton.module.css";
 
 export const MainPageSkeleton = () => {

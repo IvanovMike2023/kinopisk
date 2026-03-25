@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {MovieCard} from "../MovieCard/MovieCard";
+import {MovieCard} from "../../utils/MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 import s from "../SearchPage/Search.module.css";
 

@@ -1,4 +1,4 @@
-import s from "../MainPage/MainPage.module.css";
+import s from "../../component/MainPage/MainPage.module.css";
 import {Button, IconButton, InputAdornment, TextField, useTheme} from "@mui/material";
 import {useCallback, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";

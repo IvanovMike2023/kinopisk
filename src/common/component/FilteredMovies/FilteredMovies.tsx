@@ -3,7 +3,7 @@ import {useGetDiscoverMovieQuery, useGetMovieListQuery} from "../MainPage/api/ma
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
-import {MovieCard} from "../MovieCard/MovieCard";
+import {MovieCard} from "../../utils/MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 import {SkeletonFilteredMovies} from "./SkeletonFilteredMovies/SkeletonFilteredMovies";
 
@@ -124,7 +124,7 @@ export const FilteredMovies = () => {
                                       selectFilter={selectFilter}/>
                     </div>
                     {
-                        !isLoading? <SkeletonFilteredMovies/>
+                        isLoading? <SkeletonFilteredMovies/>
                     :
                     <section>
                         <div className={s.movies}>

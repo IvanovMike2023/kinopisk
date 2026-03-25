@@ -1,0 +1,97 @@
+.common {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container {
+    display: flex;
+    flex-direction:column;
+}
+
+.title {
+    display: flex;
+    width: 180px;
+    height: 10px;
+    padding: 10px 0px ;
+    margin-top: 10px;
+}
+
+.createItemForm {
+    composes: common;
+    align-items: center;
+}
+
+.tasks {
+    composes: common;
+    gap: 15px;
+}
+.Container{
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+.section{
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    height: 700px;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.page{
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding-bottom: 64px;
+}
+
+.content{
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.form{
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    gap: 12px;
+    height: 40px;
+    align-items: center;
+}
+.title{
+    margin: 0;
+    font-size: 48px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+.subtitle{
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+}
+.itemMovies{
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    margin-bottom: 40px;
+}
+.item{
+    display: flex;
+    flex-direction: row;
+    gap: 56px;
+    margin-bottom: 40px;
+}
+.wrappperItemMovies{
+    display: flex;
+    flex-direction: column;
+}

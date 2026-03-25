@@ -1,12 +1,13 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {SearchInput} from "../SearchInput/searchInput";
+import {SearchInput} from "../../utils/SearchInput/searchInput";
 import s from "./Search.module.css";
 import {useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
 import {useTheme} from "@mui/material";
-import {MovieCard} from "../MovieCard/MovieCard";
+import {MovieCard} from "../../utils/MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
 import {useGetSearchMovieQuery} from "../MainPage/api/mainPageApi";
+import {SkeletonSearchPage} from "./SkeletonSearchPage/SkeletonSearchPage";
 
 export const SearchPages = () => {
     const location = useLocation();
@@ -20,7 +21,7 @@ export const SearchPages = () => {
 
     const [inputValue, setinputValue] = useState(query)
 
-    const {data,refetch } = useGetSearchMovieQuery({query: query, page: page })
+    const {data,refetch,isLoading } = useGetSearchMovieQuery({query: query, page: page })
     const handleInput = (value) => {
         setinputValue(value)
         if (value === '') {
@@ -45,6 +46,7 @@ export const SearchPages = () => {
         setPage(newpage)
         refetch({query: query,page:newpage})
     }
+    if(isLoading) return <SkeletonSearchPage/>
     return <div className={s.container}>
         <section className={s.page}>
             <h2 style={{color: theme.palette.text.primary }}>Search Results</h2>
