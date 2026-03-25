@@ -1,0 +1,70 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-block: 32px;
+}
+.title {
+    color: white;
+}
+.container {
+
+}
+._moviesGrid_1mspq_19 {
+    --movie-grid-columns: 5;
+}
+.titleResult {
+    color: white;
+}
+.titleResultSpan {
+    color: darkgray;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    padding-block: 24px;
+    gap: 24px;
+}
+
+.category {
+    margin: 20px auto 0;
+}
+
+.categoryButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.movies {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    flex: 1; /* занимает оставшуюся ширину */
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.menu {
+    flex-basis: 30%; /* или задайте фиксированную ширину, например, 300px */
+}
+.pagination_wrapper {
+    display: flex;
+    justify-content: center; /* выравниваем по центру */
+    margin-top: 16px;
+}
+
+.itemMovies{
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    margin-bottom: 40px;
+}
+.item{
+    display: flex;
+    flex-direction: row;
+    gap: 56px;
+    margin-bottom: 40px;
+}

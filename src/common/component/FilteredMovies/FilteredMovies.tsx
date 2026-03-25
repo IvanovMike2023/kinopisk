@@ -5,6 +5,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {Pagination} from "../../Pagination/Pagination";
 import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
+import {SkeletonFilteredMovies} from "./SkeletonFilteredMovies/SkeletonFilteredMovies";
 
 export const FilteredMovies = () => {
     const initialParams = {
@@ -18,9 +19,7 @@ export const FilteredMovies = () => {
     const [isresetFilter, setresetFilter] = useState(false);
     const {likedIds, toggleFavorite} = useFavorites()
 
-    const {data, refetch,isFetching} = useGetDiscoverMovieQuery({params})
-    console.log(isFetching)
-
+    const {data, refetch,isLoading} = useGetDiscoverMovieQuery({params})
 
 
     useEffect(() => {
@@ -114,6 +113,7 @@ export const FilteredMovies = () => {
          setresetFilter(!isresetFilter)
         setParams(initialParams);
     }
+
     return <div className={s.container}>
 
         <section className={s.section}>
@@ -123,6 +123,9 @@ export const FilteredMovies = () => {
                         <Filters_Sort isresetFilter={isresetFilter} resetFilter={resetFilter} selectButtonFilter={selectButtonFilter} selectFilterSlider={selectFilterSlider}
                                       selectFilter={selectFilter}/>
                     </div>
+                    {
+                        !isLoading? <SkeletonFilteredMovies/>
+                    :
                     <section>
                         <div className={s.movies}>
                             {data?.results.map((el) => (
@@ -143,6 +146,8 @@ export const FilteredMovies = () => {
                                         count={count}/>
                         </div>
                     </section>
+                }
+
                 </div>
 
             </div>
