@@ -15,7 +15,6 @@ export const MainPage = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         if (error?.message) {
-            console.log(error)
             dispatch(showError(error.message));
         }
     }, [error, dispatch]);
@@ -24,7 +23,7 @@ export const MainPage = () => {
     const upcoming_movies = UpcomingData?.results ? UpcomingData?.results.slice(0, 6) : []
     const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6) : []
     const popular_movies = Popular?.results ? Popular?.results.slice(0, 6) : []
-    if (!isLoading) return <MainPageSkeleton />;
+    if (isLoading) return <MainPageSkeleton />;
     return <div className={s.Container}>
 
         <section className={s.page}>

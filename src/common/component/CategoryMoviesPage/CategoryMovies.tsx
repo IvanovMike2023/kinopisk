@@ -11,12 +11,13 @@ import s from "./CategoryMovies.module.css";
 import {useNavigate, useLocation} from 'react-router-dom';
 import {MovieCard} from "../MovieCard/MovieCard";
 import {useFavorites} from "../../helper/useFavorites";
+import {SkeletonCategoryMoviesPage} from "./SkeletonCategoryMoviesPage/SkeletonCategoryMoviesPage";
 
 
 export const CategoryMovies = () => {
 
     const [page, setPage] = useState(1);
-    const {data: Popular, refetch: refetchPopular} = useGetPopularQuery({page})
+    const {data: Popular, refetch: refetchPopular, isLoading} = useGetPopularQuery({page})
     const {data: topRatedData, refetch: refetchTopRated} = useGetTopRatedQuery({page});
     const {data: UpcomingData, refetch: refetchUpcoming} = useGetUpcomingQuery({page});
     const {data: NowPlayingData, refetch: refetchNowPlaying} = useGetNowPlayingQuery({page});
@@ -67,6 +68,7 @@ export const CategoryMovies = () => {
         setActiveCategory(categoryLabels[categoryKey] || 'Popular Movies');
         setPage(1);
     }, [location.pathname]);
+    if (isLoading) return <SkeletonCategoryMoviesPage activeCategory={activeCategory}/>
     return <div className={s.container}>
         <section className={s.section}>
             <div className={s.category}>
