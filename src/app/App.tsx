@@ -23,6 +23,7 @@ function App() {
                  style={{backgroundColor: theme.palette.background.default, color: theme.palette.text.primary}}>
                 <Header darkMode={darkMode} handleThemeChange={toggleTheme}/>
                 <GlobalSnackbar />
+
                 <Routes>
                     <Route path="/" element={<MainPage/>}/>
                     <Route path="/movies/:category" element={< CategoryMovies/>}/>
