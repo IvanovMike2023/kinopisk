@@ -84,6 +84,7 @@ type Rating = {
     range: number,
     onChangeSlider: () => void
 }
+
 export const RatingRangeSlider = ({range, onChangeSlider}): Rating => {
     const theme = useTheme();
     return <Box sx={{width: '100%', maxWidth: 250, padding: 2, borderRadius: 2}}>
