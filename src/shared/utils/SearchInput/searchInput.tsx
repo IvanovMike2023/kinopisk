@@ -44,13 +44,13 @@ export const SearchInput = ({query, handleInput, handleSearch}: Props) => {
                 value={inputValue}
                 onChange={handleChange}
                 sx={{
+                    mb:2,
                     '& .MuiOutlinedInput-root': {
                         borderRadius: 20,
                         backgroundColor: theme.palette.background.default,
                         color: theme.palette.text.primary,
                     },
                 }}
-                style={{mb: 10}}
                 InputProps={{
                     endAdornment: inputValue && (
                         <InputAdornment position="end">

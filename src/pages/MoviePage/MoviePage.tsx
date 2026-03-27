@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useGetCreditsQuery, useGetDetailsMovieQuery, useGetSimilarQuery} from "../MainPage/api/mainPageApi";
+import {useGetCreditsQuery, useGetDetailsMovieQuery, useGetSimilarQuery} from "../../app/api/mainPageApi";
 import s from "./MoviePage.module.css"
 import {MovieCard} from "../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../shared/helper/useFavorites";

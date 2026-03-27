@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {Button, Skeleton, useTheme} from "@mui/material";
 import {MovieCard} from "../../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../../shared/helper/useFavorites";
-import {MovieSchema} from "../api/MainPage.types";
+import {MovieSchema} from "../../../app/api/MainPage.types";
 
 type Props = {
     data: MovieSchema[]

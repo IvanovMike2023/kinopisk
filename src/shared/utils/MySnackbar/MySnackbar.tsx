@@ -1,20 +1,23 @@
-import * as React from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ErrorIcon from '@mui/icons-material/Error';
 import {useState} from "react";
-
-export const MySnackbar = ({message,open}) => {
+type MySnackbarProps = {
+    open: boolean
+    message: string
+    onClose?: () => void   // <-- добавляем
+}
+export const MySnackbar = ({message,open,onClose}:MySnackbarProps) => {
     const [openSnackbars, setOpenSnackbars] = useState(
        true
     );
     const handleClose = () => {
-
-        setOpenSnackbars(prev=>false)
+        setOpenSnackbars(false)
+        if (onClose) onClose()
     };
-    if (!message) return null;
+    if (!open) return null;
     return (
                 <Snackbar
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

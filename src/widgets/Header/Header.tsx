@@ -1,6 +1,6 @@
 import logoUrl from '../../img/logo.svg'
 import {AppBar, Container, LinearProgress, Toolbar, useTheme} from "@mui/material";
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import s from './Header.module.css'
 import {useSelector} from "react-redux";
 import {selectIsFetching} from "../../app/selectIsFetching";

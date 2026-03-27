@@ -6,7 +6,7 @@ import {Pagination} from "../../shared/Pagination/Pagination";
 import {useTheme} from "@mui/material";
 import {MovieCard} from "../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../shared/helper/useFavorites";
-import {useGetSearchMovieQuery} from "../MainPage/api/mainPageApi";
+import {useGetSearchMovieQuery} from "../../app/api/mainPageApi";
 import {SkeletonSearchPage} from "./SkeletonSearchPage/SkeletonSearchPage";
 
 export const SearchPages = () => {

@@ -3,7 +3,7 @@ import {
     useGetPopularQuery,
     useGetTopRatedQuery,
     useGetUpcomingQuery
-} from "../MainPage/api/mainPageApi";
+} from "../../app/api/mainPageApi";
 import {Pagination} from "../../shared/Pagination/Pagination";
 import {useEffect, useState} from "react";
 import {Button, useTheme} from "@mui/material";

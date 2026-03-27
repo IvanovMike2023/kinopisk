@@ -1,4 +1,4 @@
-import {useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery} from "./api/mainPageApi";
+import {useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery} from "../../app/api/mainPageApi";
 import s from "./MainPage.module.css";
 import {useEffect, useState} from "react";
 import {SearchInput} from "../../shared/utils/SearchInput/searchInput";

@@ -1,4 +1,4 @@
-import {baseApi} from "../../../app/api/baseApi";
+import {baseApi} from "./baseApi";
 import type { SearchParams} from './MainPage.types';
 import {z} from 'zod'
 import {
