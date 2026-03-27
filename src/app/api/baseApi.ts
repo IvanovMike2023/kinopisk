@@ -1,16 +1,14 @@
-// src/app/api/baseApi.ts
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { BaseQueryFn } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery, BaseQueryFn } from "@reduxjs/toolkit/query/react";
 import { showError } from "../snackSlice";
 
-// Тип для ответа базового API, включая возможные ошибки TMDB
+// Тип для ответа API
 export interface BaseApiResponse {
     status_code?: number;
     status_message?: string;
     [key: string]: any;
 }
 
-// Типизация базового запроса
+// BaseQueryFn для TypeScript
 const baseQuery: BaseQueryFn<
     string | { url: string; method?: string; body?: any; params?: any },
     unknown,
@@ -25,25 +23,19 @@ const baseQuery: BaseQueryFn<
         },
     });
 
-    // Выполняем запрос
     const result = await rawBaseQuery(args, api, extraOptions);
 
-    // Приведение данных к типу BaseApiResponse
+    // Приведение данных к BaseApiResponse
     const data = result.data as BaseApiResponse | undefined;
 
-    // Обработка ошибок
     if (result.error || data?.status_code) {
         let message = "Что-то пошло не так";
 
-        if (result.error?.status === "FETCH_ERROR") {
-            message = "Нет интернета";
-        } else if (typeof result.error?.status === "number") {
+        if (result.error?.status === "FETCH_ERROR") message = "Нет интернета";
+        else if (typeof result.error?.status === "number")
             message = result.error?.data?.status_message || `Ошибка ${result.error.status}`;
-        } else if (data?.status_code) {
-            message = data.status_message || message;
-        }
+        else if (data?.status_code) message = data.status_message || message;
 
-        // Диспатчим в глобальный Snackbar
         api.dispatch(showError(message));
 
         return {
@@ -57,9 +49,9 @@ const baseQuery: BaseQueryFn<
     return result;
 };
 
-// Создаём базовый API с RTK Query
+// Создаём API
 export const baseApi = createApi({
     reducerPath: "kinopoiskApi",
     baseQuery: baseQuery,
-    endpoints: () => ({}), // эндпоинты добавим отдельно
+    endpoints: () => ({}),
 });
