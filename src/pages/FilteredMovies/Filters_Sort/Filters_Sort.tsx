@@ -2,6 +2,7 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import Box from '@mui/material/Box';
 import {Button, Paper, Typography, useTheme} from "@mui/material";
+import type { SelectChangeEvent } from '@mui/material/Select'
 import {MyButton, RatingRangeSlider, SortingSelector} from "../../../shared/MyButton_Filter/MyButton";
 import {useGetMovieListQuery} from "../../MainPage/api/mainPageApi";
 
@@ -20,12 +21,12 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
     const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([0.0, 10.0])
     const theme = useTheme();
-    const handleChangeSlider = (event, newValue) => {
+    const handleChangeSlider = (event: Event, newValue: number | number[]) => {
         selectFilterSlider(newValue)
-        setRange(newValue);
+        setRange(newValue as number[]);
     };
-    const handleChange = (event:  React.ChangeEvent<{ value: unknown }>) => {
-        setAge(event.target.value as string);
+    const handleChange = (event: SelectChangeEvent) => {
+        setAge(event.target.value);
         selectFilter(event.target.value)
     };
 

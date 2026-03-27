@@ -5,13 +5,13 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import {useEffect, useState} from "react";
 
-type Props = {
+type MyButtonProps = {
     name: string
     id:number
-    handlerButtonClick:(id:number,isClick:boolean)=>void
+    handlerButtonClick:(id:string,isClick:boolean)=>void
     isresetFilter:boolean
 }
-export const MyButton = ({isresetFilter,name,id,handlerButtonClick}): Props => {
+export const MyButton = ({isresetFilter,name,id,handlerButtonClick}: MyButtonProps )=> {
     const theme = useTheme();
     const [isClick,setisClick]=useState(true)
     const handlerClick = (e) => {
@@ -42,9 +42,9 @@ export const MyButton = ({isresetFilter,name,id,handlerButtonClick}): Props => {
 }
 type Sort = {
     value: string,
-    handleChange: () => void
+    handleChange: (event: any) => void
 }
-export const SortingSelector = ({value, handleChange}): Sort => {
+export const SortingSelector = ({value, handleChange}: Sort) => {
     const theme = useTheme();
     return <FormControl sx={{width: 200}}>
         <Select value={value}
@@ -81,11 +81,11 @@ export const SortingSelector = ({value, handleChange}): Sort => {
     </FormControl>
 }
 type Rating = {
-    range: number,
-    onChangeSlider: () => void
+    range: number[],
+    onChangeSlider: (event: Event, newValue: number | number[]) => void
 }
 
-export const RatingRangeSlider = ({range, onChangeSlider}): Rating => {
+export const RatingRangeSlider = ({range, onChangeSlider}: Rating) => {
     const theme = useTheme();
     return <Box sx={{width: '100%', maxWidth: 250, padding: 2, borderRadius: 2}}>
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
