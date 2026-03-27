@@ -12,7 +12,9 @@ import {useNavigate, useLocation} from 'react-router-dom';
 import {MovieCard} from "../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../shared/helper/useFavorites";
 import {SkeletonCategoryMoviesPage} from "./SkeletonCategoryMoviesPage/SkeletonCategoryMoviesPage";
+import {ResponseSchema} from "../../app/api/MainPage.types";
 
+type CategoryKey = 'popular' | 'top_rated' | 'upcoming' | 'now_playing';
 
 export const CategoryMovies = () => {
 
@@ -21,7 +23,7 @@ export const CategoryMovies = () => {
     const {data: topRatedData, refetch: refetchTopRated} = useGetTopRatedQuery({page});
     const {data: UpcomingData, refetch: refetchUpcoming} = useGetUpcomingQuery({page});
     const {data: NowPlayingData, refetch: refetchNowPlaying} = useGetNowPlayingQuery({page});
-    const [results, setResults] = useState(undefined);
+    const [results, setResults] = useState<ResponseSchema | undefined>(undefined);
     const [activeCategory, setActiveCategory] = useState('Popular Movies');
     const {likedIds, toggleFavorite} = useFavorites()
     const currentPage = results?.page
@@ -29,10 +31,10 @@ export const CategoryMovies = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const location = useLocation();
-    const changeCategoryInUrl = (categoryUrlPart) => {
+    const changeCategoryInUrl = (categoryUrlPart:CategoryKey ) => {
         navigate(`/movies/${categoryUrlPart}`);
     }
-    const setCurrentPage = (newpage) => {
+    const setCurrentPage = (newpage:number) => {
         setPage(newpage)
     }
     const categoryMap = {
@@ -48,7 +50,7 @@ export const CategoryMovies = () => {
         {key: 'now_playing', label: 'Now Playing'}
     ];
     useEffect(() => {
-        const categoryKey = location.pathname.split('/')[2];
+        const categoryKey = location.pathname.split('/')[2] as CategoryKey;
         const category = categoryMap[categoryKey]
         if (category) {
             category.refetch({page}).unwrap().then((res) => {
