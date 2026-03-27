@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {MySnackbar} from "../MySnackbar/MySnackbar";
 import {hideError} from "../../../app/snackSlice";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 
 
 export const GlobalSnackbar = () => {
-    const dispatch = useDispatch();
-    const { open, message } = useSelector(state => state.snackSlice);
+    const dispatch = useAppDispatch();
+    const { open, message } = useAppSelector(state => state.snackSlice);
 
     return (
         <MySnackbar

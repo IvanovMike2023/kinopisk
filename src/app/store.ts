@@ -15,3 +15,7 @@ export const store = configureStore({
         getDefaultMiddleware().concat(baseApi.middleware),
 })
 setupListeners(store.dispatch)
+// тип всего состояния Redux
+export type RootState = ReturnType<typeof store.getState>
+// тип dispatch
+export type AppDispatch = typeof store.dispatch
