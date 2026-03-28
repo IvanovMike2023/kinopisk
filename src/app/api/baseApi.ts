@@ -24,7 +24,6 @@ const baseQuery: BaseQueryFn<
     });
 
     const result = await rawBaseQuery(args, api, extraOptions);
-
     // Приведение данных к BaseApiResponse
     const data = result.data as BaseApiResponse | undefined;
 
