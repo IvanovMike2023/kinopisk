@@ -7,7 +7,6 @@ export interface BaseApiResponse {
     status_message?: string;
     [key: string]: any;
 }
-
 // BaseQueryFn для TypeScript
 const baseQuery: BaseQueryFn<
     string | { url: string; method?: string; body?: any; params?: any },
