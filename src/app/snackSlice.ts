@@ -28,6 +28,3 @@ const snackSlice = createSlice({
     },
 })
 
-export const { showError, hideError } = snackSlice.actions
-
-const snackSlice = createSlice({
