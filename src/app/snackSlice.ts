@@ -12,6 +12,7 @@ const initialState: SnackState = {
     message: ''
 }
 
+
 const snackSlice = createSlice({
     name: 'snackSlice',
     initialState,
