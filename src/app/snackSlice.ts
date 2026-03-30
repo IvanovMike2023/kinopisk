@@ -29,7 +29,6 @@ const snackSlice = createSlice({
 })
 
 export const { showError, hideError } = snackSlice.actions
-export const SnackReducer = snackSlice.reducer
 
 const snackSlice = createSlice({
     name: 'snackSlice',
