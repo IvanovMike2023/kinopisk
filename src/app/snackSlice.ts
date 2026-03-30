@@ -34,7 +34,7 @@ export const SnackReducer = snackSlice.reducer
 const snackSlice = createSlice({
     name: 'snackSlice',
     initialState,
- ad
+
         },
         hideError: (state) => {
             state.open = false
