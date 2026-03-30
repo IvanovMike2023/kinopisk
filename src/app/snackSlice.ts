@@ -6,7 +6,6 @@ interface SnackState {
     open: boolean
     message: string
 }
-
 // Начальное значение
 const initialState: SnackState = {
     open: false,
