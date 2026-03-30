@@ -34,10 +34,7 @@ export const SnackReducer = snackSlice.reducer
 const snackSlice = createSlice({
     name: 'snackSlice',
     initialState,
-    reducers: {
-        showError: (state, action: PayloadAction<string>) => {
-            state.open = true
-            state.message = action.payload
+ ad
         },
         hideError: (state) => {
             state.open = false
