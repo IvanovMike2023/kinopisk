@@ -38,7 +38,7 @@ const snackSlice = createSlice({
         },
         hideError: (state) => {
             state.open = false
-            state.message = ''
+
         },
     },
 })
