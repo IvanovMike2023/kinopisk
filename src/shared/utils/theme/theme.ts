@@ -1,6 +1,6 @@
 import {createTheme} from "@mui/material/styles";
-
-export const getTheme =(darkMode:string)=> {
+type ThemeType='dark' | 'light'
+export const getTheme =(darkMode:ThemeType)=> {
      return   createTheme({
             palette: {
                 mode: darkMode==='dark' ? 'dark' : 'light', // автоматическое переключение
