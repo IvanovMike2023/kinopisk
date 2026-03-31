@@ -5,9 +5,10 @@ import s from "./MovieCards.module.css";
 
 interface MovieData {
     id: number;
-    poster_path?: string;
+    poster_path: string | null;
     vote_average: number;
     title: string;
+    backdrop_path?: string | null;
 }
 
 type PropsMovieCard = {

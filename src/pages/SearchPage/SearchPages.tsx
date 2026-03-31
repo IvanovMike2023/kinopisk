@@ -64,8 +64,8 @@ export const SearchPages = () => {
                                         {data?.results.map((el) => (
                                             <MovieCard key={el.id}
                                                        data={el} id={el.id}
-                                                       onLike={() => toggleFavorite({
-                                                           id: el.id,
+                                                       onLike={(id) => toggleFavorite({
+                                                           id,
                                                            title: el.title,
                                                            poster_path: el.poster_path,
                                                            vote_average: el.vote_average
