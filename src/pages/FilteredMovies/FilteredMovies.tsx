@@ -77,7 +77,7 @@ export const FilteredMovies = () => {
 
     const debouncedSetParams = useRef<((value: number[]) => void) | null>(null);
     const createDebounce = useCallback(() => {
-        debouncedSetParams.current = debounce((value) => {
+        debouncedSetParams.current = debounce((value:number[]) => {
             setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));
         }, 200);
     }, [setParams]);
