@@ -18,7 +18,7 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
         const MovieList=data?.genres || []
 
     const [age, setAge] = React.useState('popularity.desc');
-    const [range, setRange] = React.useState([0.0, 10.0])
+    const [range, setRange] = React.useState<number[]>([0.0, 10.0])
     const theme = useTheme();
     const handleChangeSlider = (_event: Event, newValue: number | number[]) => {
         const rangeArray = newValue as number[];
