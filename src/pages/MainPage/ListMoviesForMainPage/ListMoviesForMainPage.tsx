@@ -1,16 +1,16 @@
 import s from './Popular_movies.module.css'
 import {useNavigate} from "react-router-dom";
-import {Button, Skeleton, useTheme} from "@mui/material";
+import {Button, useTheme} from "@mui/material";
 import {MovieCard} from "../../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../../shared/helper/useFavorites";
 import {MovieSchema} from "../../../app/api/MainPage.types";
 
 type Props = {
-    data: MovieSchema[]
+    data: typeof MovieSchema[]
     title: string
     isLoad?:boolean
 }
-export const ListMoviesForMainPage = ({isLoad,data, title}: Props) => {
+export const ListMoviesForMainPage = ({data, title}: Props) => {
     const navigate = useNavigate()
     const theme = useTheme();
     const {likedIds, toggleFavorite} = useFavorites()
@@ -41,7 +41,12 @@ export const ListMoviesForMainPage = ({isLoad,data, title}: Props) => {
         <div className={s.wrap_card}>
             {
                 data.map((el) => (
-                    <MovieCard key={el.id} data={el} id={el.id} onLike={() => toggleFavorite({
+                    <MovieCard key={el.id}
+                               data={{...el,
+                        poster_path: el.poster_path || "",
+                        backdrop_path: el.backdrop_path || "",
+                    }}
+                               onLike={() => toggleFavorite({
                         id: el.id,
                         title: el.title,
                         poster_path: el.poster_path,
