@@ -27,8 +27,8 @@ export const FilteredMovies = () => {
             setDisplayedData(data);
         }
     }, [data]);
-    const currentPage = data?.page
-    const count = data?.total_pages
+    const currentPage = data?.page ?? 1;
+    const count = data?.total_pages?? 1;
     const setCurrentPage = (value) => {
         setParams(prev => ({...prev, page: value}))
     }
