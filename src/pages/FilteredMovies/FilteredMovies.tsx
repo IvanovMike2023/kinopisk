@@ -97,7 +97,8 @@ export const FilteredMovies = () => {
                 if (with_genres === id) {
                     return setParams(rest)
                 }
-                const with_genres_id = with_genres.replace(/,/g, " ").split(' ').filter(fl => fl != id).toString()
+
+                const with_genres_id = with_genres.replace(/,/g, " ").split(' ').filter((fl:string) => fl != id).toString()
                 const newParams = {...params, with_genres: with_genres_id}
                 setParams(newParams)
             }
