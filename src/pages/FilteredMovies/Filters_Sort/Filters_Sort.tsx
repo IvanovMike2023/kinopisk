@@ -9,7 +9,7 @@ import {useGetMovieListQuery} from "../../../app/api/mainPageApi";
 type Props = {
     selectFilter: (value: string) => void
     resetFilter: (value: string) => void
-    selectFilterSlider: (value: string) => void
+    selectFilterSlider: (value: number[]) => void
     selectButtonFilter: (value: string,isClick:boolean) => void
     isresetFilter:boolean
 }
@@ -22,8 +22,8 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
     const theme = useTheme();
     const handleChangeSlider = (_event: Event, newValue: number | number[]) => {
         const rangeArray = newValue as number[];
-
-        selectFilterSlider(rangeArray.join(','))
+        console.log(rangeArray)
+        selectFilterSlider(rangeArray)
         setRange(rangeArray);
     };
     const handleChange = (event: SelectChangeEvent) => {
