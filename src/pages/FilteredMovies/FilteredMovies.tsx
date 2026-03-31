@@ -6,16 +6,21 @@ import {Pagination} from "../../shared/Pagination/Pagination";
 import {MovieCard} from "../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../shared/helper/useFavorites";
 import {SkeletonFilteredMovies} from "./SkeletonFilteredMovies/SkeletonFilteredMovies";
-
+type initialParamsType={
+    page:number,
+    sort_by:string,
+    'vote_average.gte':number,
+    'vote_average.lte':number,
+    with_genres?:string
+}
 export const FilteredMovies = () => {
     const initialParams = {
         page: 1,
         sort_by: 'popularity.desc',
         'vote_average.gte': 0,
         'vote_average.lte': 10,
-        with_genres:[]
     };
-    const [params, setParams] = useState(initialParams);
+    const [params, setParams] = useState<initialParamsType>(initialParams);
     const [_, setDisplayedData] = useState(null);
     const [isresetFilter, setresetFilter] = useState(false);
     const {likedIds, toggleFavorite} = useFavorites()
