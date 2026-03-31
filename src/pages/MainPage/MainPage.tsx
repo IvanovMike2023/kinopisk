@@ -6,6 +6,7 @@ import {ListMoviesForMainPage} from "./ListMoviesForMainPage/ListMoviesForMainPa
 import {useDispatch} from "react-redux";
 import {showError} from "../../app/snackSlice";
 import {MainPageSkeleton} from "./ListMoviesForMainPage/MainPageSkeleton/MainPageSkeleton";
+import {MovieSchema} from "../../app/api/MainPage.types";
 
 export const MainPage = () => {
     const {data: Popular, error,isLoading} = useGetPopularQuery({page: 1})
@@ -23,36 +24,21 @@ export const MainPage = () => {
         : null;
     const backdropStyle = backdropPath ? `url(${backdropPath})` : undefined;
 
+
     const popular_movies = Popular?.results
-        ? Popular.results.slice(0, 6).map(el => ({
-            ...el,
-            poster_path: el.poster_path ?? null,
-            backdrop_path: el.backdrop_path ?? null,
-        }))
+        ? MovieSchema.array().parse(Popular.results.slice(0, 6))
         : [];
 
     const topRated_movies = topRatedData?.results
-        ? topRatedData.results.slice(0, 6).map(el => ({
-            ...el,
-            poster_path: el.poster_path ?? null,
-            backdrop_path: el.backdrop_path ?? null,
-        }))
+        ? MovieSchema.array().parse(topRatedData.results.slice(0, 6))
         : [];
 
     const upcoming_movies = UpcomingData?.results
-        ? UpcomingData.results.slice(0, 6).map(el => ({
-            ...el,
-            poster_path: el.poster_path ?? null,
-            backdrop_path: el.backdrop_path ?? null,
-        }))
+        ? MovieSchema.array().parse(UpcomingData.results.slice(0, 6))
         : [];
 
     const now_playing_movies = NowPlayingData?.results
-        ? NowPlayingData.results.slice(0, 6).map(el => ({
-            ...el,
-            poster_path: el.poster_path ?? null,
-            backdrop_path: el.backdrop_path ?? null,
-        }))
+        ? MovieSchema.array().parse(NowPlayingData.results.slice(0, 6))
         : [];
     if (isLoading) return <MainPageSkeleton />;
     return <div className={s.Container}>
