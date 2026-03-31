@@ -26,32 +26,32 @@ export const MainPage = () => {
     const popular_movies = Popular?.results
         ? Popular.results.slice(0, 6).map(el => ({
             ...el,
-            poster_path: el.poster_path || "",
-            backdrop_path: el.backdrop_path || "",
+            poster_path: el.poster_path ?? null,
+            backdrop_path: el.backdrop_path ?? null,
         }))
         : [];
 
     const topRated_movies = topRatedData?.results
         ? topRatedData.results.slice(0, 6).map(el => ({
             ...el,
-            poster_path: el.poster_path || "",
-            backdrop_path: el.backdrop_path || "",
+            poster_path: el.poster_path ?? null,
+            backdrop_path: el.backdrop_path ?? null,
         }))
         : [];
 
     const upcoming_movies = UpcomingData?.results
         ? UpcomingData.results.slice(0, 6).map(el => ({
             ...el,
-            poster_path: el.poster_path || "",
-            backdrop_path: el.backdrop_path || "",
+            poster_path: el.poster_path ?? null,
+            backdrop_path: el.backdrop_path ?? null,
         }))
         : [];
 
     const now_playing_movies = NowPlayingData?.results
         ? NowPlayingData.results.slice(0, 6).map(el => ({
             ...el,
-            poster_path: el.poster_path || "",
-            backdrop_path: el.backdrop_path || "",
+            poster_path: el.poster_path ?? null,
+            backdrop_path: el.backdrop_path ?? null,
         }))
         : [];
     if (isLoading) return <MainPageSkeleton />;
