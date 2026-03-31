@@ -12,10 +12,8 @@ export const MainPageSkeleton = () => {
                     <div className={s.content}>
                         <Skeleton variant="rectangular" width={220} height={70} margin={10}
                                   sx={{borderRadius: 1}}/>
-                        <Skeleton variant="rectangular" width={380} height={50} margin={10}
-                                  sx={{borderRadius: 1}}/><Skeleton variant="rectangular" width={580} height={50}
-                                                                    margin={10}
-                                                                    sx={{borderRadius: 1}}/>
+                        <Skeleton variant="rectangular" width={380} height={50} sx={{ margin: 1, borderRadius: 1 }}/>
+                        <Skeleton variant="rectangular" width={580} height={50} sx={{ margin: 1, borderRadius: 1 }}/>
                     </div>
                 </section>
                 <div className={s.wrappperItemMovies}>
@@ -27,8 +25,7 @@ export const MainPageSkeleton = () => {
                             <div className={s.item}>
                                 {Array(6).fill(null).map((_, id) => (
                                     <div key={id} className={s.container}>
-                                        <Skeleton variant="rectangular" width={180} height={270} margin={10}
-                                                  sx={{borderRadius: 1}}/>
+                                        <Skeleton variant="rectangular" width={180} height={270} sx={{ margin: 1, borderRadius: 1 }}/>
                                         <Skeleton variant="rectangular" width={180} height={30}
                                                   sx={{marginTop: 2, borderRadius: 1}}/>
                                     </div>))}

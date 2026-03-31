@@ -100,7 +100,7 @@ export const MoviePage=()=>{
             <div className={s.similarList}>
                 {similar?.map((sim: any) => (
                 <MovieCard key={sim.id}
-                           data={sim} id={sim.id}
+                           data={sim}
                            onLike={() => toggleFavorite({
                                id: sim.id,
                                title: sim.title,
