@@ -10,7 +10,7 @@ type Props = {
     selectFilter: (value: string) => void
     resetFilter: (value: string) => void
     selectFilterSlider: (value: string) => void
-    selectButtonFilter: (value: number,isClick:boolean) => void
+    selectButtonFilter: (value: string,isClick:boolean) => void
     isresetFilter:boolean
 }
 export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selectFilterSlider, selectFilter}: Props) => {
