@@ -125,7 +125,7 @@ export const FilteredMovies = () => {
                         <div className={s.movies}>
                             {data?.results.map((el) => (
                                 <MovieCard key={el.id}
-                                           data={el} id={el.id}
+                                           data={el}
                                            onLike={() => toggleFavorite({
                                                id: el.id,
                                                title: el.title,
