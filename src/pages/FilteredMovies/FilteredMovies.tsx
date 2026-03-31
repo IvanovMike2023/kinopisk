@@ -74,7 +74,6 @@ export const FilteredMovies = () => {
             timeoutId = setTimeout(() => func.apply(this, args), delay);
         };
     }
-
     const debouncedSetParams = useRef<((value: number[]) => void) | null>(null);
     const createDebounce = useCallback(() => {
         debouncedSetParams.current = debounce((value:number[]) => {
