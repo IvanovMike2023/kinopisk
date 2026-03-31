@@ -22,7 +22,7 @@ export const SearchPages = () => {
     const [inputValue, setinputValue] = useState(query)
 
     const {data,refetch,isLoading } = useGetSearchMovieQuery({query: query, page: page })
-    const handleInput = (value) => {
+    const handleInput = (value:string) => {
         setinputValue(value)
         if (value === '') {
             setinputValue('')
@@ -34,15 +34,15 @@ export const SearchPages = () => {
             setQuery(''); // Обновляем состояние `query` в компоненте
         }
     }
-    const handleSearch = (f) => {
+    const handleSearch = (f:string) => {
         // Обновляем URL с новым query
         const params = new URLSearchParams(location.search);
         params.set('query', f);
         setQuery(f); // Обновляем состояние `query`
     }
-    const currentPage = data?.page
-    const count = data?.total_pages
-    const setCurrentPage = (newpage) => {
+    const currentPage = data?.page ?? 1
+    const count = data?.total_pages ?? 0
+    const setCurrentPage = (newpage:number) => {
         setPage(newpage)
         refetch({query: query,page:newpage})
     }
