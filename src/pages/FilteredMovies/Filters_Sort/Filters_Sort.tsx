@@ -20,9 +20,11 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
     const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([0.0, 10.0])
     const theme = useTheme();
-    const handleChangeSlider = (event: Event, newValue: number | number[]) => {
-        selectFilterSlider(newValue)
-        setRange(newValue as number[]);
+    const handleChangeSlider = (_event: Event, newValue: number | number[]) => {
+        const rangeArray = newValue as number[];
+
+        selectFilterSlider(rangeArray.join(','))
+        setRange(rangeArray);
     };
     const handleChange = (event: SelectChangeEvent) => {
         setAge(event.target.value);
@@ -74,7 +76,7 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
                     '&:hover': {
                         backgroundColor: '#1e40af'
                     },
-                }} onClick={resetFilter}>Reset filters</Button>
+                }} onClick={() => resetFilter('')}>Reset filters</Button>
             </Box>
         </Paper>
     </Box>
