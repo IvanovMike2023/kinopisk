@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import {baseApi} from "./api/baseApi";
-import {SnackReducer} from "./snackSlice";
+import {snackReducer} from "./snackSlice";
 
 export const store = configureStore({
     reducer: {
         // Add the generated reducer as a specific top-level slice
         [baseApi.reducerPath]: baseApi.reducer,
-        snackSlice:SnackReducer
+        snackSlice:snackReducer
     },
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.

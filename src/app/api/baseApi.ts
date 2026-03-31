@@ -1,5 +1,6 @@
-import { createApi, fetchBaseQuery, BaseQueryFn } from "@reduxjs/toolkit/query/react";
-import { showError } from "../snackSlice";
+import { createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import type {BaseQueryFn } from "@reduxjs/toolkit/query/react";
+import {showError} from "../snackSlice";
 
 // Тип для ответа API
 export interface BaseApiResponse {

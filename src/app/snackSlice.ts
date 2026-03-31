@@ -27,4 +27,7 @@ const snackSlice = createSlice({
         },
     },
 })
+export const { showError, hideError } = snackSlice.actions
 
+// экспорт reducer
+export const snackReducer = snackSlice.reducer
