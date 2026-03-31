@@ -23,10 +23,37 @@ export const MainPage = () => {
         : null;
     const backdropStyle = backdropPath ? `url(${backdropPath})` : undefined;
 
-    const topRated_movies = topRatedData?.results ? topRatedData?.results.slice(0, 6) : []
-    const upcoming_movies = UpcomingData?.results ? UpcomingData?.results.slice(0, 6) : []
-    const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6) : []
-    const popular_movies = Popular?.results ? Popular?.results.slice(0, 6) : []
+    const popular_movies = Popular?.results
+        ? Popular.results.slice(0, 6).map(el => ({
+            ...el,
+            poster_path: el.poster_path || "",
+            backdrop_path: el.backdrop_path || "",
+        }))
+        : [];
+
+    const topRated_movies = topRatedData?.results
+        ? topRatedData.results.slice(0, 6).map(el => ({
+            ...el,
+            poster_path: el.poster_path || "",
+            backdrop_path: el.backdrop_path || "",
+        }))
+        : [];
+
+    const upcoming_movies = UpcomingData?.results
+        ? UpcomingData.results.slice(0, 6).map(el => ({
+            ...el,
+            poster_path: el.poster_path || "",
+            backdrop_path: el.backdrop_path || "",
+        }))
+        : [];
+
+    const now_playing_movies = NowPlayingData?.results
+        ? NowPlayingData.results.slice(0, 6).map(el => ({
+            ...el,
+            poster_path: el.poster_path || "",
+            backdrop_path: el.backdrop_path || "",
+        }))
+        : [];
     if (isLoading) return <MainPageSkeleton />;
     return <div className={s.Container}>
 
