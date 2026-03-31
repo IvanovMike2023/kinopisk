@@ -3,7 +3,7 @@ import {useState, useEffect} from "react"
 type Film = {
     id: number
     title: string
-    backdrop_path: string
+    poster_path: string
     vote_average: number
 }
 
