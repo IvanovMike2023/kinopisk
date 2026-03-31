@@ -83,6 +83,7 @@ export const FilteredMovies = () => {
     }, [setParams]);
     useEffect(() => {
         createDebounce();
+
     }, [createDebounce]);
     const selectFilterSlider = (value:number[]) => {
         debouncedSetParams.current?.(value);
