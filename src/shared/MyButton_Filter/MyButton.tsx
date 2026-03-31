@@ -7,17 +7,17 @@ import {useEffect, useState} from "react";
 
 type MyButtonProps = {
     name: string
-    id:number
+    id:string
     handlerButtonClick:(id:string,isClick:boolean)=>void
     isresetFilter:boolean
 }
 export const MyButton = ({isresetFilter,name,id,handlerButtonClick}: MyButtonProps )=> {
     const theme = useTheme();
     const [isClick,setisClick]=useState(true)
-    const handlerClick = (e) => {
+    const handlerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const newIsClick = !isClick;
             setisClick(newIsClick)
-            handlerButtonClick(e.currentTarget.id,isClick)
+            handlerButtonClick(e.currentTarget.id,newIsClick)
     }
     useEffect(()=>{
         if(isresetFilter){
