@@ -13,7 +13,7 @@ export const SearchPages = () => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const navigate = useNavigate()
-    const queryFromURL = params.get('query') || '';
+    const queryFromURL: string = params.get('query') || '';
     const [query, setQuery] = useState(queryFromURL);
     const [page, setPage] = useState(1);
     const theme = useTheme();
@@ -44,7 +44,7 @@ export const SearchPages = () => {
     const count = data?.total_pages ?? 0
     const setCurrentPage = (newpage:number) => {
         setPage(newpage)
-        refetch({query: query,page:newpage})
+        refetch()
     }
     if(isLoading) return <SkeletonSearchPage/>
     return <div className={s.container}>
@@ -66,7 +66,7 @@ export const SearchPages = () => {
                                                        data={el} id={el.id}
                                                        onLike={(id) => toggleFavorite({
                                                            id,
-                                                           title: el.title,
+                                                           title: el.title || 'Unknown Title',
                                                            poster_path: el.poster_path,
                                                            vote_average: el.vote_average
                                                        })}

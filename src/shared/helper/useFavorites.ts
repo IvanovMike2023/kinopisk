@@ -3,7 +3,7 @@ import {useState, useEffect} from "react"
 type Film = {
     id: number
     title: string
-    poster_path: string
+    poster_path: string | null
     vote_average: number
 }
 
