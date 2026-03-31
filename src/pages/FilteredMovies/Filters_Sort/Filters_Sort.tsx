@@ -63,7 +63,7 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
 
             <Box display={'flex'} flexWrap="wrap" gap={1} padding={2}>
                 {  MovieList.map((el)=>(
-                   <MyButton key={el.id} isresetFilter={isresetFilter } name={el.name} id={el.id ?? 0} handlerButtonClick={selectButtonFilter}/>
+                   <MyButton key={el.id} isresetFilter={isresetFilter } name={el.name} id={(el.id ?? 0).toString()} handlerButtonClick={selectButtonFilter}/>
                 ))
                 }
             </Box>
