@@ -10,8 +10,7 @@ export const MainPageSkeleton = () => {
                 <section
                     className={s.section}>
                     <div className={s.content}>
-                        <Skeleton variant="rectangular" width={220} height={70} margin={10}
-                                  sx={{borderRadius: 1}}/>
+                        <Skeleton variant="rectangular" width={220} height={70} sx={{ margin: 1, borderRadius: 1 }}/>
                         <Skeleton variant="rectangular" width={380} height={50} sx={{ margin: 1, borderRadius: 1 }}/>
                         <Skeleton variant="rectangular" width={580} height={50} sx={{ margin: 1, borderRadius: 1 }}/>
                     </div>
