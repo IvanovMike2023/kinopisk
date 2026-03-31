@@ -13,6 +13,7 @@ export const FilteredMovies = () => {
         sort_by: 'popularity.desc',
         'vote_average.gte': 0,
         'vote_average.lte': 10,
+        with_genres:[]
     };
     const [params, setParams] = useState(initialParams);
     const [_, setDisplayedData] = useState(null);
@@ -93,6 +94,7 @@ export const FilteredMovies = () => {
             })
         } else {
             const {with_genres, ...rest} = params;
+            console.log(with_genres)
             if (with_genres.includes(id)) {
                 if (with_genres === id) {
                     return setParams(rest)
