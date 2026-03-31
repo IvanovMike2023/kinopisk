@@ -19,7 +19,7 @@ export const FilteredMovies = () => {
     const [isresetFilter, setresetFilter] = useState(false);
     const {likedIds, toggleFavorite} = useFavorites()
 
-    const {data, refetch,isLoading} = useGetDiscoverMovieQuery({params})
+    const {data,isLoading} = useGetDiscoverMovieQuery({params})
 
 
     useEffect(() => {

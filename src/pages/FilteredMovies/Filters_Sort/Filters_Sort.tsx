@@ -17,7 +17,6 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
     const {data}=useGetMovieListQuery()
         const MovieList=data?.genres || []
 
-    console.log(isresetFilter)
     const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([0.0, 10.0])
     const theme = useTheme();
