@@ -69,7 +69,7 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
                 <Button sx={{
                     fontSize: 12,
                     bgcolor: theme.palette.secondary.main,
-                    border: '1px solid #ffff',
+                    border: '1px solid #fff',
                     transition: 'background-color 0.2s ease',
                     '&:hover': {
                         backgroundColor: '#1e40af'

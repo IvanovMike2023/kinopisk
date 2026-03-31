@@ -17,7 +17,7 @@ export const MyButton = ({isresetFilter,name,id,handlerButtonClick}: MyButtonPro
     const handlerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const newIsClick = !isClick;
             setisClick(newIsClick)
-            handlerButtonClick(e.currentTarget.id,isClick)
+            handlerButtonClick(Number(e.currentTarget.id),isClick)
     }
     useEffect(()=>{
         if(isresetFilter){
