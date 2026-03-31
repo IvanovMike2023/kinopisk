@@ -1,30 +1,33 @@
-import {useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery} from "../../app/api/mainPageApi";
+import { useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery } from "../../app/api/mainPageApi";
 import s from "./MainPage.module.css";
-import {useEffect} from "react";
-import {SearchInput} from "../../shared/utils/SearchInput/searchInput";
-import {ListMoviesForMainPage} from "./ListMoviesForMainPage/ListMoviesForMainPage";
-import {useDispatch} from "react-redux";
-import {showError} from "../../app/snackSlice";
-import {MainPageSkeleton} from "./ListMoviesForMainPage/MainPageSkeleton/MainPageSkeleton";
+import { useEffect } from "react";
+import { SearchInput } from "../../shared/utils/SearchInput/searchInput";
+import { ListMoviesForMainPage } from "./ListMoviesForMainPage/ListMoviesForMainPage";
+import { useDispatch } from "react-redux";
+import { showError } from "../../app/snackSlice";
+import { MainPageSkeleton } from "./ListMoviesForMainPage/MainPageSkeleton/MainPageSkeleton";
 import {MovieSchema} from "../../app/api/MainPage.types";
 
 export const MainPage = () => {
-    const {data: Popular, error,isLoading} = useGetPopularQuery({page: 1})
-    const {data: topRatedData} = useGetTopRatedQuery({page: 1});
-    const {data: UpcomingData} = useGetUpcomingQuery({page: 1});
-    const {data: NowPlayingData} = useGetNowPlayingQuery({page: 1});
-    const dispatch = useDispatch()
+    const { data: Popular, error, isLoading } = useGetPopularQuery({ page: 1 });
+    const { data: topRatedData } = useGetTopRatedQuery({ page: 1 });
+    const { data: UpcomingData } = useGetUpcomingQuery({ page: 1 });
+    const { data: NowPlayingData } = useGetNowPlayingQuery({ page: 1 });
+    const dispatch = useDispatch();
+
     useEffect(() => {
         if (error?.message) {
             dispatch(showError(error.message));
         }
     }, [error, dispatch]);
+
+    // фон для верхнего блока
     const backdropPath = Popular?.results.length
         ? Popular.results[Math.floor(Math.random() * Popular.results.length)].backdrop_path
         : null;
-    const backdropStyle = backdropPath ? `url(${backdropPath})` : undefined;
+    const backdropStyle = backdropPath ? `url(https://image.tmdb.org/t/p/original${backdropPath})` : undefined;
 
-
+    // Пропускаем массивы через MovieSchema.array().parse(...) для соответствия Zod
     const popular_movies = Popular?.results
         ? MovieSchema.array().parse(Popular.results.slice(0, 6))
         : [];
@@ -40,24 +43,27 @@ export const MainPage = () => {
     const now_playing_movies = NowPlayingData?.results
         ? MovieSchema.array().parse(NowPlayingData.results.slice(0, 6))
         : [];
-    if (isLoading) return <MainPageSkeleton />;
-    return <div className={s.Container}>
 
-        <section className={s.page}>
-            <section style={{backgroundImage: backdropStyle}}
-                     className={s.section}>
-                <div className={s.content}>
-                    <h1 className={s.title}>Welcome</h1>
-                    <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
-                    <SearchInput/>
+    if (isLoading) return <MainPageSkeleton />;
+
+    return (
+        <div className={s.Container}>
+            <section className={s.page}>
+                <section style={{ backgroundImage: backdropStyle }} className={s.section}>
+                    <div className={s.content}>
+                        <h1 className={s.title}>Welcome</h1>
+                        <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
+                        <SearchInput />
+                    </div>
+                </section>
+
+                <div className={s.popularMovies}>
+                    <ListMoviesForMainPage data={popular_movies} title="Popular Movies" />
+                    <ListMoviesForMainPage data={topRated_movies} title="Top Rated Movies" />
+                    <ListMoviesForMainPage data={upcoming_movies} title="Upcoming Movies" />
+                    <ListMoviesForMainPage data={now_playing_movies} title="Now Playing" />
                 </div>
             </section>
-            <div className={s.popularMovies}>
-                <ListMoviesForMainPage  data={popular_movies} title={'Popular Movies'}/>
-                <ListMoviesForMainPage  data={topRated_movies} title={'Top Rated Movies'}/>
-                <ListMoviesForMainPage  data={upcoming_movies} title={'Upcoming Movies'}/>
-                <ListMoviesForMainPage  data={now_playing_movies} title={'Now Playing'}/>
-            </div>
-        </section>
-    </div>
-}
+        </div>
+    );
+};
