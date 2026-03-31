@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux';
 import {MySnackbar} from "../MySnackbar/MySnackbar";
 import {hideError} from "../../../app/snackSlice";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
