@@ -4,9 +4,10 @@ import {Button, useTheme} from "@mui/material";
 import {MovieCard} from "../../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../../shared/helper/useFavorites";
 import {MovieSchema} from "../../../app/api/MainPage.types";
+import {z} from "zod";
 
 type Props = {
-    data: typeof MovieSchema[]
+    data: z.infer<typeof MovieSchema>[];
     title: string
     isLoad?:boolean
 }
