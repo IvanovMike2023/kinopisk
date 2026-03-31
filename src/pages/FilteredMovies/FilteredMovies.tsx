@@ -75,7 +75,7 @@ export const FilteredMovies = () => {
         };
     }
 
-    const debouncedSetParams = useRef();
+    const debouncedSetParams = useRef<((value: number[]) => void) | null>(null);
     const createDebounce = useCallback(() => {
         debouncedSetParams.current = debounce((value) => {
             setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));
@@ -85,10 +85,10 @@ export const FilteredMovies = () => {
         createDebounce();
     }, [createDebounce]);
     const selectFilterSlider = (value) => {
-        debouncedSetParams.current(value);
+        debouncedSetParams.current?.(value);
     }
 
-    const selectButtonFilter = (id, isClick) => {
+    const selectButtonFilter = (id:string, isClick:boolean) => {
         if (isClick) {
             setParams(prev => {
                 const iswith_genres = prev.with_genres ? prev.with_genres.split(',') : []
@@ -99,14 +99,13 @@ export const FilteredMovies = () => {
             })
         } else {
             const {with_genres, ...rest} = params;
-            console.log(with_genres)
-            if (with_genres.includes(id)) {
+            if (with_genres && with_genres.includes(id)) {
                 if (with_genres === id) {
                     return setParams(rest)
                 }
 
                 const with_genres_id = with_genres.replace(/,/g, " ").split(' ').filter((fl:string) => fl != id).toString()
-                const newParams = {...params, with_genres: with_genres_id}
+                const newParams = {...params, with_genres: with_genres_id }
                 setParams(newParams)
             }
         }
