@@ -63,13 +63,20 @@ export const SearchPages = () => {
                                     <div className={s.movies}>
                                         {data?.results.map((el) => (
                                             <MovieCard key={el.id}
-                                                       data={el} id={el.id}
-                                                       onLike={(id) => toggleFavorite({
-                                                           id,
-                                                           title: el.title || 'Unknown Title',
-                                                           poster_path: el.poster_path,
-                                                           vote_average: el.vote_average
-                                                       })}
+                                                       data={{...el,
+                                                           poster_path: el.poster_path || "",
+                                                           backdrop_path: el.backdrop_path || "",
+                                                       }}
+                                                       id={el.id}
+                                                       onLike={(id,e) => {
+                                                           e.preventDefault();
+                                                           toggleFavorite({
+                                                               id,
+                                                               title: el.title || 'Unknown Title',
+                                                               poster_path: el.poster_path,
+                                                               vote_average: el.vote_average
+                                                           })
+                                                       }}
                                                        isLiked={likedIds.includes(el.id)}/>
                                         ))}
                                     </div>
