@@ -67,7 +67,6 @@ export const SearchPages = () => {
                                                            poster_path: el.poster_path || "",
                                                            backdrop_path: el.backdrop_path || "",
                                                        }}
-                                                       id={el.id}
                                                        onLike={(id,e) => {
                                                            e.preventDefault();
                                                            toggleFavorite({

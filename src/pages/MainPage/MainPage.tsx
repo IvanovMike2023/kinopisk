@@ -1,6 +1,6 @@
 import {useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery} from "../../app/api/mainPageApi";
 import s from "./MainPage.module.css";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {SearchInput} from "../../shared/utils/SearchInput/searchInput";
 import {ListMoviesForMainPage} from "./ListMoviesForMainPage/ListMoviesForMainPage";
 import {useDispatch} from "react-redux";
@@ -18,7 +18,11 @@ export const MainPage = () => {
             dispatch(showError(error.message));
         }
     }, [error, dispatch]);
-    const backdrop = Popular?.results[Math.floor(Math.random() * Popular?.results.length)].backdrop_path
+    const backdropPath = Popular?.results.length
+        ? Popular.results[Math.floor(Math.random() * Popular.results.length)].backdrop_path
+        : null;
+    const backdropStyle = backdropPath ? `url(${backdropPath})` : undefined;
+
     const topRated_movies = topRatedData?.results ? topRatedData?.results.slice(0, 6) : []
     const upcoming_movies = UpcomingData?.results ? UpcomingData?.results.slice(0, 6) : []
     const now_playing_movies = NowPlayingData?.results ? NowPlayingData?.results.slice(0, 6) : []
@@ -27,7 +31,7 @@ export const MainPage = () => {
     return <div className={s.Container}>
 
         <section className={s.page}>
-            <section style={{backgroundImage: backdrop}}
+            <section style={{backgroundImage: backdropStyle}}
                      className={s.section}>
                 <div className={s.content}>
                     <h1 className={s.title}>Welcome</h1>
