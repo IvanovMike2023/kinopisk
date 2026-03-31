@@ -1,9 +1,5 @@
 import {Skeleton} from "@mui/material";
 import s from "./MainPageSkeleton.module.css"
-    ;
-import {Filters_Sort} from "../Filters_Sort/Filters_Sort";
-import {MovieCard} from "../../../entities/MovieCard/MovieCard";
-import {Pagination} from "../../../shared/Pagination/Pagination";
 
 export const SkeletonFilteredMovies = () => {
     return (
@@ -16,18 +12,14 @@ export const SkeletonFilteredMovies = () => {
                             <div key={id} className={s.itemMovies}>
                                 {Array(5).fill(null).map((_, id) => (
                                     <div key={id}>
-                                        <Skeleton variant="rectangular" width={180} height={270} margin={10}
-                                                  sx={{borderRadius: 1}}/>
+                                        <Skeleton variant="rectangular" width={180} height={270} sx={{ margin: 1, borderRadius: 1 }}/>
                                         <Skeleton variant="rectangular" width={180} height={30}
                                                   sx={{marginTop: 2, borderRadius: 1}}/>
                                     </div>))}
 
                             </div>
                         ))}
-
                     </div>
-
-
             </div>
         </section>
 
