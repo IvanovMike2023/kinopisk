@@ -13,11 +13,11 @@ type Props = {
     selectButtonFilter: (value: number,isClick:boolean) => void
     isresetFilter:boolean
 }
-export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selectFilterSlider, selectFilter}): Props => {
+export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selectFilterSlider, selectFilter}: Props) => {
     const {data}=useGetMovieListQuery()
         const MovieList=data?.genres || []
 
-
+    console.log(isresetFilter)
     const [age, setAge] = React.useState('popularity.desc');
     const [range, setRange] = React.useState([0.0, 10.0])
     const theme = useTheme();
@@ -32,7 +32,6 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
 
     useEffect(() => {
         if (isresetFilter) {
-
             setRange([0.0, 10.0]);
             setAge('popularity.desc')
         }

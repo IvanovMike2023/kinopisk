@@ -15,7 +15,7 @@ export const FilteredMovies = () => {
         'vote_average.lte': 10,
     };
     const [params, setParams] = useState(initialParams);
-    const [displayedData, setDisplayedData] = useState(null);
+    const [_, setDisplayedData] = useState(null);
     const [isresetFilter, setresetFilter] = useState(false);
     const {likedIds, toggleFavorite} = useFavorites()
 
@@ -81,12 +81,7 @@ export const FilteredMovies = () => {
     const selectFilterSlider = (value) => {
         debouncedSetParams.current(value);
     }
-    const handleParamsChange = (newParams, shouldRefetch = true) => {
-        setParams(newParams);
-        if (shouldRefetch) {
-            refetch();
-        }
-    };
+
     const selectButtonFilter = (id, isClick) => {
         if (isClick) {
             setParams(prev => {
