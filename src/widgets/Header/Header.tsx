@@ -1,5 +1,5 @@
 import logoUrl from '../../img/logo.svg'
-import {AppBar, Container, IconButton, LinearProgress, styled, Toolbar, useTheme} from "@mui/material";
+import {AppBar, Container,  LinearProgress,  Toolbar, useTheme} from "@mui/material";
 import type { PaletteMode} from "@mui/material";
 import {NavLink, useNavigate} from "react-router-dom";
 import s from './Header.module.css'
