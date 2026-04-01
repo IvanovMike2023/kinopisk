@@ -1,14 +1,15 @@
-import { createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import type {BaseQueryFn } from "@reduxjs/toolkit/query/react";
-import {showError} from "../snackSlice";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { BaseQueryFn } from "@reduxjs/toolkit/query/react";
+import { showError } from "../snackSlice";
 
-// Тип для ответа API
+// Интерфейс для данных API
 export interface BaseApiResponse {
     status_code?: number;
     status_message?: string;
     [key: string]: any;
 }
-// BaseQueryFn для TypeScript
+
+// Безопасный BaseQueryFn для TS
 const baseQuery: BaseQueryFn<
     string | { url: string; method?: string; body?: any; params?: any },
     unknown,
@@ -24,15 +25,17 @@ const baseQuery: BaseQueryFn<
     });
 
     const result = await rawBaseQuery(args, api, extraOptions);
-    // Приведение данных к BaseApiResponse
-    const data = result.data as unknown;
+    const data = result.data;
+
+    // Проверка на статус ошибки и безопасное использование status_message
     if (result.error || (data && typeof data === "object" && "status_code" in data)) {
-        const statusMessage = (data as BaseApiResponse)?.status_message;
-        let message = statusMessage || "Что-то пошло не так";
+        let message = "Что-то пошло не так";
 
         if (result.error?.status === "FETCH_ERROR") message = "Нет интернета";
         else if (typeof result.error?.status === "number")
             message = result.error?.data?.status_message || `Ошибка ${result.error.status}`;
+        else if (data && typeof data === "object" && "status_message" in data)
+            message = (data as BaseApiResponse).status_message || message;
 
         api.dispatch(showError(message));
 
@@ -51,6 +54,7 @@ const baseQuery: BaseQueryFn<
 export const baseApi = createApi({
     reducerPath: "kinopoiskApi",
     baseQuery: baseQuery,
-    tagTypes: ['Popular', 'TopRated', 'Upcoming', 'NowPlaying'],
+    // TagTypes с явным типом string[]
+    tagTypes: ["Popular", "TopRated", "Upcoming", "NowPlaying"],
     endpoints: () => ({}),
 });
