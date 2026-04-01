@@ -1,4 +1,4 @@
-import logoUrl from '../../img/logo.svg'
+import logoUrl from '../../img/logo.svg?url'
 import {AppBar, Container,  LinearProgress,  Toolbar, useTheme} from "@mui/material";
 import type { PaletteMode} from "@mui/material";
 import {NavLink, useNavigate} from "react-router-dom";
