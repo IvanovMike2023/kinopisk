@@ -1,7 +1,9 @@
 import s from "./SkeletonCategoryMoviesPage.module.css";
 import {Skeleton} from "@mui/material";
-
-export const SkeletonCategoryMoviesPage = ({activeCategory}) => {
+type SkeletonType={
+    activeCategory:string
+}
+export const SkeletonCategoryMoviesPage = ({activeCategory}:SkeletonType) => {
     return (
         <div className={s.Container}>
             <h2>{activeCategory}</h2>
