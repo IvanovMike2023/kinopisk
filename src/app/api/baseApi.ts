@@ -25,15 +25,14 @@ const baseQuery: BaseQueryFn<
 
     const result = await rawBaseQuery(args, api, extraOptions);
     // Приведение данных к BaseApiResponse
-    const data = result.data as BaseApiResponse | undefined;
-
-    if (result.error || data?.status_code) {
-        let message = "Что-то пошло не так";
+    const data = result.data as unknown;
+    if (result.error || (data && typeof data === "object" && "status_code" in data)) {
+        const statusMessage = (data as BaseApiResponse)?.status_message;
+        let message = statusMessage || "Что-то пошло не так";
 
         if (result.error?.status === "FETCH_ERROR") message = "Нет интернета";
         else if (typeof result.error?.status === "number")
             message = result.error?.data?.status_message || `Ошибка ${result.error.status}`;
-        else if (data?.status_code) message = data.status_message || message;
 
         api.dispatch(showError(message));
 
