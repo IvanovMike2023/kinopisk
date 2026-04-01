@@ -57,7 +57,6 @@ export const FilteredMovies = () => {
             setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));
         }, 200)
     }, [])
-
     const selectFilterSlider = (value: number[]) => {
         debouncedSetParams(value);
     }
