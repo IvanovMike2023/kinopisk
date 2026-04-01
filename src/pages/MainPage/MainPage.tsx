@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { showError } from "../../app/snackSlice";
 import { MainPageSkeleton } from "./ListMoviesForMainPage/MainPageSkeleton/MainPageSkeleton";
 import {MovieSchema} from "../../app/api/MainPage.types";
+import {dialogActionsClasses} from "@mui/material";
 
 export const MainPage = () => {
     const { data: Popular, error, isLoading } = useGetPopularQuery({ page: 1 });
@@ -25,9 +26,9 @@ export const MainPage = () => {
     const backdropPath = Popular?.results.length
         ? Popular.results[Math.floor(Math.random() * Popular.results.length)].backdrop_path
         : null;
-    const backdropStyle = backdropPath ? `url(http://image.tmdb.org/t/p/original${backdropPath})` : undefined;
-    console.log(backdropStyle)
-    // Пропускаем массивы через MovieSchema.array().parse(...) для соответствия Zod
+    const backdropStyle = backdropPath
+        ? backdropPath
+        : undefined;    // Пропускаем массивы через MovieSchema.array().parse(...) для соответствия Zod
     const popular_movies = Popular?.results
         ? MovieSchema.array().parse(Popular.results.slice(0, 6))
         : [];
@@ -49,7 +50,7 @@ export const MainPage = () => {
     return (
         <div className={s.Container}>
             <section className={s.page}>
-                <section style={{ backgroundImage: backdropStyle }} className={s.section}>
+                <section style={{  backgroundImage: backdropStyle} } className={s.section}>
                     <div className={s.content}>
                         <h1 className={s.title}>Welcome</h1>
                         <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>

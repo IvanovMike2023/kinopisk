@@ -85,7 +85,7 @@ export const CategoryMovies = () => {
 
         const categoryKey: CategoryKey = categoryKeyStr;
         const category = categoryMap[categoryKey];
-        category.refetch().unwrap().then(res => setResults(res));
+        category.refetch().unwrap().then((res:ResponseType) => setResults(res));
         setActiveCategory(category.label);
     }, [location.pathname, page]);
 
