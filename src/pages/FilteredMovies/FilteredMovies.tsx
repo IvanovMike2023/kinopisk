@@ -1,12 +1,11 @@
 import s from "./FilteredMovie.module.css";
-import {useGetDiscoverMovieQuery, useGetMovieListQuery} from "../../app/api/mainPageApi";
+import {useGetDiscoverMovieQuery} from "../../app/api/mainPageApi";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useCallback, useMemo, useState} from "react";
 import {Pagination} from "../../shared/Pagination/Pagination";
 import {MovieCard} from "../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../shared/helper/useFavorites";
 import {SkeletonFilteredMovies} from "./SkeletonFilteredMovies/SkeletonFilteredMovies";
-import {dialogActionsClasses} from "@mui/material";
 
 type initialParamsType = {
     page: number,
@@ -23,18 +22,11 @@ export const FilteredMovies = () => {
         'vote_average.lte': 10,
     };
     const [params, setParams] = useState<initialParamsType>(initialParams);
-    const [_, setDisplayedData] = useState(null);
     const [isresetFilter, setresetFilter] = useState(false);
     const {likedIds, toggleFavorite} = useFavorites()
 
     const {data, isLoading} = useGetDiscoverMovieQuery({params})
 
-
-    useEffect(() => {
-        if (data) {
-            setDisplayedData(data);
-        }
-    }, [data]);
     const currentPage = data?.page ?? 1;
     const count = data?.total_pages ?? 1;
     const setCurrentPage = (value: number) => {
@@ -43,15 +35,16 @@ export const FilteredMovies = () => {
     const selectFilter = useCallback((value: string) => {
         setParams(prev => ({...prev, page: 1, sort_by: value}));
     }, [])
-
-    function debounce(func: (...args: any[]) => void, delay: number) {
-        let timeoutId;
-        return function (...args) {
+    const debounce = <T extends (...args: unknown[]) => unknown>(
+        func: T,
+        delay: number
+    ) => {
+        let timeoutId: ReturnType<typeof setTimeout>;
+        return (...args: Parameters<T>): void => {
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => func(...args), delay);
         };
     }
-
     const debouncedSetParams = useMemo(() => {
         return debounce((value: number[]) => {
             setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));

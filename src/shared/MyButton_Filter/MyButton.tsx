@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 type MyButtonProps = {
     name: string
     id:string
-    handlerButtonClick:(id:number,isClick:boolean)=>void
+    handlerButtonClick:(id:string,isClick:boolean)=>void
     isresetFilter:boolean
 }
 export const MyButton = ({isresetFilter,name,id,handlerButtonClick}: MyButtonProps )=> {
@@ -17,7 +17,7 @@ export const MyButton = ({isresetFilter,name,id,handlerButtonClick}: MyButtonPro
     const handlerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const newIsClick = !isClick;
             setisClick(newIsClick)
-            handlerButtonClick(Number(e.currentTarget.id),isClick)
+            handlerButtonClick(e.currentTarget.id,isClick)
     }
     useEffect(()=>{
         if(isresetFilter){
@@ -57,7 +57,7 @@ export const SortingSelector = ({value, handleChange}: Sort) => {
                 sx={{
                     height: 35,
                     '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: theme.palette.secondary.main,
+                        borderColor: theme.palette.outLine.main,
                      // обычный бордер
                         borderWidth: '1px',
                     },

@@ -22,7 +22,6 @@ export const Filters_Sort = ({isresetFilter,resetFilter,selectButtonFilter,selec
     const theme = useTheme();
     const handleChangeSlider = (_event: Event, newValue: number | number[]) => {
         const rangeArray = newValue as number[];
-        console.log(rangeArray)
         selectFilterSlider(rangeArray)
         setRange(rangeArray);
     };

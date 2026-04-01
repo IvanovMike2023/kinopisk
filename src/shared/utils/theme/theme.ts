@@ -10,6 +10,9 @@ export const getTheme =(darkMode: PaletteMode)=> {
                 secondary: {
                     main: darkMode==='dark'   ? '#141c2c': '#c4bdbd',  // дополнительный цвет
                 },
+                outLine: {
+                    main: darkMode==='dark'   ? '#ffffff': '#c4bdbd',  // дополнительный цвет
+                },
                 background: {
                     default: darkMode==='dark'   ? '#0b1120' : '#ffffff', // фон
                 },
