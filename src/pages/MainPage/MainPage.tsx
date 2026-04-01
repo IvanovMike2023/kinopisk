@@ -25,8 +25,8 @@ export const MainPage = () => {
     const backdropPath = Popular?.results.length
         ? Popular.results[Math.floor(Math.random() * Popular.results.length)].backdrop_path
         : null;
-    const backdropStyle = backdropPath ? `url(https://image.tmdb.org/t/p/original${backdropPath})` : undefined;
-
+    const backdropStyle = backdropPath ? `url(http://image.tmdb.org/t/p/original${backdropPath})` : undefined;
+    console.log(backdropStyle)
     // Пропускаем массивы через MovieSchema.array().parse(...) для соответствия Zod
     const popular_movies = Popular?.results
         ? MovieSchema.array().parse(Popular.results.slice(0, 6))
