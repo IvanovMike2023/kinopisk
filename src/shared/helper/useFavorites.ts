@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 
-type Film = {
+export type Film = {
     id: number
     title: string
     poster_path: string | null
