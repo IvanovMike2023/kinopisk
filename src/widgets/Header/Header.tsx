@@ -1,4 +1,3 @@
-import logoUrl from '../../img/logo.svg'
 import {AppBar, Container,  LinearProgress,  Toolbar, useTheme} from "@mui/material";
 import type { PaletteMode} from "@mui/material";
 import {NavLink, useNavigate} from "react-router-dom";
@@ -28,7 +27,7 @@ export const Header = ({darkMode, handleThemeChange}: Props) => {
                 style={{backgroundColor: theme.palette.background.default, color: theme.palette.text.primary}}>
             <Toolbar>
                 <Container maxWidth={"lg"} sx={containerSx}>
-                    <img className={s.logo} id='1' onClick={() => navigate(navItems[0].path)} src={logoUrl}
+                    <img className={s.logo} id='1' onClick={() => navigate(navItems[0].path)} src="/img/logo.svg"
                          alt="Логотип" width="150"/>
                     {navItems.map((item) => <NavLink className={s.navMenu}
                                                      key={item.path}
