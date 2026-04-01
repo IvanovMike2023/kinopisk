@@ -1,5 +1,6 @@
 import {createTheme} from "@mui/material/styles";
 import type {PaletteMode} from "@mui/material";
+
 export const getTheme =(darkMode: PaletteMode)=> {
      return   createTheme({
             palette: {

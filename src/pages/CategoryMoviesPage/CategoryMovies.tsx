@@ -29,25 +29,32 @@ const isCategoryKey = (key: string): key is CategoryKey => {
 
 export const CategoryMovies = () => {
     const [page, setPage] = useState(1);
+
     const { data: Popular, refetch: refetchPopular, isLoading } = useGetPopularQuery({ page });
     const { data: topRatedData, refetch: refetchTopRated } = useGetTopRatedQuery({ page });
     const { data: UpcomingData, refetch: refetchUpcoming } = useGetUpcomingQuery({ page });
     const { data: NowPlayingData, refetch: refetchNowPlaying } = useGetNowPlayingQuery({ page });
+
     const [results, setResults] = useState<ResponseType>({
         page: 1,
         results: [],
         total_pages: 1,
         total_results: 0
     });
-    const [activeCategory, setActiveCategory] = useState('Popular Movies');
+
+    const [activeCategoryKey, setActiveCategoryKey] = useState<CategoryKey>('popular');
+    const [activeCategoryLabel, setActiveCategoryLabel] = useState("Popular Movies");
+
     const { likedIds, toggleFavorite } = useFavorites();
     const currentPage = results?.page ?? 1;
     const count = results?.total_pages ?? 1;
+
     const theme = useTheme();
     const navigate = useNavigate();
     const location = useLocation();
 
     const changeCategoryInUrl = (categoryUrlPart: CategoryKey) => {
+        setPage(1); // сбрасываем страницу при смене категории
         navigate(`/movies/${categoryUrlPart}`);
     };
 
@@ -70,26 +77,15 @@ export const CategoryMovies = () => {
     // Обновление данных при смене категории или страницы
     useEffect(() => {
         const categoryKeyStr = location.pathname.split('/')[2];
+        const categoryKey: CategoryKey = isCategoryKey(categoryKeyStr) ? categoryKeyStr : 'popular';
 
-        if (!isCategoryKey(categoryKeyStr)) {
-            // Если категория некорректная, сбрасываем к дефолтной
-            setResults({
-                page: 1,
-                results: [],
-                total_pages: 1,
-                total_results: 0
-            });
-            setActiveCategory('Popular Movies');
-            return;
-        }
+        setActiveCategoryKey(categoryKey);
+        setActiveCategoryLabel(categoryMap[categoryKey].label);
 
-        const categoryKey: CategoryKey = categoryKeyStr;
-        const category = categoryMap[categoryKey];
-        category.refetch().unwrap().then((res:ResponseType) => setResults(res));
-        setActiveCategory(category.label);
+        categoryMap[categoryKey].refetch().unwrap().then((res: ResponseType) => setResults(res));
     }, [location.pathname, page]);
 
-    if (isLoading) return <SkeletonCategoryMoviesPage activeCategory={activeCategory} />;
+    if (isLoading) return <SkeletonCategoryMoviesPage activeCategory={activeCategoryLabel} />;
 
     return (
         <div className={s.container}>
@@ -100,33 +96,48 @@ export const CategoryMovies = () => {
                             <Button
                                 key={cat.key}
                                 onClick={() => changeCategoryInUrl(cat.key)}
-                                variant={activeCategory === cat.label ? 'contained' : 'outlined'}
+                                variant={cat.key === activeCategoryKey ? "contained" : "outlined"}
+                                sx={{
+                                    borderColor: theme.palette.text.primary,
+                                    backgroundColor: cat.key === activeCategoryKey
+                                        ? '#206cb7'//theme.palette.primary.main // активная кнопка выделяется цветом темы
+                                        : 'transparent',
+                                    color: cat.key === activeCategoryKey
+                                        ? theme.palette.primary.contrastText // текст контрастный к primary
+                                        : theme.palette.text.primary,
+                                    '&:hover': {
+                                        backgroundColor: cat.key === activeCategoryKey
+                                            ? theme.palette.primary.dark // hover для активной
+                                            : theme.palette.action.hover // hover для неактивной
+                                    }
+                                }}
                             >
                                 {cat.label}
                             </Button>
                         ))}
                     </div>
                 </div>
+
                 <h2 style={{ color: theme.palette.text.primary }} className={s.titleResult}>
-                    {activeCategory}
+                    {activeCategoryLabel}
                 </h2>
+
                 <div className={s.movies}>
                     {results.results.map((el: MovieType) => (
                         <MovieCard
                             key={el.id}
                             data={el}
-                            onLike={() =>
-                                toggleFavorite({
-                                    id: el.id,
-                                    title: el.title,
-                                    poster_path: el.poster_path,
-                                    vote_average: el.vote_average
-                                })
-                            }
+                            onLike={() => toggleFavorite({
+                                id: el.id,
+                                title: el.title,
+                                poster_path: el.poster_path,
+                                vote_average: el.vote_average
+                            })}
                             isLiked={likedIds.includes(el.id)}
                         />
                     ))}
                 </div>
+
                 <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} count={count} />
             </section>
         </div>

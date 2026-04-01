@@ -1,6 +1,6 @@
 import { useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery } from "../../app/api/PagesApi";
 import s from "./MainPage.module.css";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { SearchInput } from "../../shared/utils/SearchInput/searchInput";
 import { ListMoviesForMainPage } from "./ListMoviesForMainPage/ListMoviesForMainPage";
 import { useDispatch } from "react-redux";
@@ -15,41 +15,34 @@ export const MainPage = () => {
     const { data: NowPlayingData } = useGetNowPlayingQuery({ page: 1 });
     const dispatch = useDispatch();
 
+    // Показываем ошибку, если есть
     useEffect(() => {
-        if (error?.message) {
-            dispatch(showError(error.message));
-        }
+        if (error?.message) dispatch(showError(error.message));
     }, [error, dispatch]);
 
-    // фон для верхнего блока
-    const backdropPath = Popular?.results.length
-        ? Popular.results[Math.floor(Math.random() * Popular.results.length)].backdrop_path
-        : null;
-    const backdropStyle = backdropPath
-        ? backdropPath
-        : undefined;    // Пропускаем массивы через MovieSchema.array().parse(...) для соответствия Zod
-    const popular_movies = Popular?.results
-        ? MovieSchema.array().parse(Popular.results.slice(0, 6))
-        : [];
-
-    const topRated_movies = topRatedData?.results
-        ? MovieSchema.array().parse(topRatedData.results.slice(0, 6))
-        : [];
-
-    const upcoming_movies = UpcomingData?.results
-        ? MovieSchema.array().parse(UpcomingData.results.slice(0, 6))
-        : [];
-
-    const now_playing_movies = NowPlayingData?.results
-        ? MovieSchema.array().parse(NowPlayingData.results.slice(0, 6))
-        : [];
+    // Стейт для фонового изображения (замораживаем после первой загрузки Popular)
+    const [backdropUrl, setBackdropUrl] = useState<string>();
+    useEffect(() => {
+        if (Popular?.results.length && !backdropUrl) {
+            const randomMovie = Popular.results[Math.floor(Math.random() * Popular.results.length)];
+            setBackdropUrl(randomMovie.backdrop_path);
+        }
+    }, [Popular, backdropUrl]);
 
     if (isLoading) return <MainPageSkeleton />;
+
+    // Парсим массивы фильмов через Zod
+    const popular_movies = Popular?.results ? MovieSchema.array().parse(Popular.results.slice(0, 6)) : [];
+    const topRated_movies = topRatedData?.results ? MovieSchema.array().parse(topRatedData.results.slice(0, 6)) : [];
+    const upcoming_movies = UpcomingData?.results ? MovieSchema.array().parse(UpcomingData.results.slice(0, 6)) : [];
+    const now_playing_movies = NowPlayingData?.results ? MovieSchema.array().parse(NowPlayingData.results.slice(0, 6)) : [];
+    console.log(backdropUrl)
 
     return (
         <div className={s.Container}>
             <section className={s.page}>
-                <section style={{  backgroundImage: backdropStyle} } className={s.section}>
+                {/* Фоновая секция: фон фиксируется через стейт */}
+                <section className={s.section} style={{ backgroundImage: backdropUrl }}>
                     <div className={s.content}>
                         <h1 className={s.title}>Welcome</h1>
                         <h2 className={s.subtitle}>Browse highlighted titles from TMDB</h2>
