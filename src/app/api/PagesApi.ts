@@ -1,5 +1,5 @@
 import {baseApi} from "./baseApi";
-import type { SearchParams} from './MainPage.types';
+import type { SearchParams} from './PagesApi.types';
 import {z} from 'zod'
 import {
     CreditsSchema,
@@ -7,7 +7,7 @@ import {
     MovieDetailsSchema,
     ResponseDetailsSchema,
     ResponseSchema
-} from "./MainPage.types";
+} from "./PagesApi.types";
 
 export type DiscoverParams = {
     page?: number;
@@ -23,28 +23,28 @@ export type ResponseGenreListSchema = z.infer<typeof GenreListSchema >;
 
 const parseResponse = <T>(schema: z.ZodType<T>) => (response: unknown) => schema.parse(response);
 
-export const mainPageApi = baseApi.injectEndpoints({
+export const pagesApi = baseApi.injectEndpoints({
     endpoints: (build) => {
         return ({
             getPopular: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `/movie/popular?page=${page}`}),
                 transformResponse:parseResponse(ResponseSchema),
-                providesTags: ['Popular']
+                providesTags: [{type:'Popular'}]
             }),
             getTopRated: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `movie/top_rated?page=${page}`}),
                     transformResponse:parseResponse(ResponseSchema),
-                providesTags: ['TopRated']
+                providesTags: [{type:'TopRated'}]
             }),
             getUpcoming: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `movie/upcoming?page=${page}`}),
                 transformResponse:parseResponse(ResponseSchema),
-                providesTags: ['Upcoming']
+                providesTags: [{type:'Upcoming'}]
             }),
             getNowPlaying: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `movie/now_playing?page=${page}`}),
                 transformResponse:parseResponse(ResponseSchema),
-                providesTags: ['NowPlaying']
+                providesTags: [{type:'NowPlaying'}]
             }),
             getDiscoverMovie: build.query<DiscoverTypeType,DiscoverParams >({
                 query: (params) => ({
@@ -103,4 +103,4 @@ export const {
     useGetDetailsMovieQuery,
     useGetCreditsQuery,
     useGetSimilarQuery
-} = mainPageApi
+} = pagesApi

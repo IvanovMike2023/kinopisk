@@ -3,7 +3,7 @@ import {
     useGetPopularQuery,
     useGetTopRatedQuery,
     useGetUpcomingQuery
-} from "../../app/api/mainPageApi";
+} from "../../app/api/PagesApi";
 import { Pagination } from "../../shared/Pagination/Pagination";
 import { useEffect, useState } from "react";
 import { Button, useTheme } from "@mui/material";
@@ -12,7 +12,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { MovieCard } from "../../entities/MovieCard/MovieCard";
 import { useFavorites } from "../../shared/helper/useFavorites";
 import { SkeletonCategoryMoviesPage } from "./SkeletonCategoryMoviesPage/SkeletonCategoryMoviesPage";
-import { MovieSchema, ResponseSchema } from "../../app/api/MainPage.types";
+import { MovieSchema, ResponseSchema } from "../../app/api/PagesApi.types";
 import { z } from "zod";
 
 // Типы из Zod

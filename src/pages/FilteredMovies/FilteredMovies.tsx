@@ -1,5 +1,5 @@
 import s from "./FilteredMovie.module.css";
-import {useGetDiscoverMovieQuery} from "../../app/api/mainPageApi";
+import {useGetDiscoverMovieQuery} from "../../app/api/PagesApi";
 import {Filters_Sort} from "./Filters_Sort/Filters_Sort";
 import {useCallback, useMemo, useState} from "react";
 import {Pagination} from "../../shared/Pagination/Pagination";

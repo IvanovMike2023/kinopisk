@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import {Button, Paper, Typography, useTheme} from "@mui/material";
 import type { SelectChangeEvent } from '@mui/material/Select'
 import {MyButton, RatingRangeSlider, SortingSelector} from "../../../shared/MyButton_Filter/MyButton";
-import {useGetMovieListQuery} from "../../../app/api/mainPageApi";
+import {useGetMovieListQuery} from "../../../app/api/PagesApi";
 
 type Props = {
     selectFilter: (value: string) => void

@@ -24,7 +24,7 @@ display: flex;
     min-width: 40px;
     padding: 0;
     border-radius: 999px;
-    border: #d3ddef 1px solid;
+    border: 1px solid #d3ddef ;
     background-color: #fff;
     color: #facc15;
     font-size: 25px;

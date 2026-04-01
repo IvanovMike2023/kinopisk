@@ -1,4 +1,4 @@
-import { useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery } from "../../app/api/mainPageApi";
+import { useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery } from "../../app/api/PagesApi";
 import s from "./MainPage.module.css";
 import { useEffect } from "react";
 import { SearchInput } from "../../shared/utils/SearchInput/searchInput";
@@ -6,8 +6,7 @@ import { ListMoviesForMainPage } from "./ListMoviesForMainPage/ListMoviesForMain
 import { useDispatch } from "react-redux";
 import { showError } from "../../app/snackSlice";
 import { MainPageSkeleton } from "./ListMoviesForMainPage/MainPageSkeleton/MainPageSkeleton";
-import {MovieSchema} from "../../app/api/MainPage.types";
-import {dialogActionsClasses} from "@mui/material";
+import {MovieSchema} from "../../app/api/PagesApi.types";
 
 export const MainPage = () => {
     const { data: Popular, error, isLoading } = useGetPopularQuery({ page: 1 });

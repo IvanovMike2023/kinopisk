@@ -13,9 +13,10 @@ import {getTheme} from "../shared/utils/theme/theme";
 import {useThemeMode} from "../shared/helper/useThemeMode";
 import {GlobalSnackbar} from "../shared/utils/GlobalSnackbar/GlobalSnackbar";
 import {NotFoundPage} from "../shared/404Page/404Page";
+import type {PaletteMode} from "@mui/material";
 
 function App() {
-    const [darkMode,toggleTheme]=useThemeMode()
+    const [darkMode,toggleTheme]=useThemeMode() as [PaletteMode, () => void]
     const theme=getTheme(darkMode)
     return (
         <ThemeProvider theme={theme}>
