@@ -47,7 +47,7 @@ export const mainPageApi = baseApi.injectEndpoints({
                 providesTags: ['NowPlaying']
             }),
             getDiscoverMovie: build.query<DiscoverTypeType,DiscoverParams >({
-                query: ({params}) => ({
+                query: (params) => ({
                     url: `discover/movie`,
                     params
                 }),

@@ -6,6 +6,7 @@ import {Pagination} from "../../shared/Pagination/Pagination";
 import {MovieCard} from "../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../shared/helper/useFavorites";
 import {SkeletonFilteredMovies} from "./SkeletonFilteredMovies/SkeletonFilteredMovies";
+import {debounce} from "../../shared/utils/debonce/debonce";
 
 type initialParamsType = {
     page: number,
@@ -25,7 +26,7 @@ export const FilteredMovies = () => {
     const [isresetFilter, setresetFilter] = useState(false);
     const {likedIds, toggleFavorite} = useFavorites()
 
-    const {data, isLoading} = useGetDiscoverMovieQuery({params})
+    const {data, isLoading} = useGetDiscoverMovieQuery(params)
 
     const currentPage = data?.page ?? 1;
     const count = data?.total_pages ?? 1;
@@ -35,16 +36,7 @@ export const FilteredMovies = () => {
     const selectFilter = useCallback((value: string) => {
         setParams(prev => ({...prev, page: 1, sort_by: value}));
     }, [])
-    const debounce = <T extends (...args: unknown[]) => unknown>(
-        func: T,
-        delay: number
-    ) => {
-        let timeoutId: ReturnType<typeof setTimeout>;
-        return (...args: Parameters<T>): void => {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => func(...args), delay);
-        };
-    }
+
     const debouncedSetParams = useMemo(() => {
         return debounce((value: number[]) => {
             setParams(prev => ({...prev, 'vote_average.gte': value[0], 'vote_average.lte': value[1]}));

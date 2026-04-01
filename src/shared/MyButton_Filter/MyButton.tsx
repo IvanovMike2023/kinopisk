@@ -57,7 +57,7 @@ export const SortingSelector = ({value, handleChange}: Sort) => {
                 sx={{
                     height: 35,
                     '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: theme.palette.outLine.main,
+                        borderColor: theme.palette.divider,
                      // обычный бордер
                         borderWidth: '1px',
                     },
