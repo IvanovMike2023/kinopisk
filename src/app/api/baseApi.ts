@@ -15,6 +15,7 @@ const baseQuery: BaseQueryFn<
     unknown,
     { message?: string }
     > = async (args, api, extraOptions) => {
+    // Указываем тип для fetchBaseQuery
     const rawBaseQuery = fetchBaseQuery({
         baseUrl: "https://api.themoviedb.org/3",
         prepareHeaders: (headers) => {
@@ -24,18 +25,17 @@ const baseQuery: BaseQueryFn<
         },
     });
 
-    const result = await rawBaseQuery(args, api, extraOptions);
+    const result = await rawBaseQuery<BaseApiResponse>(args, api, extraOptions);
     const data = result.data;
 
-    // Проверка на статус ошибки и безопасное использование status_message
-    if (result.error || (data && typeof data === "object" && "status_code" in data)) {
+    // Проверка на ошибки
+    if (result.error || (data && data.status_code)) {
         let message = "Что-то пошло не так";
 
         if (result.error?.status === "FETCH_ERROR") message = "Нет интернета";
         else if (typeof result.error?.status === "number")
-            message = result.error?.data?.status_message || `Ошибка ${result.error.status}`;
-        else if (data && typeof data === "object" && "status_message" in data)
-            message = (data as BaseApiResponse).status_message || message;
+            message = (result.error?.data as BaseApiResponse)?.status_message || `Ошибка ${result.error.status}`;
+        else if (data?.status_message) message = data.status_message;
 
         api.dispatch(showError(message));
 
@@ -53,7 +53,7 @@ const baseQuery: BaseQueryFn<
 // Создаём API
 export const baseApi = createApi({
     reducerPath: "kinopoiskApi",
-    baseQuery: baseQuery,
+    baseQuery,
     // TagTypes с явным типом string[]
     tagTypes: ["Popular", "TopRated", "Upcoming", "NowPlaying"],
     endpoints: () => ({}),
