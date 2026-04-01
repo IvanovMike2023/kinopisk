@@ -15,7 +15,6 @@ const baseQuery: BaseQueryFn<
     unknown,
     { message?: string }
     > = async (args, api, extraOptions) => {
-    // Указываем тип для fetchBaseQuery
     const rawBaseQuery = fetchBaseQuery({
         baseUrl: "https://api.themoviedb.org/3",
         prepareHeaders: (headers) => {
@@ -25,8 +24,10 @@ const baseQuery: BaseQueryFn<
         },
     });
 
-    const result = await rawBaseQuery<BaseApiResponse>(args, api, extraOptions);
-    const data = result.data;
+    const result = await rawBaseQuery(args, api, extraOptions);
+
+    // Кастим к BaseApiResponse
+    const data = result.data as BaseApiResponse | undefined;
 
     // Проверка на ошибки
     if (result.error || (data && data.status_code)) {
@@ -54,7 +55,6 @@ const baseQuery: BaseQueryFn<
 export const baseApi = createApi({
     reducerPath: "kinopoiskApi",
     baseQuery,
-    // TagTypes с явным типом string[]
     tagTypes: ["Popular", "TopRated", "Upcoming", "NowPlaying"],
     endpoints: () => ({}),
 });
