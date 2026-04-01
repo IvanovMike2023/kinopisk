@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material";
 import s from "./MovieCards.module.css";

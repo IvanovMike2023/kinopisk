@@ -53,8 +53,17 @@ export const CategoryMovies = () => {
     ];
     useEffect(() => {
         const categoryKeyStr = location.pathname.split('/')[2];
-        if (!['popular','top_rated','upcoming','now_playing'].includes(categoryKeyStr)) return;
-
+        if (!['popular','top_rated','upcoming','now_playing'].includes(categoryKeyStr)) {
+            // пустой объект правильного типа
+            setResults({
+                page: 1,
+                results: [],
+                total_pages: 1,
+                total_results: 0
+            });
+            setActiveCategory('Popular Movies');
+            return;
+        }
         const categoryKey = categoryKeyStr as CategoryKey;
         const category = categoryMap[categoryKey]
         if (category) {
@@ -62,7 +71,12 @@ export const CategoryMovies = () => {
                 setResults(res)
             })
             setActiveCategory(category.label);
-        } else setResults([])
+        } else setResults({
+            page: 1,
+            results: [],
+            total_pages: 1,
+            total_results: 0
+        })
     }, [location.pathname, page]);
     useEffect(() => {
         const categoryKey = location.pathname.split('/')[2];
