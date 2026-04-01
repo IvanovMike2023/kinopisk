@@ -13,17 +13,19 @@ import {MovieCard} from "../../entities/MovieCard/MovieCard";
 import {useFavorites} from "../../shared/helper/useFavorites";
 import {SkeletonCategoryMoviesPage} from "./SkeletonCategoryMoviesPage/SkeletonCategoryMoviesPage";
 import {MovieSchema, ResponseSchema} from "../../app/api/MainPage.types";
+import {z} from "zod";
 
 type CategoryKey = 'popular' | 'top_rated' | 'upcoming' | 'now_playing';
 
 export const CategoryMovies = () => {
-
+    type MovieType = z.infer<typeof MovieSchema>;
+    type ResponseType = z.infer<typeof ResponseSchema>;
     const [page, setPage] = useState(1);
     const {data: Popular, refetch: refetchPopular, isLoading} = useGetPopularQuery({page})
     const {data: topRatedData, refetch: refetchTopRated} = useGetTopRatedQuery({page});
     const {data: UpcomingData, refetch: refetchUpcoming} = useGetUpcomingQuery({page});
     const {data: NowPlayingData, refetch: refetchNowPlaying} = useGetNowPlayingQuery({page});
-    const [results, setResults] = useState<typeof ResponseSchema | undefined>(undefined);
+    const [results, setResults] = useState<ResponseType | undefined>(undefined);
     const [activeCategory, setActiveCategory] = useState('Popular Movies');
     const {likedIds, toggleFavorite} = useFavorites()
     const currentPage = results?.page ?? 1
@@ -43,7 +45,7 @@ export const CategoryMovies = () => {
         'upcoming': {data: UpcomingData, refetch: refetchUpcoming, label: "Upcoming Movies"},
         'now_playing': {data: NowPlayingData, refetch: refetchNowPlaying, label: "Now Playing"}
     }
-    const categories = [
+    const categories :{ key: CategoryKey; label: string }[]= [
         {key: 'popular', label: 'Popular Movies'},
         {key: 'top_rated', label: 'Top Rated Movies'},
         {key: 'upcoming', label: 'Upcoming Movies'},
@@ -94,7 +96,7 @@ export const CategoryMovies = () => {
             </div>
             <h2 style={{color: theme.palette.text.primary}} className={s.titleResult}>{activeCategory}</h2>
             <div className={s.movies}>
-                {results?.results?.map((el:MovieSchema) => (
+                {results?.results?.map((el:MovieType) => (
                     <MovieCard key={el.id}
                                data={el}
                                onLike={() => toggleFavorite({
