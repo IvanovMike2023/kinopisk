@@ -67,10 +67,9 @@ export const SearchPages = () => {
                                                            poster_path: el.poster_path || "",
                                                            backdrop_path: el.backdrop_path || "",
                                                        }}
-                                                       onLike={(id,e) => {
-                                                           e.preventDefault();
+                                                       onLike={() => {
                                                            toggleFavorite({
-                                                               id,
+                                                               id:el.id,
                                                                title: el.title || 'Unknown Title',
                                                                poster_path: el.poster_path,
                                                                vote_average: el.vote_average

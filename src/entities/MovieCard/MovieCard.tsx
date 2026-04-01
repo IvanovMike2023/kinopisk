@@ -14,15 +14,11 @@ interface MovieData {
 type PropsMovieCard = {
     data: MovieData;
     isLiked: boolean;
-    onLike: () => void;
+    onLike: (id:number,e:MouseEvent<HTMLButtonElement>) => void;
 };
 
 export const MovieCard = ({ data, isLiked, onLike }:PropsMovieCard) => {
     const theme = useTheme();
-    const hand=()=>{
-        console.log('ssss')
-        console.log(data.id)
-    }
     return (
         <article className={s.card}>
             <div className={s.posterFrame}>
@@ -35,7 +31,7 @@ export const MovieCard = ({ data, isLiked, onLike }:PropsMovieCard) => {
                 </Link>
                     <button
                         id={data.id.toString()}
-                        onClick={() => onLike()} // передаём событие целиком
+                        onClick={(e) => onLike(data.id,e)} // передаём событие целиком
                         className={s.like}
                     >
                         <svg

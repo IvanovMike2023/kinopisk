@@ -25,7 +25,9 @@ export const MainPage = () => {
     useEffect(() => {
         if (Popular?.results.length && !backdropUrl) {
             const randomMovie = Popular.results[Math.floor(Math.random() * Popular.results.length)];
-            setBackdropUrl(randomMovie.backdrop_path);
+            if (randomMovie.backdrop_path) {
+                setBackdropUrl(randomMovie.backdrop_path);
+            }
         }
     }, [Popular, backdropUrl]);
 
