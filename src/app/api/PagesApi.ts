@@ -29,22 +29,22 @@ export const pagesApi = baseApi.injectEndpoints({
             getPopular: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `/movie/popular?page=${page}`}),
                 transformResponse:parseResponse(ResponseSchema),
-                providesTags: ['Popular']as const,
+                providesTags: ['Popular'],
             }),
             getTopRated: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `movie/top_rated?page=${page}`}),
                     transformResponse:parseResponse(ResponseSchema),
-                providesTags: ['TopRated']as const,
+                providesTags: ['TopRated'],
             }),
             getUpcoming: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `movie/upcoming?page=${page}`}),
                 transformResponse:parseResponse(ResponseSchema),
-                providesTags: ['Upcoming']as const,
+                providesTags: ['Upcoming'],
             }),
             getNowPlaying: build.query<ResponseType, { page: number }>({
                 query: ({page}) => ({url: `movie/now_playing?page=${page}`}),
                 transformResponse:parseResponse(ResponseSchema),
-                providesTags: ['NowPlaying']as const,
+                providesTags: ['NowPlaying'],
             }),
             getDiscoverMovie: build.query<DiscoverTypeType,DiscoverParams >({
                 query: (params) => ({

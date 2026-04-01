@@ -52,5 +52,6 @@ const baseQuery: BaseQueryFn<
 export const baseApi = createApi({
     reducerPath: "kinopoiskApi",
     baseQuery: baseQuery,
+    tagTypes: ['Popular', 'TopRated', 'Upcoming', 'NowPlaying'],
     endpoints: () => ({}),
 });
